@@ -1,0 +1,52 @@
+@base-color: #ffffff;
+@dark-gray: #868685;
+@font-dnipro: "DINPro reg", sans-serif;
+
+.header-layout {
+  justify-content: space-around;
+  align-items: start;
+  margin: 0;
+  max-height: 280px;
+  background-color: @base-color;
+
+  .logo {
+    height: 80px;
+    width: 100%;
+    margin: 0;
+    background-image: linear-gradient(to right, #3575b8, #ff1632);
+
+    .logo-img {
+      height: 90%;
+      width: 100%;
+    }
+  }
+
+  .info-header {
+    font-family: @font-dnipro;
+    color: @dark-gray;
+    p,
+    span {
+      margin: 10px 10px 6px 10px;
+    }
+  }
+
+  .menu {
+    font-family: @font-dnipro;
+    color: @dark-gray;
+    &-icons {
+      .menu-icon {
+        height: 20px;
+        width: 20px;
+        margin-right: 3px;
+        cursor: pointer;
+      }
+    }
+    &-burger {
+      .burger {
+        margin-top: 8px;
+        font-size: 23px;
+        cursor: pointer;
+      }
+    }
+  }
+}
