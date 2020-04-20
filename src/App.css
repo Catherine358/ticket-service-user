@@ -1,0 +1,15 @@
+.wrapper {
+    box-sizing: border-box;
+    min-height: 100vh;
+    margin: 0;
+    background-image: url('../src/img/rhwk_decorGrey.png');
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: 40%;
+}
+
+.heading {
+    height: 280px;
+    margin: 0;
+    margin-right: 9%;
+}
