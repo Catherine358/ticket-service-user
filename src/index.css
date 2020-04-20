@@ -1,0 +1,47 @@
+@font-face {
+    font-family: 'DINPro black';
+    src: url("fonts/DINPro-Black.otf");
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: 'DINPro CondBold';
+    src: url("fonts/DINPro-CondBold.otf");
+}
+
+@font-face {
+    font-family: 'DINPro reg';
+    src: url("fonts/DINPro-Regular.otf");
+}
+
+@font-face {
+    font-family: 'DINPro light';
+    src: url("fonts/DINPro-Light.otf");
+}
+
+@font-face {
+    font-family: 'FuturaFuturis';
+    src: url("fonts/FUTURAFUTURIS.OTF");
+}
+
+@font-face {
+    font-family: 'FuturaFuturis bold';
+    src: url("fonts/FUTURAFUTURIS-BOLD.OTF");
+}
+
+body {
+    margin: 0;
+    font-family: FuturaFuturis, "FuturaFuturis bold", "DINPro reg", "DINPro light", "DINPro CondBold", "DINPro black",
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    font-size: 18px;
+    color: #868685;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
