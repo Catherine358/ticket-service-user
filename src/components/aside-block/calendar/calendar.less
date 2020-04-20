@@ -1,0 +1,102 @@
+@light-gray: #f3f4f4;
+@light-blue: #07ace8;
+@dark-gray: #868685;
+@dark-blue: #3575b8;
+@font-dnipro-light: "DINPro light", sans-serif;
+@font-dnipro: "DINPro black", sans-serif;
+@font-fut: "FuturaFuturis", sans-serif;
+
+.calendar {
+  &-container {
+    margin: 0;
+    padding: 0;
+  }
+  &-header {
+    margin: 0;
+    padding: 0;
+    font-size: 1.6em;
+    text-align: center;
+    .prev-aside,
+    .next-aside {
+      display: inline-block;
+      button {
+        font-size: 0.6em;
+        background-color: @light-gray;
+        border: none;
+        color: @light-blue;
+      }
+    }
+    .prev-aside button {
+      padding-right: 1em;
+    }
+    .next-aside button {
+      padding-left: 1em;
+    }
+    td {
+      border-spacing: 0;
+      padding-left: 5px;
+    }
+    .her {
+      position: relative;
+      top: 8px;
+      color: @dark-gray;
+      font-family: @font-dnipro-light;
+    }
+  }
+  .calendar2 {
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+    font-family: @font-dnipro-light;
+    background-color: @light-gray;
+    color: @dark-gray;
+  }
+  td {
+    margin: 0;
+    padding: 0;
+  }
+  tr {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.day,
+.empty-slot,
+.week-day {
+  height: 40px;
+  text-align: center;
+}
+
+.week-day {
+  font-size: 0.8em;
+  border-bottom: 1px solid @dark-gray;
+  color: @dark-gray;
+  font-family: @font-dnipro-light;
+}
+
+.day {
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 0.8em;
+  cursor: pointer;
+  color: @dark-gray;
+  font-family: @font-dnipro-light;
+}
+
+.current-day {
+  color: @dark-blue;
+}
+
+.label-month,
+.label-year {
+  font-size: 0.6em;
+  color: @dark-gray;
+  font-family: @font-dnipro-light;
+}
+
+.title {
+  font-family: @font-fut;
+  color: @dark-gray;
+}
