@@ -16,7 +16,6 @@
 .main-container {
     min-height: calc(100% - 200px);
     margin: 0;
-    margin-left: 9%;
     background-color: #f3f4f4;
 }
 
