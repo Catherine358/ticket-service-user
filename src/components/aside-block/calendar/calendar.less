@@ -1,43 +1,52 @@
-@light-gray: #f3f4f4;
+@light-gray: rgba(243, 244, 244, .5);
 @light-blue: #07ace8;
 @dark-gray: #868685;
 @dark-blue: #3575b8;
+@yellow: #ffe8a5;
 @font-dnipro-light: "DINPro light", sans-serif;
 @font-dnipro: "DINPro black", sans-serif;
 @font-fut: "FuturaFuturis", sans-serif;
 
 .calendar {
+
   &-container {
     margin: 0;
     margin-left: 25px;
     margin-bottom: 15px;
     padding: 0;
   }
+
   &-header {
     margin: 0;
     padding: 0;
     font-size: 1.6em;
     text-align: center;
+
     .prev-aside,
     .next-aside {
       display: inline-block;
+
       button {
         font-size: 0.6em;
-        background-color: @light-gray;
+        background-color: transparent;
         border: none;
         color: @light-blue;
       }
     }
+
     .prev-aside button {
       padding-right: 1em;
     }
+
     .next-aside button {
       padding-left: 1em;
     }
+
     td {
       border-spacing: 0;
       padding-left: 5px;
     }
+
     .her {
       position: relative;
       top: 8px;
@@ -45,6 +54,7 @@
       font-family: @font-dnipro-light;
     }
   }
+
   .calendar2 {
     margin: 0;
     padding: 0;
@@ -53,10 +63,12 @@
     background-color: @light-gray;
     color: @dark-gray;
   }
+
   td {
     margin: 0;
     padding: 0;
   }
+
   tr {
     margin: 0;
     padding: 0;
@@ -68,6 +80,10 @@
 .week-day {
   height: 40px;
   text-align: center;
+}
+
+.empty-slot {
+  height: 26px;
 }
 
 .week-day {
@@ -85,9 +101,14 @@
   cursor: pointer;
   color: @dark-gray;
   font-family: @font-dnipro-light;
+
+  &:hover {
+    background-color: @yellow;
+  }
 }
 
 .current-day {
+  font-weight: 700;
   color: @dark-blue;
 }
 

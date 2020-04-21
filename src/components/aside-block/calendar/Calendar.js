@@ -57,6 +57,10 @@ export default class Calendar extends React.Component{
         return this.state.dateContext.get("date");
     };
 
+    currentDay = () => {
+      return this.state.dateContext.format("D");
+    };
+
     currentEvents = (index) => {
         const { hall } = this.props;
         const { events } = this.state;
@@ -129,19 +133,9 @@ export default class Calendar extends React.Component{
 
         let daysInMonth = [];
             for (let d = 1; d <= this.daysInMonth(); d++) {
-                let className = "day";
-                if (!error) {
-                    for (let i = 0; i < events.length; i++) {
-                        // if (this.currentEvents(i)) {
-                        //     let day = new Date(events[i].eventStart).getDate();
-                        //     if (d === day) {
-                        //         className = "day current-day";
-                        //     }
-                        // }
-                    }
-                }
+                let className = (d === parseInt(this.currentDay()) ? "day current-day" : "day");
                 daysInMonth.push(<td key={d} className={className}>
-                    <span>{d}</span></td>)
+                    <span>{d}</span></td>);
             }
 
         let totalSlots = [...blanks, ...daysInMonth];
