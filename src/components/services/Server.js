@@ -14,7 +14,6 @@ const requestEvents = () => {
         )
     })
         .then(response => {
-            console.log(response);
             if(response.status !== 200) {
                 if (response.status === 400) {
                     throw new Error(`Input validation error, received ${response.status}`);
@@ -27,4 +26,20 @@ const requestEvents = () => {
     return response;
 };
 
-export { requestEvents };
+const ticketsInformation = (eventId) => {
+    const response = fetch(`${BASE_URL}events/rest/${eventId}`,{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => {
+            if(response.status !== 200){
+                throw new Error(`Could not fetch data`);
+            }
+            return response.json();
+        });
+    return response;
+};
+
+export { requestEvents, ticketsInformation };

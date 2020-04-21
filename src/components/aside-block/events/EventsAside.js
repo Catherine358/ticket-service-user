@@ -12,6 +12,7 @@ const EventsAside = (props) => {
         async function fetchEvents() {
             await requestEvents()
                 .then(data => {
+                    console.log(data);
                     let arr = [];
                     for (let i = 0; i < data.length; i++) {
                         arr.push(data[i]);
@@ -23,9 +24,15 @@ const EventsAside = (props) => {
         fetchEvents();
     }, []);
 
+    let arr = events.slice(0, 3);
+    let newEvent = [];
+    arr.forEach(data => {
+         newEvent.push(<Event key={data.eventId} event={data}/>)
+    });
+
     return (
         <Grid container direction="column">
-            <Event events={events} soldPlacesPercentage={70}/>
+            {newEvent}
         </Grid>
     );
 };
