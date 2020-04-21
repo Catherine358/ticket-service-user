@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import Header from "./components/header";
+import Grid from '@material-ui/core/Grid';
+import AsideBlock from "./components/aside-block";
 
 const App = (props) => {
     return (
@@ -8,7 +10,14 @@ const App = (props) => {
             <header className="heading">
                 <Header/>
             </header>
-            <p>Hello!</p>
+            <Grid container direction="row" className="main-container">
+                    <Grid container item sm={3}>
+                        <AsideBlock/>
+                    </Grid>
+                    <Grid container item sm={9}>
+                        <p>Hello</p>
+                    </Grid>
+            </Grid>
         </div>
     );
 };

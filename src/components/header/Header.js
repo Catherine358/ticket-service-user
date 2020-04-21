@@ -16,8 +16,10 @@ const Header = (props) => {
                 <img src={logo} alt="logo" className="logo-img"/>
             </Grid>
             <Grid  container item sm={4} className="info-header">
-                <p>Berlin City Hall | Events & Tickets</p>
-                <span>LOGIN</span>
+                <Grid container direction="column" className="middle-sec-header">
+                    <p>Berlin City Hall | Events & Tickets</p>
+                    <span>LOGIN</span>
+                </Grid>
             </Grid>
             <Grid container item sm={4} className="menu">
                 <Grid container direction="row">
