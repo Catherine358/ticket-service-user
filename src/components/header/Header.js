@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import './header.less';
 import logo from "../../img/logo_white.svg";
 import icon_fb from "../../img/icons/icon-fb.png";
@@ -8,8 +8,17 @@ import icon_inst from "../../img/icons/icon-inst.png";
 import icon_ok from "../../img/icons/icon-classmates.png";
 import icon_rss from "../../img/icons/icon-rss.png";
 import Grid from '@material-ui/core/Grid';
+import Menu from "./menu";
 
 const Header = (props) => {
+    const [menu, setMenu] = useState(false);
+
+    if(menu){
+        return (
+            <Menu menu={menu} setMenu={setMenu}/>
+        );
+    }
+
     return (
         <Grid className="header-layout" container direction="row" justify="space-around" alignItems="flex-start">
             <Grid container item  sm={4} className="logo">
@@ -31,8 +40,10 @@ const Header = (props) => {
                         <img className="menu-icon" src={icon_ok} alt="ok-icon"/>
                         <img className="menu-icon" src={icon_rss} alt="rss-icon"/>
                     </Grid>
-                    <Grid container item justify="flex-end" className="menu-burger">
-                        <span className="burger">&#9776;</span>
+                    <Grid container item justify="flex-end" className="menu-burger-btn">
+                        <span className="burger" onClick={() => {
+                            setMenu(true);
+                        }}>&#9776;</span>
                     </Grid>
                 </Grid>
             </Grid>
