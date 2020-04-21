@@ -3,6 +3,7 @@ import './App.css';
 import Header from "./components/header";
 import Grid from '@material-ui/core/Grid';
 import AsideBlock from "./components/aside-block";
+import Events from "./components/main-block/main/events";
 
 const App = (props) => {
     return (
@@ -15,7 +16,7 @@ const App = (props) => {
                         <AsideBlock/>
                     </Grid>
                     <Grid container item sm={9}>
-                        <p>Hello</p>
+                        <Events/>
                     </Grid>
             </Grid>
         </div>
