@@ -1,0 +1,61 @@
+@dnipro-reg: "DINPro reg", sans-serif;
+@font-fut: FuturaFuturis, sans-serif;
+@yellow: #ffc800;
+@dark-gray: #868685;
+@green: #84cc25;
+@light-gray: #f3f4f4;
+@pink: #ff1632;
+
+.event {
+  position: relative;
+  width: 210px;
+  margin-left: 25px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  overflow: hidden;
+
+  &-name {
+    margin-bottom: 0;
+    padding: 33px 0 3px 6px;
+    font-family: @dnipro-reg;
+    font-size: 20px;
+    color: @yellow;
+  }
+}
+
+.event-date {
+  width: 210px !important;
+  margin-left: 25px;
+  p {
+    font-size: 13px;
+    color: @dark-gray;
+  }
+
+  p:first-child {
+    align-items: center;
+    margin-left: 9px;
+  }
+
+  p:nth-child(2) {
+    text-align: right;
+  }
+
+  .event-buy {
+    width: 61px;
+    padding: 7px 22px 5px;
+    background-color: @green;
+  }
+
+  .event-sold {
+    width: 61px;
+    padding: 7px 8px 5px;
+    background-color: @pink;
+  }
+
+  .event-buy, .event-sold {
+    margin-left: 9px;
+    font-family: @font-fut;
+    font-size: 9px;
+    color: @light-gray;
+  }
+}

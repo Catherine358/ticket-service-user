@@ -10,15 +10,13 @@ const App = (props) => {
             <header className="heading">
                 <Header/>
             </header>
-            <Grid container>
-                <Grid container direction="row" className="main-container">
-                    <Grid container item lg={3}>
+            <Grid container direction="row" className="main-container">
+                    <Grid container item sm={3}>
                         <AsideBlock/>
                     </Grid>
-                    <Grid container item lg={9}>
-
+                    <Grid container item sm={9}>
+                        <p>Hello</p>
                     </Grid>
-                </Grid>
             </Grid>
         </div>
     );

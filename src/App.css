@@ -9,7 +9,6 @@
 }
 
 .heading {
-    height: 280px;
     margin: 0;
     margin-right: 9%;
 }
@@ -19,4 +18,8 @@
     margin: 0;
     margin-left: 9%;
     background-color: #f3f4f4;
+}
+
+.aside-container {
+    margin-top: 3rem;
 }
