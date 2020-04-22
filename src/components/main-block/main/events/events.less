@@ -1,0 +1,95 @@
+@base-color: #ffffff;
+@dark-gray: #868685;
+@yellow: #ffc800;
+@light-gray: #f3f4f4;
+@font-futura-black: "FuturaFuturis bold", sans-serif;
+@font-dnipro: "DINPro reg", sans-serif;
+
+.eventsList {
+  font-family: @font-futura-black;
+  width: 100%;
+
+  .header {
+    display: flex;
+    width: 100%;
+    h1 {
+      margin-left: auto;
+      margin-right: auto;
+      border-bottom: 10px solid @dark-gray;
+      color: @dark-gray;
+    }
+    select {
+      border: none;
+      background-color: transparent;
+      font-family: @font-dnipro;
+    }
+    select:active,
+    select:focus {
+      outline: none;
+    }
+  }
+
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  .event {
+    position: relative;
+    margin-left: 0;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    min-width: 320px;
+    max-width: 400px;
+    width: 40%;
+    height: 200px;
+    overflow: hidden;
+    .date {
+      position: absolute;
+      top: 5px;
+      right: 20px;
+      font-family: @font-dnipro;
+      text-align: right;
+      color: @base-color
+    }
+    h1 {
+      position: absolute;
+      bottom: 25px;
+      border-bottom: 5px solid @yellow;
+      margin-left: 5%;
+      margin-right: 5%;
+      color: @yellow;
+      font-size: 30px;
+    }
+    h2 {
+      position: absolute;
+      bottom: 5px;
+      margin-left: 5%;
+      margin-right: 5%;
+      color: @yellow;
+      font-size: 15px;
+    }
+  }
+
+  .btn-page {
+    &-container {
+      margin-bottom: 15px;
+    }
+
+    &-prev,
+    &-next {
+      text-align: center;
+      font-family: @font-futura-black;
+      font-size: 20px;
+      background-color: @dark-gray;
+      color: @light-gray;
+    }
+
+    &-next {
+      margin-left: 5px;
+    }
+  }
+
+}

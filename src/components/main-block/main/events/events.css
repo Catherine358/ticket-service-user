@@ -1,0 +1,65 @@
+.eventsList {
+  font-family: "FuturaFuturis bold", sans-serif;
+  width: 100%;
+}
+.eventsList .header {
+  display: flex;
+  width: 100%;
+}
+.eventsList .header h1 {
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom: 10px solid black;
+}
+.eventsList .header select {
+  border: none;
+  background-color: transparent;
+  font-family: "DINPro reg", sans-serif;
+}
+.eventsList .header select:active,
+.eventsList .header select:focus {
+  outline: none;
+}
+.eventsList .list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+}
+.eventsList .event {
+  position: relative;
+  margin-left: 0;
+  margin-right: 20px;
+  margin-bottom: 30px;
+  min-width: 320px;
+  max-width: 400px;
+  width: 40%;
+  height: 200px;
+  overflow: hidden;
+}
+.eventsList .event .date {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  font-family: "DINPro reg", sans-serif;
+  text-align: right;
+  color: #ffffff;
+}
+.eventsList .event h1 {
+  position: absolute;
+  bottom: 25px;
+  border-bottom: 5px solid #ffc800;
+  margin-left: 5%;
+  margin-right: 5%;
+  color: #ffc800;
+  font-size: 30px;
+}
+.eventsList .event h2 {
+  position: absolute;
+  bottom: 5px;
+  margin-left: 5%;
+  margin-right: 5%;
+  color: #ffc800;
+  font-size: 15px;
+}
+/*# sourceMappingURL=events.css.map */

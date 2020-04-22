@@ -1,13 +1,30 @@
-import React from "react";
-import Calendar from "./calendar";
+import React, { useState } from "react";
 import Grid from '@material-ui/core/Grid';
 import EventsAside from "./events";
+import DayPicker, { DateUtils } from "react-day-picker";
+import './day-picker.less';
+
+const handleDayClick = (day, range, setRange) => {
+    const res = DateUtils.addDayToRange(day, range);
+    setRange(res);
+};
 
 const AsideBlock = (props) => {
+    const WEEKDAYS_SHORT = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+    const [range, setRange] = useState({
+        from: undefined,
+        to: undefined
+    });
+    const modifiers = { start: range.from, end: range.to };
+
     return (
         <Grid container direction="column" justify="center" className="aside-container">
             <div className="title">Calendar</div>
-            <Calendar/>
+            <DayPicker className="Selectable" weekdaysShort={WEEKDAYS_SHORT} selectedDays={[range.from, range]}
+                       modifiers={modifiers}
+                       onDayClick={(day) => {
+                           handleDayClick(day, range, setRange);
+            }}/>
             <div className="title">Upcoming events</div>
             <EventsAside/>
         </Grid>

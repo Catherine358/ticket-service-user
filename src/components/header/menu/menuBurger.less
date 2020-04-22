@@ -1,0 +1,60 @@
+@menu-color: #696a6d;
+@white: #ffffff;
+@font-dnipro-light: "DINPro-Light", sans-serif;
+@font-dnipro-reg: "DINPro-Regular", sans-serif;
+
+.menu-burger {
+  position: absolute;
+  height: 275px;
+  background-color: @menu-color;
+  color: @white;
+
+  &-logo {
+    height: 80px;
+    width: 100%;
+    margin: 0;
+    &-img {
+      height: 90%;
+      width: 100%;
+      margin-top: 20%;
+    }
+  }
+
+  &-name {
+    margin-top: 10px;
+    font-family: @font-dnipro-light;
+    font-size: 17px;
+  }
+
+  &-icons {
+    .menu-burger-icon {
+      height: 40px;
+      width: 40px;
+      margin-right: 3px;
+      cursor: pointer;
+    }
+  }
+
+  .address {
+    margin-top: 10px;
+    line-height: 21px;
+    font-size: 17px;
+    font-family: @font-dnipro-light;
+  }
+
+  .menu-list {
+    margin-top: 20%;
+    list-style: none;
+    font-family: @font-dnipro-reg;
+    li span {
+      cursor: pointer;
+    }
+  }
+
+  .cross {
+    margin-top: 20%;
+    font-size: 64px;
+    color: @white;
+    cursor: pointer;
+  }
+}
