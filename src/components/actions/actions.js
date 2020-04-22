@@ -37,8 +37,17 @@ const fetchEvents = (dispatch) => {
         })
 };
 
-export const rangeEventsSort = () => {
+export const rangeEventsSort = (range) => {
+    return {
+        type: 'RANGE_EVENTS_SORT',
+        payload: range
+    };
+};
 
+export const clearRangeEventsSort = () => {
+    return {
+        type: 'CLEAR_RANGE_EVENTS_SORT'
+    };
 };
 
 export {
