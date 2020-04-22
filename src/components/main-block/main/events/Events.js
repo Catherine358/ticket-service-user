@@ -1,33 +1,23 @@
 import React, { useState, useEffect } from "react";
 import './events.less';
-import { requestEvents } from "../../../services";
 import Event from "./Event";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import { fetchEvents } from "../../../actions/actions";
+import { useSelector, useDispatch } from "react-redux";
 
 const updatePage = (indexForPagination, quantity) => {
     return indexForPagination + 4 * quantity;
 };
 
 const Events = (props) => {
-    const [events, setEvents] = useState([]);
+    const events = useSelector(state => state.eventsList.events);
     const [indexForPagination, setIndex] = useState(0);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        async function fetchEvents() {
-            await requestEvents()
-                .then(data => {
-                    console.log(data);
-                    let arr = [];
-                    for (let i = 0; i < data.length; i++) {
-                        arr.push(data[i]);
-                    }
-                    setEvents(arr);
-                })
-                .catch(error => console.log(error));
-        }
-        fetchEvents();
-    }, []);
+        fetchEvents(dispatch);
+    }, [dispatch]);
 
     return (
         <div className="eventsList">
