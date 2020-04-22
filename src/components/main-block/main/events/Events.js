@@ -1,7 +1,27 @@
-import React from "react";
-import './events.less'
+import React, { useState, useEffect } from "react";
+import './events.less';
+import { requestEvents } from "../../../services";
+import Event from "./Event";
 
 const Events = (props) => {
+    const [events, setEvents] = useState([]);
+
+    useEffect(() => {
+        async function fetchEvents() {
+            await requestEvents()
+                .then(data => {
+                    console.log(data);
+                    let arr = [];
+                    for (let i = 0; i < data.length; i++) {
+                        arr.push(data[i]);
+                    }
+                    setEvents(arr);
+                })
+                .catch(error => console.log(error));
+        }
+        fetchEvents();
+    }, []);
+
     return (
         <div className="eventsList">
             <div className="header">
@@ -12,33 +32,7 @@ const Events = (props) => {
                 </select>
             </div>
             <div className="list">
-                <article className="event">
-                    <div className="date">30 February</div>
-                    <h1>Lady Gaga</h1>
-                    <h2>World Tour 2020</h2>
-                    <img src="https://sun9-58.userapi.com/c857520/v857520709/1af604/9c2d0fLcoaU.jpg" />
-                </article>
-
-                <article className="event">
-                    <div className="date">30 February</div>
-                    <h1>Lady Gaga</h1>
-                    <h2>World Tour 2020</h2>
-                    <img src="https://sun9-58.userapi.com/c857520/v857520709/1af604/9c2d0fLcoaU.jpg" />
-                </article>
-
-                <article className="event">
-                    <div className="date">30 February</div>
-                    <h1>Lady Gaga</h1>
-                    <h2>World Tour 2020</h2>
-                    <img src="https://sun9-58.userapi.com/c857520/v857520709/1af604/9c2d0fLcoaU.jpg" />
-                </article>
-
-                <article className="event">
-                    <div className="date">30 February</div>
-                    <h1>Lady Gaga</h1>
-                    <h2>World Tour 2020</h2>
-                    <img src="https://sun9-58.userapi.com/c857520/v857520709/1af604/9c2d0fLcoaU.jpg" />
-                </article>
+                <Event arr={events} indexForPagination={0}/>
             </div>
         </div>
     )
