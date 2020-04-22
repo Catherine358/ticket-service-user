@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import Grid from '@material-ui/core/Grid';
 import EventsAside from "./events";
 import DayPicker, { DateUtils } from "react-day-picker";
 import './day-picker.less';
+import { rangeEventsSort } from "../actions/actions";
+import { useDispatch } from "react-redux";
 
 const handleDayClick = (day, range, setRange) => {
     const res = DateUtils.addDayToRange(day, range);
@@ -16,6 +18,12 @@ const AsideBlock = (props) => {
         to: undefined
     });
     const modifiers = { start: range.from, end: range.to };
+    const dispatch = useDispatch();
+    useEffect(() => {
+        if(range.from !== undefined) {
+            dispatch(rangeEventsSort(range));
+        }
+    }, [range]);
 
     return (
         <Grid container direction="column" justify="center" className="aside-container">
