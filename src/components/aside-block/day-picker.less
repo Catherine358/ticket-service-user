@@ -48,11 +48,10 @@
 
 .DayPicker-NavButton {
   position: absolute;
-  top: 1em;
+  display: inline-block;
+  top: 0.6em;
   right: 1.5em;
   left: auto;
-
-  display: inline-block;
   margin-top: 2px;
   width: 1.25em;
   height: 1.25em;
@@ -68,12 +67,14 @@
 }
 
 .DayPicker-NavButton--prev {
-  margin-right: 1.5em;
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAwCAYAAAB5R9gVAAAABGdBTUEAALGPC/xhBQAAAVVJREFUWAnN2G0KgjAYwPHpGfRkaZeqvgQaK+hY3SUHrk1YzNLay/OiEFp92I+/Mp2F2Mh2lLISWnflFjzH263RQjzMZ19wgs73ez0o1WmtW+dgA01VxrE3p6l2GLsnBy1VYQOtVSEH/atCCgqpQgKKqYIOiq2CBkqtggLKqQIKgqgCBjpJ2Y5CdJ+zrT9A7HHSTA1dxUdHgzCqJIEwq0SDsKsEg6iqBIEoq/wEcVRZBXFV+QJxV5mBtlDFB5VjYTaGZ2sf4R9PM7U9ZU+lLuaetPP/5Die3ToO1+u+MKtHs06qODB2zBnI/jBd4MPQm1VkY79Tb18gB+C62FdBFsZR6yeIo1YQiLJWMIiqVjQIu1YSCLNWFgijVjYIuhYYCKoWKAiiFgoopxYaKLUWOii2FgkophYp6F3r42W5A9s9OcgNvva8xQaysKXlFytoqdYmQH6tF3toSUo0INq9AAAAAElFTkSuQmCC');
+  margin-right: 12.1em;
+  background-size: 20px;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAb1BMVEUAAAAA//8Gq+gHq+kHrOgHrOkHrOgHq+gHrOgIrekIrOgIq+gIregIrOgIq+gIrecIrOcIq+cGq+cGrecHrOcHq+kHrekHrOkHrOgHregHrOgHrOgHq+kIrekIrOgHrOgIq+gIregGrOkHrOgAAACIJHW8AAAAI3RSTlMAAXqV5JSTkpGIh4aFhIOCgYB3dnV0c3JxcG/+Z2Zl/WRjfsY7g38AAAABYktHRACIBR1IAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJTUUH4wMXACgDEj4pagAAAeVJREFUeNrl29lywjAMheG4C93pvrfQVu//ji3TLUASS7LkMyNzzfB/Fww4ttx1rq+04/v52f7uHra/T1DAVx8KWPWRgDQjKOC7jwOkA4ICfvsoQDokKOC/jwH0+hjAEWEB/T4CcExYwHq/PuCEsIDNfm3AVr8y4JSwgIF+VcAZYQGD/YqA4X49wJywgLF+LcA5YQHj/TqAC8ICpvo1AJP9CoBLwgIyfXfAFWEB17m+MyDf9wUw+q6AG0bfE8DqOwJuWX0/ALPvBuD2vQB33L4TgN/3Adzz+y4ASd8D8CDpOwBkfXuAsG8OeBT2rQHivjFA3rcFPD1jAS+KviVA1TcEvKr6dgBl3wywUPatAOq+EUDftwEsluq+CeCtoG8BKOobAN6L+hEAhYIIX8Iygc0PUYEgyE8x/s9IL4izINEKLBelKoHpslyzLLV9MFE8GAR7NMM/nMoF9hsUQkHALRqhIOQ2nUgQdKtWIHDbrucK4h5YcAWRD614gtgHl/ijW4bA/fg+d3wef4AhJ2hhiAU/xjMpaGSUa0LQzDjfqKDiSOccDYAPtQ4L2hpsHhK0NtyOH+/fEjR4xWND0OQ1nzVBm1e98JfdeoJmLzz+CRq+9PojwF58noEB8KvfKwEY0KWP3Ds+Af0wII0E2Vb1AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE5LTAzLTIyVDIzOjQwOjAzKzAxOjAwQfGIGwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxOS0wMy0yMlQyMzo0MDowMyswMTowMDCsMKcAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC");
 }
 
 .DayPicker-NavButton--next {
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAwCAYAAAB5R9gVAAAABGdBTUEAALGPC/xhBQAAAXRJREFUWAnN119ugjAcwPHWzJ1gnmxzB/BBE0n24m4xfNkTaOL7wOtsl3AXMMb+Vjaa1BG00N8fSEibPpAP3xAKKs2yjzTPH9RAjhEo9WzPr/Vm8zgE0+gXATAxxuxtqeJ9t5tIwv5AtQAApsfT6TPdbp+kUBcgVwvO51KqVhMkXKsVJFXrOkigVhCIs1Y4iKlWZxB1rX4gwlpRIIpa8SDkWmggrFq4IIRaJKCYWnSgnrXIQV1r8YD+1Vrn+bReagysIFfLABRt31v8oBu1xEBttfRbltmfjgEcWh9snUS2kNdBK6WN1vrOWxObWsz+fjxevsxmB1GQDfINWiev83nhaoiB/CoOU438oPrhXS0WpQ9xc1ZQWxWHqUYe0I0qrKCQKjygDlXIQV2r0IF6ViEBxVTBBSFUQQNhVYkHIVeJAtkNsbQ7c1LtzP6FsObhb2rCKv7NBIGoq4SDmKoEgTirXAcJVGkFSVVpgoSrXICGUMUH/QBZNSUy5XWUhwAAAABJRU5ErkJggg==');
+  background-size: 20px;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAOVBMVEUAAAAIrOcHrOgHrOgHrOcHq+cHrOcHrOkHq+kIrekGrekGrOkGq+kGregGrOgGq+gGregHrOgAAAAiWwPOAAAAEXRSTlMAgfKOjYyLiomIf359fHt6eVt33HMAAAABYktHRACIBR1IAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJTUUH4wMXACcW+HvRTgAAANRJREFUWMPF19kSwiAQRFE07lvs//9ZY1laEgJOTw8l7/c8JCEwKc3WKolrPagANiogChOgCU8AWxVQhBeAnQr4hTfgFj4A9irgFL4AHFTAJWSAR8gBHFUAJxWghQJghRLAWQU4YQnARQUYYRkghAqAqwqYhSqAmwoYhQaAUQVMQhOwCG0A938Dv/u+D1F9jaa+46ds7LttZ3NfAex9n58q0/c4WLi+BMg+/Hin+xnAX1BywNGHXvNcfeBV19mHXffVgcPfxwxdSh8xeKqjr9gndv8+AP1wQKS9BoTRAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE5LTAzLTIyVDIzOjM5OjIyKzAxOjAwcI26mwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxOS0wMy0yMlQyMzozOToyMiswMTowMAHQAicAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC");
 }
 
 .DayPicker-NavButton--interactionDisabled {
@@ -82,9 +83,9 @@
 
 .DayPicker-Caption {
   display: table-caption;
-  margin-bottom: 0.5em;
+  margin-bottom: 20px;
   padding: 0 0.5em;
-  text-align: left;
+  text-align: center;
 }
 
 .DayPicker-Caption > div {
@@ -227,4 +228,22 @@
 
   background: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+//selectable
+
+.Selectable .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+  background-color: #f0f8ff !important;
+  color: #4a90e2;
+}
+.Selectable .DayPicker-Day {
+  border-radius: 0 !important;
+}
+.Selectable .DayPicker-Day--start {
+  border-top-left-radius: 50% !important;
+  border-bottom-left-radius: 50% !important;
+}
+.Selectable .DayPicker-Day--end {
+  border-top-right-radius: 50% !important;
+  border-bottom-right-radius: 50% !important;
 }
