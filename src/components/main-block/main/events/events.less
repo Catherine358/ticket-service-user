@@ -1,6 +1,7 @@
 @base-color: #ffffff;
 @dark-gray: #868685;
 @yellow: #ffc800;
+@light-gray: #f3f4f4;
 @font-futura-black: "FuturaFuturis bold", sans-serif;
 @font-dnipro: "DINPro reg", sans-serif;
 
@@ -70,14 +71,25 @@
       color: @yellow;
       font-size: 15px;
     }
-    img {
+  }
 
+  .btn-page {
+    &-container {
+      margin-bottom: 15px;
     }
-    //img {
-    //  position: absolute;
-    //  top: 0;
-    //  left: 0;
-    //}
+
+    &-prev,
+    &-next {
+      text-align: center;
+      font-family: @font-futura-black;
+      font-size: 20px;
+      background-color: @dark-gray;
+      color: @light-gray;
+    }
+
+    &-next {
+      margin-left: 5px;
+    }
   }
 
 }
