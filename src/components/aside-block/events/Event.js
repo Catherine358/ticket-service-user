@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Grid from "@material-ui/core/Grid";
-import { ticketsInformation } from "../../services/Server";
+import { fetchTickets } from "../../actions/actions";
 
 const Event = ({event}) => {
-    const [ticketsRemained, setTickets] = useState(0);
+    const ticketsRemained = useSelector(state => state.ticketsInfo.ticketsInfo.restTick);
+    const dispatch = useDispatch();
     useEffect(() => {
-        async function fetchTickets(eventId) {
-            await ticketsInformation(eventId)
-                .then(data => {
-                    console.log(data);
-                    setTickets(data.restTick);
-                })
-        }
-        fetchTickets(event.eventId);
-        }, [event.eventId]);
+        fetchTickets(dispatch, event.eventId);
+        }, [dispatch]);
 
     let res = event.eventStart;
     let date2 = new Date(parseInt(res)).toLocaleString('default', {month: 'long'});
