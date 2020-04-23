@@ -18,6 +18,25 @@ const sortRangeEvents = (state, range) => {
     }
 };
 
+const sortTypeEvents = (state, value) => {
+    const {eventsList: {events}} = state;
+    let arr = [];
+    if(value === "0" || value === "1") {
+        for (let i = 0; i < events.length; i++) {
+            if (parseInt(value) === events[i].eventType) {
+                arr.push(events[i]);
+            }
+        }
+    }else{
+        return [];
+    }
+    if(arr.length > 0) {
+        return arr;
+    }else{
+        return "There are no events of such type."
+    }
+};
+
 const sortEvents = (state, action) => {
     if(state === undefined){
         return {
@@ -43,6 +62,18 @@ const sortEvents = (state, action) => {
                 eventsFiltered: [],
                 message: ''
             };
+        case 'TYPE_EVENTS_SORT':
+            if(typeof sortRangeEvents(state, action.payload) === "string") {
+                return {
+                    eventsFiltered: [],
+                    message: sortTypeEvents(state, action.payload)
+                };
+            }else {
+                return {
+                    eventsFiltered: sortTypeEvents(state, action.payload),
+                    message: ''
+                };
+            }
         default:
             return state.sortedEvents;
     }

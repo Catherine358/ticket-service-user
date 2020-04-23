@@ -3,7 +3,7 @@ import './events.less';
 import Event from "./Event";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import { fetchEvents, clearRangeEventsSort } from "../../../actions/actions";
+import { fetchEvents, clearRangeEventsSort, sortEventsType } from "../../../actions/actions";
 import { useSelector, useDispatch } from "react-redux";
 
 const updatePage = (indexForPagination, quantity) => {
@@ -25,9 +25,13 @@ const Events = (props) => {
         <div className="eventsList">
             <div className="header">
                 <h1>Events</h1>
-                <select>
-                    <option>Concert</option>
-                    <option>Stand Up</option>
+                <select className="eventsList-select" onChange={(event) => {
+                    dispatch(sortEventsType(event.target.value));
+                    setIndex(0);
+                }}>
+                    <option value="2">All events</option>
+                    <option value="1">Concert</option>
+                    <option value="0">Stand Up</option>
                 </select>
             </div>
             <div className="list">
@@ -35,19 +39,19 @@ const Events = (props) => {
                 <Event arr={eventsSorted.length > 0 && !message ? eventsSorted: events} indexForPagination={indexForPagination}/>}
                 <Grid container direction="row" className="btn-page-container w-100">
                     <Grid container item justify="center">
-                        {(!message && eventsSorted.length === 0) &&
+                        {((eventsSorted.length === 0 && events.length > 4) || (!message && eventsSorted.length > 4)) &&
                         <Button variant="contained" className="btn-page-prev" onClick={() => {
                             setIndex(updatePage(indexForPagination, -1));
                         }} disabled={indexForPagination === 0}>PREV</Button>}
-                        {(!message && eventsSorted.length === 0) &&
+                        {(eventsSorted.length > 0 || message) && <Button variant="contained" className="btn-page-next"
+                                                                         onClick={() => {
+                                                                             dispatch(clearRangeEventsSort());
+                                                                         }}>
+                            RESET</Button>}
+                        {((eventsSorted.length === 0 && events.length > 4) || (!message && eventsSorted.length > 4)) &&
                         <Button variant="contained" className="btn-page-next" onClick={() => {
                             setIndex(updatePage(indexForPagination, 1));
                         }} disabled={indexForPagination + 4 >= events.length}>NEXT</Button>}
-                        {(eventsSorted.length > 0 || message) && <Button variant="contained" className="btn-page-next"
-                        onClick={() => {
-                            dispatch(clearRangeEventsSort());
-                        }}>
-                            RESET</Button>}
                     </Grid>
                 </Grid>
             </div>

@@ -44,6 +44,13 @@ export const rangeEventsSort = (range) => {
     };
 };
 
+export const sortEventsType = (value) => {
+    return {
+        type: 'TYPE_EVENTS_SORT',
+        payload: value
+    };
+};
+
 export const clearRangeEventsSort = () => {
     return {
         type: 'CLEAR_RANGE_EVENTS_SORT'
