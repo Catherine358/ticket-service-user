@@ -1,3 +1,3 @@
 import { requestEvents, ticketsInformation } from "./Server";
 
-export { requestEvents };
+export { requestEvents, ticketsInformation };

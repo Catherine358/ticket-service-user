@@ -1,4 +1,4 @@
-import { requestEvents } from "../services";
+import { requestEvents, ticketsInformation } from "../services";
 
 const eventsLoaded = (events) => {
     return {
@@ -20,6 +20,26 @@ const eventsError = (error) => {
     };
 };
 
+const ticketsLoaded = (tickets) => {
+    return {
+        type: 'FETCH_TICKETS_SUCCESS',
+        payload: tickets
+    };
+};
+
+const ticketsRequested = () => {
+    return {
+        type: 'FETCH_TICKETS_REQUEST'
+    };
+};
+
+const ticketsError = (error) => {
+    return {
+        type: 'FETCH_TICKETS_FAILURE',
+        payload: error
+    };
+};
+
 const fetchEvents = (dispatch) => {
     dispatch(eventsReqeusted());
     requestEvents()
@@ -37,6 +57,18 @@ const fetchEvents = (dispatch) => {
         })
 };
 
+const fetchTickets = (dispatch, eventId) => {
+    dispatch(ticketsRequested());
+    ticketsInformation(eventId)
+        .then(data => {
+            dispatch(ticketsLoaded(data));
+        })
+        .catch(error => {
+            console.log(error);
+            dispatch(ticketsError(error.message));
+        })
+};
+
 export const rangeEventsSort = (range) => {
     return {
         type: 'RANGE_EVENTS_SORT',
@@ -51,5 +83,6 @@ export const clearRangeEventsSort = () => {
 };
 
 export {
-    fetchEvents
+    fetchEvents,
+    fetchTickets
 };
