@@ -5,19 +5,20 @@ import './eventInfo.less';
 
 const EventInfo = (props) => {
     const myEvent = JSON.parse(localStorage.getItem("myEvent"));
-    const eventStart = myEvent.eventStart;
-    const year = new Date(parseInt(eventStart)).getFullYear();
-    const month = new Date(parseInt(eventStart)).toLocaleString('default', {month: 'long'});
-    const day = new Date(parseInt(eventStart)).getDay();
-    let hour = new Date(parseInt(eventStart)).getHours();
+    const eventStart = new Date(parseInt(myEvent.eventStart));
+    const month = eventStart.toLocaleString('default', {month: 'long'});
+    const day = eventStart.getDate();
+    const year = eventStart.getFullYear();
+    let hour = eventStart.getHours();
     if (hour < 10) {
         hour = "0" + hour;
     }
-    let minute = new Date(parseInt(eventStart)).getMinutes();
+    let minute = eventStart.getMinutes();
     if (minute < 10) {
         minute = "0" + minute;
     }
     const date = day + " " + month + " " + year;
+    const date2 = day + " " + month;
     const time = hour + ":" + minute;
 
     const ticketInfo = useSelector(state => state.ticketsInfo.ticketsInfo);
@@ -32,7 +33,7 @@ const EventInfo = (props) => {
                 <h1>Events</h1>
             </div>
             <div className="preview">
-                <div className="date">{day + " " + month}</div>
+                <div className="date">{date2}</div>
                 <h1>{myEvent.artist}</h1>
                 <h2>{myEvent.eventName}</h2>
                 <img src={myEvent.images[0]} alt="poster"/>

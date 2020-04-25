@@ -10,23 +10,23 @@ const Event = ({ arr, indexForPagination }) => {
     }
     let myEvents = [];
         arrTmp.forEach((data) => {
-        let res = data.eventStart;
-        let date2 = new Date(parseInt(res)).toLocaleString('default', {month: 'long'});
-        let day = new Date(parseInt(res)).getDate();
-        let date = day + " " + date2;
-        myEvents.push(
-            <Link to={`/${data.eventId}`}>
-                <article className="event" onClick={() => {
-                    localStorage.setItem("myEvent", JSON.stringify(data));
-                }}>
-                    <div className="date">{date}</div>
-                    <h1>{data.artist}</h1>
-                    <h2>{data.eventName}</h2>
-                    <img src={data.images[0]} alt="poster"/>
-                </article>
-            </Link>
-        );
-    });
+            const res = new Date(parseInt(data.eventStart));
+            const month = res.toLocaleString('default', {month: 'long'});
+            const day = res.getDate();
+            const date = day + " " + month;
+            myEvents.push(
+                <Link to={`/${data.eventId}`}>
+                    <article className="event" onClick={() => {
+                        localStorage.setItem("myEvent", JSON.stringify(data));
+                    }}>
+                        <div className="date">{date}</div>
+                        <h1>{data.artist}</h1>
+                        <h2>{data.eventName}</h2>
+                        <img src={data.images[0]} alt="poster"/>
+                    </article>
+                </Link>
+            );
+        });
     return myEvents;
 };
 
