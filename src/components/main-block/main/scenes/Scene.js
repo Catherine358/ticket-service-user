@@ -4,6 +4,7 @@ import SmallScene from "./SmallScene";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { sceneInformation } from "../../../services";
+import BigScene from "./BigScene";
 
 const PriceRanges = ({priceRanges}) => {
     let priceRange;
@@ -66,12 +67,13 @@ const Scene = (props) => {
     const eventStart = myEvent.eventStart;
     const year = new Date(parseInt(eventStart)).getFullYear();
     const month = new Date(parseInt(eventStart)).toLocaleString('default', {month: 'long'});
-    const day = new Date(parseInt(eventStart)).getDay();
+    const day = new Date(parseInt(eventStart)).getDate();
     const date = day + " " + month + " " + year;
     const [priceRanges, setPriceRanges] = useState({});
     const [ticketsInCart, setTickets] = useState([]);
     const [pricesSum, setPrices] = useState(0);
     const [ticketsCount, setCount] = useState(0);
+    const sceneType = myEvent.hall === 0 ? "big" : "small";
 
     useEffect(() => {
        async function fetchSceneInfo(eventId) {
@@ -124,14 +126,29 @@ const Scene = (props) => {
                         <div className="w-100"/>
                         <div className="d-flex justify-content-between row title-hall-row w-100">
                             <span className="notausgang">Notausgang</span>
+                            {sceneType === "big" && <span className="mid-title-hall-2">Mittelparkett</span>}
                             <span className="notausgang">Notausgang</span>
                         </div>
-                        <SmallScene priceRanges={priceRanges} setTickets={updateTickets} setPrices={updatePricesSum}
+                        {sceneType === "small" ? <SmallScene priceRanges={priceRanges} setTickets={updateTickets} setPrices={updatePricesSum}
                                     setCount={updateCount}/>
-                        <p className="hall-1-title mt-5">KLEINER SAAL</p>
+                        : <BigScene priceRanges={priceRanges} setTickets={updateTickets} setPrices={updatePricesSum}
+                                    setCount={updateCount}/>}
+                        {sceneType === "small" ? <p className="hall-1-title mt-5">KLEINER SAAL</p>
+                            : <p className="hall-1-title mt-5">GROSSER SAAL</p>}
                         <div className="d-flex justify-content-between row title-hall-row w-100">
                             <span className="hall-1-side-title">Linke Seite</span>
                             <span className="hall-1-side-title">Rechte Seite</span>
+                            {sceneType === "big" && <div className="w-100"/>}
+                            {sceneType === "big" && <span className="hall-2-natau">
+                                                    Eingang
+                                                    <br/>
+                                                    Ausgang
+                                                    </span>}
+                            {sceneType === "big" &&<span className="hall-2-natau">
+                                                    Eingang
+                                                    <br/>
+                                                    Ausgang
+                                                    </span>}
                         </div>
                     </Grid>
                 </Grid>
