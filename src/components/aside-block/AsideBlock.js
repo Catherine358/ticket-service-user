@@ -26,7 +26,7 @@ const AsideBlock = (props) => {
     }, [dispatch, range]);
 
     return (
-        <Grid container direction="column" justify="center" className="aside-container">
+        <Grid container direction="column" justify="flex-start" className="aside-container">
             <div className="title">Calendar</div>
             <DayPicker className="Selectable" weekdaysShort={WEEKDAYS_SHORT} selectedDays={[range.from, range]}
                        modifiers={modifiers}
