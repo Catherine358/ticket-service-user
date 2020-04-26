@@ -1,0 +1,130 @@
+@dark-gray: #868685;
+@blue: #07ace8;
+@blue-dark: #3575b8;
+@light-gray: #f3f4f4;
+@font-futura-black: "FuturaFuturis bold", sans-serif;
+@font-dnipro-reg: "DINPro-Regular", sans-serif;
+
+.scene {
+  font-family: @font-futura-black;
+  width: 100%;
+
+  &-header {
+    display: flex;
+    width: 100%;
+    h1 {
+      margin-left: auto;
+      margin-right: auto;
+      border-bottom: 10px solid @dark-gray;
+      color: @dark-gray;
+    }
+  }
+
+  &-main-section {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    &-header {
+      margin-top: 15px;
+      font-family: @font-futura-black;
+      font-size: 22px;
+      text-align: left;
+      color: @dark-gray;
+    }
+  }
+
+  .buhne {
+    width: 370px;
+    padding: 1px;
+    font-family: @font-futura-black;
+    font-size: 19px;
+    text-align: center;
+    background-color: @blue;
+    color: @light-gray;
+  }
+
+  .title-hall-row {
+    height: 45px;
+    text-align: center;
+  }
+
+  .notausgang {
+    align-self: start;
+    margin-bottom: 10px;
+    padding: 6px;
+    font-size: 10px;
+    border: 1px solid @blue;
+    color: @blue;
+  }
+
+  .hall-1-row {
+    display: flex;
+    flex-basis: 100%;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 7px;
+  }
+
+  .hall-1-place:first-child {
+    border-left: 1px solid @blue;
+  }
+
+  .hall-1-place {
+    padding: 0 4px;
+    font-size: 12px;
+    border-bottom: 1px solid @blue;
+    border-top: 1px solid @blue;
+    border-right: 1px solid @blue;
+    color: @blue;
+    cursor: pointer;
+  }
+
+  .hall-1-title {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    justify-content: center;
+    text-align: center;
+    font-family: @font-futura-black;
+    font-size: 28px;
+    color: @blue-dark;
+  }
+
+  .hall-1-side-title {
+    font-family: @font-futura-black;
+    font-size: 15px;
+    color: @blue;
+  }
+
+  .cart-container {
+    min-height: 300px;
+    color: @dark-gray;
+
+    .scene-main-section-prices {
+      font-family: @font-futura-black;
+      font-size: 22px;
+    }
+
+    .seat-cart-row {
+      border-bottom: 1px solid @dark-gray;
+      font-family: @font-dnipro-reg;
+      color: @dark-gray;
+    }
+
+    .cart-btn {
+      max-height: 50px;
+      padding: 4px 0;
+      text-align: center;
+      font-family: @font-futura-black;
+      font-size: 20px;
+      background-color: @dark-gray;
+      color: @light-gray;
+      cursor: pointer;
+    }
+  }
+
+  .seat-cart-cross {
+    cursor: pointer;
+  }
+}

@@ -5,6 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { fetchEvents, clearRangeEventsSort } from "../../../actions/actions";
 import { useSelector, useDispatch } from "react-redux";
+import Spinner from "../../../loader/Loader";
 
 const updatePage = (indexForPagination, quantity) => {
     return indexForPagination + 4 * quantity;
@@ -32,7 +33,9 @@ const Events = (props) => {
             </div>
             <div className="list">
                 {message ? <p>{message}</p> :
-                <Event arr={eventsSorted.length > 0 && !message ? eventsSorted: events} indexForPagination={indexForPagination}/>}
+                    (events.length > 0 || eventsSorted.length > 0 ?
+                        <Event arr={eventsSorted.length > 0 && !message ? eventsSorted: events} indexForPagination={indexForPagination}/>
+                        : <Spinner/>)}
                 <Grid container direction="row" className="btn-page-container w-100">
                     <Grid container item justify="center">
                         {(!message && eventsSorted.length === 0) &&

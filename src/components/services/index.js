@@ -1,3 +1,3 @@
-import { requestEvents, ticketsInformation } from "./Server";
+import { requestEvents, ticketsInformation, sceneInformation } from "./Server";
 
-export { requestEvents, ticketsInformation };
+export { requestEvents, ticketsInformation, sceneInformation };

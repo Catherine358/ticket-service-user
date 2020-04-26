@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTickets } from "../../../actions/actions";
+import { Link } from "react-router-dom";
 import './eventInfo.less';
 
 const EventInfo = (props) => {
@@ -24,7 +25,7 @@ const EventInfo = (props) => {
     const dispatch = useDispatch();
     useEffect(() => {
         fetchTickets(dispatch, myEvent.eventId)
-    }, [dispatch]);
+    }, [dispatch, myEvent.eventId]);
 
     return (
         <div className="eventInfo">
@@ -45,7 +46,9 @@ const EventInfo = (props) => {
                     <span>Tickets available - <span className="yellow">{ticketInfo.restTick}</span></span>
                     <span>Price range: <span className="yellow">{ticketInfo.maxPrice} - {ticketInfo.minPrice}</span></span>
                 </div>
-                <span className="yellow">BUY TICKETS</span>
+                <Link to={`/${myEvent.eventId}/scene`}>
+                    <span className="yellow">BUY TICKETS</span>
+                </Link>
             </div>
         </div>
     )

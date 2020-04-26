@@ -23,7 +23,7 @@ const AsideBlock = (props) => {
         if(range.from !== undefined) {
             dispatch(rangeEventsSort(range));
         }
-    }, [range]);
+    }, [dispatch, range]);
 
     return (
         <Grid container direction="column" justify="center" className="aside-container">

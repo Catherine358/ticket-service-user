@@ -4,6 +4,7 @@ import ErrorIndicator from "../../error-indicator";
 import Grid from "@material-ui/core/Grid";
 import { requestEvents } from "../../services";
 import Event from "./Event";
+import Spinner from "../../loader/Loader";
 
 const EventsAside = (props) => {
     const [events, setEvents] = useState([]);
@@ -12,7 +13,6 @@ const EventsAside = (props) => {
         async function fetchEvents() {
             await requestEvents()
                 .then(data => {
-                    console.log(data);
                     let arr = [];
                     for (let i = 0; i < data.length; i++) {
                         arr.push(data[i]);
@@ -32,7 +32,7 @@ const EventsAside = (props) => {
 
     return (
         <Grid container direction="column">
-            {newEvent}
+            {newEvent.length === 0 ? <Spinner/> : newEvent}
         </Grid>
     );
 };

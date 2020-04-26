@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { fetchTickets } from "../../actions/actions";
@@ -8,7 +8,7 @@ const Event = ({event}) => {
     const dispatch = useDispatch();
     useEffect(() => {
         fetchTickets(dispatch, event.eventId);
-        }, [dispatch]);
+        }, [dispatch, event.eventId]);
 
     let res = event.eventStart;
     let date2 = new Date(parseInt(res)).toLocaleString('default', {month: 'long'});

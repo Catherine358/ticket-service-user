@@ -42,4 +42,23 @@ const ticketsInformation = (eventId) => {
     return response;
 };
 
-export { requestEvents, ticketsInformation };
+const sceneInformation = (eventId) => {
+    const response = fetch(`${BASE_URL}event/${eventId}/${false}`,{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => {
+            if(response.status !== 200){
+                if(response.status === 404){
+                    throw new Error(`Event with ${eventId} does not exist`);
+                }
+                throw new Error(`Could not fetch data`);
+            }
+            return response.json();
+        });
+    return response;
+};
+
+export { requestEvents, ticketsInformation, sceneInformation };

@@ -7,6 +7,7 @@ import Events from "./components/main-block/main/events";
 import EventInfo from "./components/main-block/main/eventInfo";
 import Footer from "./components/main-block/footer";
 import { Switch, Route } from "react-router";
+import Scene from "./components/main-block/main/scenes";
 
 const App = (props) => {
     return (
@@ -43,6 +44,27 @@ const App = (props) => {
                                 <Grid container item sm={9}>
                                     <Grid container direction="column">
                                         <EventInfo eventId={id}/>
+                                        <Footer/>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </div>
+                    );
+                }}/>
+                <Route exact path="/:id/scene" render={props => {
+                    const { id } = props.match.params;
+                    return (
+                        <div className="wrapper">
+                            <header className="heading">
+                                <Header/>
+                            </header>
+                            <Grid container direction="row" className="main-container">
+                                <Grid container item sm={3}>
+                                    <AsideBlock/>
+                                </Grid>
+                                <Grid container item sm={9}>
+                                    <Grid container direction="column">
+                                        <Scene eventId={id}/>
                                         <Footer/>
                                     </Grid>
                                 </Grid>
