@@ -45,7 +45,7 @@
   }
 
   .title-hall-row {
-    height: 45px;
+    height: 60px;
     text-align: center;
   }
 
@@ -58,26 +58,55 @@
     color: @blue;
   }
 
-  .hall-1-row {
+  .hall-1-row,
+  .hall-2-row {
     display: flex;
     flex-basis: 100%;
     justify-content: center;
     text-align: center;
+  }
+
+  .hall-1-row {
     margin-bottom: 7px;
   }
 
-  .hall-1-place:first-child {
+  .hall-2-row{
+    align-self: start;
+    margin-bottom: 2px;
+  }
+
+  .hall-1-place:first-child,
+  .hall-2-place:first-child{
     border-left: 1px solid @blue;
   }
 
-  .hall-1-place {
-    padding: 0 4px;
-    font-size: 12px;
+  .hall-1-place,
+  .hall-2-place {
     border-bottom: 1px solid @blue;
     border-top: 1px solid @blue;
     border-right: 1px solid @blue;
     color: @blue;
     cursor: pointer;
+  }
+
+  .hall-1-place:hover,
+  .hall-2-place:hover {
+    background-color: #3575b8 !important;
+  }
+
+  .hall-1-place {
+    padding: 0 4px;
+    font-size: 12px;
+  }
+
+  .hall-2-place{
+    display: inline-block;
+    font-size: 9px;
+    padding: 1px;
+    line-height: 10px;
+    min-width: 11px;
+    text-align: center;
+    font-family: FuturaFuturis sans-serif;
   }
 
   .hall-1-title {
@@ -91,10 +120,24 @@
     color: @blue-dark;
   }
 
-  .hall-1-side-title {
+  .hall-1-side-title,
+  .mid-title-hall-2 {
     font-family: @font-futura-black;
     font-size: 15px;
     color: @blue;
+  }
+
+  .mid-title-hall-2{
+    font-size: 22px;
+  }
+
+  .hall-2-natau{
+    font-size: 10px;
+    color: #07ace8;
+    border: 1px solid #07ace8;
+    padding: 6px;
+    align-self: start;
+    text-align: center;
   }
 
   .cart-container {
@@ -126,5 +169,32 @@
 
   .seat-cart-cross {
     cursor: pointer;
+  }
+
+  .hall-2-left-side{
+    margin-left: 20px;
+    transform: rotate(25deg);
+    text-align: center;
+  }
+
+  .hall-2-center{
+    margin: 0 50px;
+    width: 247px;
+    transform: translateY(18px);
+    text-align: center;
+  }
+
+  .hall-2-right-side{
+    transform: rotate(-25deg);
+    text-align: center;
+  }
+
+  .right-bottom-side{
+    margin-left: 4px;
+  }
+
+  .left-bottom-side{
+    margin-right: 4px;
+    text-align: center;
   }
 }
