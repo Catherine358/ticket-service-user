@@ -1,0 +1,105 @@
+@dark-gray: #868685;
+@pink: #ff1632;
+@light-gray: #f3f4f4;
+@yellow: #ffc800;
+@font-fut: FuturaFuturis, sans-serif;
+@font-futura-black: FuturaFuturis-bold, sans-serif;
+@font-dnipro-light: DINPro-Light, sans-serif;
+
+.shopping-cart {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  color: @dark-gray;
+
+  &-header {
+    display: flex;
+    margin-bottom: 20px;
+    width: 100%;
+
+    h1 {
+      margin-left: auto;
+      margin-right: auto;
+      border-bottom: 10px solid @dark-gray;
+      color: @dark-gray;
+    }
+  }
+
+  .reserved-text {
+    text-align: left;
+    font-family: @font-fut;
+    font-size: 15px;
+    color: @pink;
+  }
+
+  .border-cart {
+    position: relative;
+    border: 1px solid @dark-gray;
+
+    &-header {
+      margin-top: 15px;
+      font-family: @font-futura-black;
+      font-size: 22px;
+    }
+  }
+
+  .shopping-cart-btn {
+    text-align: center;
+    padding: 4px 0;
+    font-family: @font-futura-black;
+    font-size: 20px;
+    background-color: @dark-gray;
+    color: @light-gray;
+    cursor: pointer;
+  }
+
+  input[type=checkbox] {
+    display: none;
+  }
+
+  input[type=checkbox],
+  input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+  }
+
+  .pos-cart-agreement {
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+  }
+
+  .label-for-checkbox {
+    font-family: @font-dnipro-light;
+    font-size: 12px;
+  }
+
+  input[type=checkbox]+label span:first-child {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    background: url("https://ticket-service-69443.firebaseapp.com/static/media/0.69fe352a.svg");
+    cursor: pointer;
+  }
+
+  .red-text {
+    font-family: @font-futura-black;
+    font-size: 18px;
+    color: @pink;
+  }
+
+  .yellow-text {
+    color: @yellow;
+    cursor: pointer;
+  }
+
+  .clear-cart {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color: @yellow;
+    cursor: pointer;
+  }
+}

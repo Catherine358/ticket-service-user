@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { sceneInformation } from "../../../services";
 import BigScene from "./BigScene";
+import {Link} from "react-router-dom";
 
 const PriceRanges = ({priceRanges}) => {
     let priceRange;
@@ -169,7 +170,9 @@ const Scene = (props) => {
                                                                     setCount={updateCount}/>}
                     </div>
                     <PricesSum pricesSum={pricesSum} ticketsCount={ticketsCount}/>
-                    <Button variant="contained" className="cart-btn w-100 mt-2 pt-2">TO THE CART</Button>
+                    <Link to={`/${myEvent.eventId}/cart`}>
+                        <Button variant="contained" className="cart-btn w-100 mt-2 pt-2">TO THE CART</Button>
+                    </Link>
                 </Grid>
             </Grid>
         </div>
