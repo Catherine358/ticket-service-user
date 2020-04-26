@@ -12,7 +12,7 @@ const PriceRanges = ({priceRanges}) => {
        priceRange  = priceRanges.map(data => {
             return (
                 <div key={data.price + data.color} className="priceCategories w-100">
-                    <span className="ml-2 d-inline-block w-100"
+                    <span className="d-inline-block w-100"
                           style={{backgroundColor: `${data.color}`}}><span>&#8364;</span> {data.price}</span>
                 </div>
             )
@@ -153,7 +153,7 @@ const Scene = (props) => {
                     </Grid>
                 </Grid>
                 <Grid container item sm={3} className="w-100 cart-container">
-                    <div className="mb-4 scene-main-section-prices w-100">
+                    <div className="ml-2 mb-4 scene-main-section-prices w-100">
                         <div>Price range:</div>
                         <PriceRanges priceRanges={priceRanges.priceRanges}/>
                     </div>
