@@ -41,6 +41,9 @@
       font-family: @font-futura-black;
       font-size: 22px;
     }
+    .seat-cart-row {
+      border-bottom: 1px solid @dark-gray;
+    }
   }
 
   .shopping-cart-btn {
@@ -54,7 +57,9 @@
   }
 
   input[type=checkbox] {
-    display: none;
+    //display: none;
+    //background-color: transparent;
+    box-shadow: none;
   }
 
   input[type=checkbox],
@@ -67,22 +72,63 @@
     position: absolute;
     right: 15px;
     bottom: 10px;
+    padding-left: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   .label-for-checkbox {
     font-family: @font-dnipro-light;
     font-size: 12px;
+    line-height: 15px;
+    input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      background-color: @light-gray;
+      border: 1px solid @dark-gray;
+    }
+
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+    input:checked ~ .checkmark:after {
+      display: block;
+      left: 2px;
+      top: -4px;
+      width: 10px;
+      height: 15px;
+      border: solid @dark-gray;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
   }
 
-  input[type=checkbox]+label span:first-child {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin: -1px 4px 0 0;
-    vertical-align: middle;
-    background: url("https://ticket-service-69443.firebaseapp.com/static/media/0.69fe352a.svg");
-    cursor: pointer;
-  }
+  //input[type=checkbox]+label span:first-child {
+  //  display: inline-block;
+  //  width: 16px;
+  //  height: 16px;
+  //  margin: -1px 4px 0 0;
+  //  vertical-align: middle;
+  //  background: url("https://ticket-service-69443.firebaseapp.com/static/media/0.69fe352a.svg");
+  //  cursor: pointer;
+  //}
 
   .red-text {
     font-family: @font-futura-black;
