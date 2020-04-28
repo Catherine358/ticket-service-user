@@ -138,7 +138,7 @@ const Scene = (props) => {
                         dispatch={dispatch}/>}
                     </div>
                     <PricesSum pricesSum={pricesSum} ticketsCount={ticketsCount}/>
-                    <Link to={`/${myEvent.eventId}/cart`}>
+                    <Link to={'/cart'}>
                         <Button variant="contained" className="cart-btn w-100 mt-2 pt-2" onClick={() => {
                             let lockedSeats = [];
                             let map = new Map();
