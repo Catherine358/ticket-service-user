@@ -10,7 +10,7 @@ import { Switch, Route } from "react-router";
 import Scene from "./components/main-block/main/scenes";
 import ShoppingCart from "./components/main-block/main/shopping-cart";
 import TermsAndConditions from "./components/main-block/main/terms-&-conditions";
-import Pay from "./components/main-block/main/pay";
+import PaySystem from "./components/main-block/main/pay/Pay";
 
 const App = (props) => {
     return (
@@ -84,7 +84,7 @@ const App = (props) => {
                                 </Grid>
                                 <Grid container item sm={9}>
                                     <Grid container direction="column">
-                                        <Pay {...props} />
+                                        <PaySystem {...props} />
                                         <Footer/>
                                     </Grid>
                                 </Grid>
