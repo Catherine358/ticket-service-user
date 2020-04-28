@@ -151,6 +151,18 @@ export const updateCount = (count, idx) => {
   }
 };
 
+export const loadPayPal = (act) => {
+    if(act) {
+        return {
+            type: 'LOAD_PAYPAL_REQUEST'
+        };
+    }else {
+        return {
+            type: 'LOAD_PAYPAL_SUCCESS'
+        };
+    }
+};
+
 export {
     fetchEvents,
     fetchTickets,

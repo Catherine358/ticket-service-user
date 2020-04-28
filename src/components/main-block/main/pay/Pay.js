@@ -5,18 +5,18 @@ import "./pay.less"
 import { useSelector, connect } from "react-redux";
 import scriptLoader from 'react-async-script-loader';
 import Spinner from "../../../loader/Loader";
+import { loadPayPal } from "../../../actions/actions";
 
 const CLIENT_ID = 'Acmwh7Sap7muPMPZ0-06wBMIyV6_Q9Qv5MM44d2s1l_Z5z4AGQVbD6lbBAu1ZAc3hohsbJTzPLVZFpJB';
 let PayPalButtons = null;
 
 class PaySystem extends React.Component {
-    state = (
-        loading: true
-    );
+
     componentWillReceiveProps({isScriptLoaded, isScriptLoadSucceed}, nextStep) {
         if(isScriptLoaded && !this.props.isScriptLoaded) {
             if(isScriptLoadSucceed) {
                 PayPalButtons = window.paypal.Buttons.driver('react', {React, ReactDOM});
+                this.props.loadPayPal(false);
             }
             else this.props.onError();
         }
@@ -36,7 +36,7 @@ class PaySystem extends React.Component {
         const year = eventStart.getFullYear();
         const date = day + " " + month + " " + year;
 
-         const { pricesSum, ticketsCount } = this.props;
+         const { pricesSum, ticketsCount, loading, paySuccess, payPalSystem } = this.props;
 
         return (
          <div className="pay">
@@ -48,7 +48,8 @@ class PaySystem extends React.Component {
                     The tickets shown here have now been reserved for you for 10 minutes.
                 </div>
             </div>
-             {this.state.loading ? <Spinner/> : <div className="row w-100 border-pay p-2 m-0 mr-2">
+             {loading && <Spinner/>}
+             {payPalSystem && <div className="row w-100 border-pay p-2 m-0 mr-2">
                 <div>
                     <p className="border-pay-header ml-md-3 mx-0 mt-0 text-md-left text-center">
                         {myEvent.artist} | {myEvent.eventName} | {date}
@@ -71,12 +72,14 @@ class PaySystem extends React.Component {
     }
 }
 
-const mapStateToProps = ({ticketsInCart: { pricesSum, ticketsCount }}) => {
-    return { pricesSum, ticketsCount };
+const mapStateToProps = ({ticketsInCart: { pricesSum, ticketsCount }, payPalSystem: { loading, paySuccess, payPalSystem }}) => {
+    return { pricesSum, ticketsCount, loading, paySuccess, payPalSystem };
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//     return
-// }
+ const mapDispatchToProps = (dispatch) => {
+     return {
+         loadPayPal: (act) => dispatch(loadPayPal(act))
+     };
+ };
 
-export default connect(mapStateToProps)(scriptLoader(`https://www.paypal.com/sdk/js?client-id=${CLIENT_ID}`)(PaySystem));
+export default connect(mapStateToProps, mapDispatchToProps)(scriptLoader(`https://www.paypal.com/sdk/js?client-id=${CLIENT_ID}`)(PaySystem));
