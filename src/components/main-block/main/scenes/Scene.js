@@ -171,7 +171,33 @@ const Scene = (props) => {
                     </div>
                     <PricesSum pricesSum={pricesSum} ticketsCount={ticketsCount}/>
                     <Link to={`/${myEvent.eventId}/cart`}>
-                        <Button variant="contained" className="cart-btn w-100 mt-2 pt-2">TO THE CART</Button>
+                        <Button variant="contained" className="cart-btn w-100 mt-2 pt-2" onClick={() => {
+                            let lockedSeats = [];
+                            let map = new Map();
+                            ticketsInCart.forEach(data => {
+                                let arr = data.split("-");
+                                if(map.get(arr[0]) === undefined){
+                                    let seats = [];
+                                    seats.push(arr[1]);
+                                    map.set(arr[0], seats);
+                                }else{
+                                    let tmp = map.get(arr[0]);
+                                    tmp.push(arr[1]);
+                                    map.set(arr[0], tmp);
+                                }
+                            });
+                            map.forEach((value, key) => {
+                                lockedSeats.push({
+                                    row: key.toString(),
+                                    seats: value
+                                });
+                            });
+                            localStorage.setItem("lockedSeats", JSON.stringify({
+                                lockedSeats: lockedSeats,
+                                pricesSum: pricesSum,
+                                ticketsCount: ticketsCount
+                            }));
+                        }}>TO THE CART</Button>
                     </Link>
                 </Grid>
             </Grid>

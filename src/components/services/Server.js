@@ -61,4 +61,25 @@ const sceneInformation = (eventId) => {
     return response;
 };
 
-export { requestEvents, ticketsInformation, sceneInformation };
+const bookTicket = (eventId, lockedSeats) => {
+    const response = fetch(`${BASE_URL}event/book`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            eventId: eventId,
+            lockedSeats: lockedSeats
+            }
+        )
+    })
+        .then(response => {
+            if(response.status !== 200){
+                throw new Error(`Could not fetch data`);
+            }
+            return response.json();
+        });
+    return response;
+};
+
+export { requestEvents, ticketsInformation, sceneInformation, bookTicket };
