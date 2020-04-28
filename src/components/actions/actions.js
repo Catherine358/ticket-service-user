@@ -1,4 +1,4 @@
-import { requestEvents, ticketsInformation } from "../services";
+import { requestEvents, ticketsInformation, sceneInformation } from "../services";
 
 const eventsLoaded = (events) => {
     return {
@@ -40,6 +40,26 @@ const ticketsError = (error) => {
     };
 };
 
+const sceneInfoLoaded = (tickets) => {
+    return {
+        type: 'FETCH_SCENE_INFO_SUCCESS',
+        payload: tickets
+    };
+};
+
+const sceneInfoRequested = () => {
+    return {
+        type: 'FETCH_SCENE_INFO_REQUEST'
+    };
+};
+
+const sceneInfoError = (error) => {
+    return {
+        type: 'FETCH_SCENE_INFO_FAILURE',
+        payload: error
+    };
+};
+
 const fetchEvents = (dispatch) => {
     dispatch(eventsReqeusted());
     requestEvents()
@@ -69,6 +89,13 @@ const fetchTickets = (dispatch, eventId) => {
         })
 };
 
+const fetchSceneInfo = (dispatch, eventId) => {
+    dispatch(sceneInfoRequested());
+    sceneInformation(eventId)
+        .then(data => dispatch(sceneInfoLoaded(data)))
+        .catch(error => dispatch(sceneInfoError(error)));
+};
+
 export const rangeEventsSort = (range) => {
     return {
         type: 'RANGE_EVENTS_SORT',
@@ -82,7 +109,50 @@ export const clearRangeEventsSort = () => {
     };
 };
 
+export const updateTickets = (item, idx) => {
+    if(idx > 0) {
+        return {
+            type: 'ADD_TICKET_TO_CART',
+            payload: item
+        };
+    }else{
+        return {
+            type: 'DELETE_TICKET_FROM_CART',
+            payload: item
+        };
+    }
+};
+
+export const updatePriceSum = (price, idx) => {
+    if(idx > 0) {
+        return {
+            type: 'INCREASE_PRICE',
+            payload: price
+        };
+    }else{
+        return {
+          type: 'DECREASE_PRICE',
+          payload: price
+        };
+    }
+};
+
+export const updateCount = (count, idx) => {
+  if(idx > 0) {
+      return {
+          type: 'INCREASE_COUNT',
+          payload: count
+      };
+  }  else {
+      return {
+          type: 'DECREASE_COUNT',
+          payload: count
+      };
+  }
+};
+
 export {
     fetchEvents,
-    fetchTickets
+    fetchTickets,
+    fetchSceneInfo
 };

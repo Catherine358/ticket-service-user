@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import './scene.less';
 import SmallScene from "./SmallScene";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import { sceneInformation } from "../../../services";
+import { useDispatch, useSelector } from "react-redux";
 import BigScene from "./BigScene";
 import {Link} from "react-router-dom";
+import { fetchSceneInfo, updateTickets, updatePriceSum, updateCount } from "../../../actions/actions";
 
 const PriceRanges = ({priceRanges}) => {
     let priceRange;
@@ -33,7 +34,7 @@ const findPrice = (row, priceRanges) => {
     return null;
 };
 
-const TicketsInCart = ({ticketsInCart, setTickets, setPrices, priceRanges, setCount}) => {
+const TicketsInCart = ({ ticketsInCart, priceRanges, dispatch }) => {
   let ticket = ticketsInCart.map(data => {
       let arr = data.split("-");
       return (
@@ -41,10 +42,10 @@ const TicketsInCart = ({ticketsInCart, setTickets, setPrices, priceRanges, setCo
             <span className="seat-cart-font">{arr[0]}</span>
             <span className="seat-cart-font">{arr[1]}</span>
             <span className="seat-cart-cross" onClick={() => {
-                setTickets(data, 1);
+                dispatch(updateTickets(data, -1));
                 let price = findPrice(arr[0], priceRanges);
-                setPrices(price, -1);
-                setCount(1, -1);
+                dispatch(updatePriceSum(price, -1));
+                dispatch(updateCount(1, -1));
             }}>&times;</span>
         </div>
       )
@@ -70,47 +71,16 @@ const Scene = (props) => {
     const month = new Date(parseInt(eventStart)).toLocaleString('default', {month: 'long'});
     const day = new Date(parseInt(eventStart)).getDate();
     const date = day + " " + month + " " + year;
-    const [priceRanges, setPriceRanges] = useState({});
-    const [ticketsInCart, setTickets] = useState([]);
-    const [pricesSum, setPrices] = useState(0);
-    const [ticketsCount, setCount] = useState(0);
+    const priceRanges = useSelector(state => state.ticketsInCart.priceRanges);
+    const ticketsInCart = useSelector(state => state.ticketsInCart.ticketsInCart);
+    const pricesSum = useSelector(state => state.ticketsInCart.pricesSum);
+    const ticketsCount = useSelector(state => state.ticketsInCart.ticketsCount);
     const sceneType = myEvent.hall === 0 ? "big" : "small";
+    const dispatch = useDispatch();
 
     useEffect(() => {
-       async function fetchSceneInfo(eventId) {
-           await sceneInformation(eventId)
-               .then(data => {
-                   setPriceRanges(data);
-               })
-               .catch(error => console.log(error));
-       }
-       fetchSceneInfo(myEvent.eventId);
-    }, [myEvent.eventId]);
-
-    function updateTickets(item, idx) {
-        if(idx === -1) {
-            setTickets(items => [...items, item]);
-        }else{
-            let index = ticketsInCart.findIndex(itm => itm === item);
-            setTickets(items => items.slice(0, index).concat(items.slice(index + 1)));
-        }
-    }
-
-    function updatePricesSum(price, idx) {
-        if(idx === -1){
-            setPrices(prices => prices - price);
-        }else{
-            setPrices(prices => prices + price);
-        }
-    }
-
-    function updateCount(count, idx) {
-        if(idx === -1){
-            setCount(counts => counts - count);
-        }else{
-            setCount(counts => counts + count);
-        }
-    }
+       fetchSceneInfo(dispatch, myEvent.eventId);
+    }, [dispatch, myEvent.eventId]);
 
     return (
         <div className="scene">
@@ -130,10 +100,8 @@ const Scene = (props) => {
                             {sceneType === "big" && <span className="mid-title-hall-2">Mittelparkett</span>}
                             <span className="notausgang">Notausgang</span>
                         </div>
-                        {sceneType === "small" ? <SmallScene priceRanges={priceRanges} setTickets={updateTickets} setPrices={updatePricesSum}
-                                    setCount={updateCount}/>
-                        : <BigScene priceRanges={priceRanges} setTickets={updateTickets} setPrices={updatePricesSum}
-                                    setCount={updateCount}/>}
+                        {sceneType === "small" ? <SmallScene priceRanges={priceRanges} dispatch={dispatch}/>
+                        : <BigScene priceRanges={priceRanges} dispatch={dispatch}/>}
                         {sceneType === "small" ? <p className="hall-1-title mt-5">KLEINER SAAL</p>
                             : <p className="hall-1-title mt-5">GROSSER SAAL</p>}
                         <div className="d-flex justify-content-between row title-hall-row w-100">
@@ -165,9 +133,9 @@ const Scene = (props) => {
                         </div>
                     </div>
                     <div className="col-12">
-                        {ticketsInCart.length > 0 && <TicketsInCart ticketsInCart={ticketsInCart} setTickets={updateTickets}
-                                                                    setPrices={updatePricesSum} priceRanges={priceRanges.priceRanges}
-                                                                    setCount={updateCount}/>}
+                        {ticketsInCart.length > 0 && <TicketsInCart ticketsInCart={ticketsInCart}
+                                                                    priceRanges={priceRanges.priceRanges}
+                        dispatch={dispatch}/>}
                     </div>
                     <PricesSum pricesSum={pricesSum} ticketsCount={ticketsCount}/>
                     <Link to={`/${myEvent.eventId}/cart`}>
@@ -194,8 +162,7 @@ const Scene = (props) => {
                             });
                             localStorage.setItem("lockedSeats", JSON.stringify({
                                 lockedSeats: lockedSeats,
-                                pricesSum: pricesSum,
-                                ticketsCount: ticketsCount
+                                ticketsInCart: ticketsInCart
                             }));
                         }}>TO THE CART</Button>
                     </Link>

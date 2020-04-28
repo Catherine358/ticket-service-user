@@ -1,5 +1,6 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
+import { updateTickets, updatePriceSum, updateCount } from "../../../actions/actions";
 
 const findColorOrPrice = (row, priceRanges, idx) => {
     for(let i = 0; i < priceRanges.length; i++){
@@ -14,16 +15,16 @@ const findColorOrPrice = (row, priceRanges, idx) => {
     return null;
 };
 
-const RowLeft = (index, row, color, price, setTickets, setPrices, setCount) => {
+const RowLeft = (index, row, color, price, dispatch) => {
     let rows = [];
     let seats = [];
     for(let i = 0; i < index; i++){
         seats.push(<span className="hall-2-place" key={`${row}-${i + 1}L`}
                          id={`${row}-${i + 1}L`}
                          onClick={() => {
-                             setTickets(`${row}-${i + 1}L`, -1);
-                             setPrices(price, 1);
-                             setCount(1, 1);
+                             dispatch(updateTickets(`${row}-${i + 1}L`, 1));
+                             dispatch(updatePriceSum(price, 1));
+                             dispatch(updateCount(1, 1));
                          }}
                          style={{backgroundColor: `${color === null ? "" : color}`}}>
                 {i + 1}</span>)
@@ -32,16 +33,16 @@ const RowLeft = (index, row, color, price, setTickets, setPrices, setCount) => {
     return rows;
 };
 
-const RowRight = (index, row, color, price, setTickets, setPrices, setCount) => {
+const RowRight = (index, row, color, price, dispatch) => {
     let rows = [];
     let seats = [];
     for(let i = index; i > 0; i--){
         seats.push(<span className="hall-2-place" key={`${row}-${i}R`}
                          id={`${row}-${i}R`}
                          onClick={() => {
-                             setTickets(`${row}-${i}R`, -1);
-                             setPrices(price, 1);
-                             setCount(1, 1);
+                             dispatch(updateTickets(`${row}-${i}R`, 1));
+                             dispatch(updatePriceSum(price, 1));
+                             dispatch(updateCount(1, 1));
                          }}
                          style={{backgroundColor: `${color === null ? "" : color}`}}>
                 {i}</span>)
@@ -50,7 +51,7 @@ const RowRight = (index, row, color, price, setTickets, setPrices, setCount) => 
     return rows;
 };
 
-const RowCenter = (index, row, startIndex, color, price, setTickets, setPrices, setCount) => {
+const RowCenter = (index, row, startIndex, color, price, dispatch) => {
     let rows = [];
     let seats = [];
     for(let i = startIndex; i < index + startIndex; i++){
@@ -58,9 +59,9 @@ const RowCenter = (index, row, startIndex, color, price, setTickets, setPrices, 
         seats.push(<span className="hall-2-place" key={`${row}-${i <= side ? i : (index + (startIndex) * 2) - i - 1}${i <= side ? "L" : "R"}`}
                          id={`${row}-${i <= side ? i : (index + (startIndex) * 2) - i - 1}${i <= side ? "L" : "R"}`}
                          onClick={() => {
-                             setTickets(`${row}-${i <= side ? i : (index + (startIndex) * 2) - i - 1}${i <= side ? "L" : "R"}`, -1);
-                             setPrices(price, 1);
-                             setCount(1, 1);
+                             dispatch(updateTickets(`${row}-${i <= side ? i : (index + (startIndex) * 2) - i - 1}${i <= side ? "L" : "R"}`, 1));
+                             dispatch(updatePriceSum(price, 1));
+                             dispatch(updateCount(1, 1));
                          }}
                          style={{backgroundColor: `${color === null ? "" : color}`}}>
                 {i <= side ? i : (index + (startIndex) * 2) - i - 1}</span>)
@@ -69,7 +70,7 @@ const RowCenter = (index, row, startIndex, color, price, setTickets, setPrices, 
     return rows;
 };
 
-const SceneLeftSideTop = ({ priceRanges }, setTickets, setPrices, setCount) => {
+const SceneLeftSideTop = ({ priceRanges }, dispatch) => {
     let rows = [];
     let index = 3;
     let color = null;
@@ -79,11 +80,11 @@ const SceneLeftSideTop = ({ priceRanges }, setTickets, setPrices, setCount) => {
             color = findColorOrPrice(i + 1, priceRanges, 1);
             price = findColorOrPrice(i + 1, priceRanges, -1);
         }
-        rows.push(RowLeft(index, i + 1, color, price, setTickets, setPrices, setCount));
+        rows.push(RowLeft(index, i + 1, color, price, dispatch));
         rows.push(<div key={i + "divsceneLeftTop"} className="w-100"/>);
         index++;
     }
-    rows.push(RowLeft(--index, 9, color, price, setTickets, setPrices, setCount));
+    rows.push(RowLeft(--index, 9, color, price, dispatch));
     rows.push(<div key={8 + "divsceneLeftTop"} className="w-100"/>);
     return (
         <Grid container direction="row" justify="center">
@@ -92,7 +93,7 @@ const SceneLeftSideTop = ({ priceRanges }, setTickets, setPrices, setCount) => {
     );
 };
 
-const SceneRightSideTop = ({ priceRanges }, setTickets, setPrices, setCount) => {
+const SceneRightSideTop = ({ priceRanges }, dispatch) => {
     let rows = [];
     let index = 3;
     let color = null;
@@ -102,11 +103,11 @@ const SceneRightSideTop = ({ priceRanges }, setTickets, setPrices, setCount) => 
             color = findColorOrPrice(i + 1, priceRanges, 1);
             price = findColorOrPrice(i + 1, priceRanges, -1);
         }
-        rows.push(RowRight(index, i + 1, color, price, setTickets, setPrices, setCount));
+        rows.push(RowRight(index, i + 1, color, price, dispatch));
         rows.push(<div key={i + "divsceneRightTop"} className="w-100"/>);
         index++;
     }
-    rows.push(RowRight(--index, 9, color, price, setTickets, setPrices, setCount));
+    rows.push(RowRight(--index, 9, color, price, dispatch));
     rows.push(<div key={8 + "divsceneRightTop"} className="w-100"/>);
     return (
         <Grid container direction="row" justify="center">
@@ -115,7 +116,7 @@ const SceneRightSideTop = ({ priceRanges }, setTickets, setPrices, setCount) => 
     );
 };
 
-const SceneLeftSideBottom = ({ priceRanges }, setTickets, setPrices, setCount) => {
+const SceneLeftSideBottom = ({ priceRanges }, dispatch) => {
     let rows = [];
     let index = 9;
     let color = null;
@@ -125,7 +126,7 @@ const SceneLeftSideBottom = ({ priceRanges }, setTickets, setPrices, setCount) =
             color = findColorOrPrice(i + 10, priceRanges, 1);
             price = findColorOrPrice(i + 10, priceRanges, -1);
         }
-        rows.push(RowLeft(index, i + 10, color, price, setTickets, setPrices, setCount));
+        rows.push(RowLeft(index, i + 10, color, price, dispatch));
         rows.push(<div key={i + "divsceneLeftBottom"} className="w-100"/>);
         index--;
     }
@@ -136,7 +137,7 @@ const SceneLeftSideBottom = ({ priceRanges }, setTickets, setPrices, setCount) =
     );
 };
 
-const SceneRightSideBottom = ({ priceRanges }, setTickets, setPrices, setCount) => {
+const SceneRightSideBottom = ({ priceRanges }, dispatch) => {
     let rows = [];
     let index = 9;
     let color = null;
@@ -146,7 +147,7 @@ const SceneRightSideBottom = ({ priceRanges }, setTickets, setPrices, setCount) 
             color = findColorOrPrice(i + 10, priceRanges, 1);
             price = findColorOrPrice(i + 10, priceRanges, -1);
         }
-        rows.push(RowRight(index, i + 10, color, price, setTickets, setPrices, setCount));
+        rows.push(RowRight(index, i + 10, color, price, dispatch));
         rows.push(<div key={i + "divsceneRightBottom"} className="w-100"/>);
         index--;
     }
@@ -157,7 +158,7 @@ const SceneRightSideBottom = ({ priceRanges }, setTickets, setPrices, setCount) 
     );
 };
 
-const SceneCenter = ({ priceRanges }, setTickets, setPrices, setCount) => {
+const SceneCenter = ({ priceRanges }, dispatch) => {
     let rows = [];
     let index = 15;
     let startIndex = 4;
@@ -170,7 +171,7 @@ const SceneCenter = ({ priceRanges }, setTickets, setPrices, setCount) => {
             price = findColorOrPrice(i + 1, priceRanges, -1);
         }
         if(!flag) {
-            rows.push(RowCenter(index, i + 1, startIndex, color, price, setTickets, setPrices, setCount));
+            rows.push(RowCenter(index, i + 1, startIndex, color, price, dispatch));
             startIndex++;
             index++;
             if(i === 7){
@@ -178,7 +179,7 @@ const SceneCenter = ({ priceRanges }, setTickets, setPrices, setCount) => {
                 startIndex--;
             }
         }else{
-            rows.push(RowCenter(index, i + 1, startIndex, color, price, setTickets, setPrices, setCount));
+            rows.push(RowCenter(index, i + 1, startIndex, color, price, dispatch));
             startIndex--;
             if(i === 13){
                 startIndex = 1;
@@ -197,19 +198,19 @@ const SceneCenter = ({ priceRanges }, setTickets, setPrices, setCount) => {
     );
 };
 
-const BigScene = ({priceRanges, setTickets, setPrices, setCount}) => {
+const BigScene = ({ priceRanges, dispatch }) => {
     return (
         <div className="middle hall-2-container row justify-content-between flex-nowrap ml-0 mr-0">
             <div className="hall-2-left-side">
-                {SceneLeftSideTop(priceRanges, setTickets, setPrices, setCount)}
-                {SceneLeftSideBottom(priceRanges, setTickets, setPrices, setCount)}
+                {SceneLeftSideTop(priceRanges, dispatch)}
+                {SceneLeftSideBottom(priceRanges, dispatch)}
             </div>
             <div className="hall-2-center">
-                {SceneCenter(priceRanges, setTickets, setPrices, setCount)}
+                {SceneCenter(priceRanges, dispatch)}
             </div>
             <div className="hall-2-right-side">
-                {SceneRightSideTop(priceRanges, setTickets, setPrices, setCount)}
-                {SceneRightSideBottom(priceRanges, setTickets, setPrices, setCount)}
+                {SceneRightSideTop(priceRanges, dispatch)}
+                {SceneRightSideBottom(priceRanges, dispatch)}
             </div>
         </div>
     );

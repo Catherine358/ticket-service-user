@@ -3,23 +3,37 @@ import './shoppingCart.less';
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
 import { bookTicket } from "../../../services";
+import { useDispatch, useSelector } from "react-redux";
+import { updateTickets, updatePriceSum, updateCount } from "../../../actions/actions";
 
-const TicketsInCart = ({lockedSeats}) => {
-    let ticket;
-    let tickets = [];
-        lockedSeats.forEach(data => {
-        ticket = data.seats.map(seat => {
-            return (
-                <div key={data.row + seat} className="row ml-0 mr-0 justify-content-between seat-cart-row">
-                    <span className="seat-cart-font">{data.row}</span>
-                    <span className="seat-cart-font">{seat}</span>
-                    <span className="seat-cart-cross">&times;</span>
-                </div>
-            );
-        });
-        tickets.push(ticket);
+const findPrice = (row, priceRanges) => {
+    for(let i = 0; i < priceRanges.length; i++){
+        if(priceRanges[i].rows.includes(row.toString())){
+            return priceRanges[i].price;
+        }
+    }
+    return null;
+};
+
+const TicketsInCart = ({ lockedSeats, priceRanges, dispatch }) => {
+    let ticket = lockedSeats.map(data => {
+        let arr = data.split("-");
+        return (
+            <div key={data} className="row justify-content-between seat-cart-row">
+                <span className="seat-cart-font">{arr[0]}</span>
+                <span className="seat-cart-font">{arr[1]}</span>
+                <span className="seat-cart-cross" onClick={() => {
+                    dispatch(updateTickets(data, -1));
+                    let price = findPrice(arr[0], priceRanges);
+                    dispatch(updatePriceSum(price, -1));
+                    dispatch(updateCount(1, -1));
+                }}>&times;</span>
+            </div>
+        )
     });
-    return tickets;
+    let ticketsArr = [];
+    ticketsArr.push(ticket);
+    return ticketsArr;
 };
 
 const PricesSum = (props) => {
@@ -35,10 +49,10 @@ const PricesSum = (props) => {
 const ShoppingCart = (props) => {
     const lockedSeats = JSON.parse(localStorage.getItem("lockedSeats")) !== null ?
         JSON.parse(localStorage.getItem("lockedSeats")).lockedSeats : null;
-    const pricesSum = JSON.parse(localStorage.getItem("lockedSeats")) !== null ?
-        JSON.parse(localStorage.getItem("lockedSeats")).pricesSum : 0;
-    const ticketsCount = JSON.parse(localStorage.getItem("lockedSeats")) !== null ?
-        JSON.parse(localStorage.getItem("lockedSeats")).ticketsCount : 0;
+    const pricesSum = useSelector(state => state.ticketsInCart.pricesSum);
+    const ticketsCount = useSelector(state => state.ticketsInCart.ticketsCount);
+    const priceRanges = useSelector(state => state.ticketsInCart.priceRanges);
+    const ticketsInCart = useSelector(state => state.ticketsInCart.ticketsInCart);
     const myEvent = JSON.parse(localStorage.getItem("myEvent"));
     const eventStart = myEvent.eventStart;
     const year = new Date(parseInt(eventStart)).getFullYear();
@@ -46,7 +60,7 @@ const ShoppingCart = (props) => {
     const day = new Date(parseInt(eventStart)).getDate();
     const date = day + " " + month + " " + year;
     const [section, setSection] = useState();
-    const [pricesSumary, setPrices] = useState(pricesSum);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         async function bookSeats(eventId, lockedSeats) {
@@ -91,8 +105,9 @@ const ShoppingCart = (props) => {
                         <span>Row</span>
                         <span>Place</span>
                     </div>
-                    <TicketsInCart lockedSeats={lockedSeats}/>
-                    <PricesSum pricesSum={pricesSumary} ticketsCount={ticketsCount}/>
+                    <TicketsInCart lockedSeats={ticketsInCart} priceRanges={priceRanges.priceRanges}
+                                   dispatch={dispatch}/>
+                    <PricesSum pricesSum={pricesSum} ticketsCount={ticketsCount}/>
                     <Button variant="contained" className="shopping-cart-btn col-md-4 col-12">PAY</Button>
                     <label form="agreement" className="label-for-checkbox pos-cart-agreement">
                         <input required type="checkbox" id="agreement" name="agreement" title="This is required"/>
