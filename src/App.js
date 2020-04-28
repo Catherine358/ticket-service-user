@@ -10,6 +10,7 @@ import { Switch, Route } from "react-router";
 import Scene from "./components/main-block/main/scenes";
 import ShoppingCart from "./components/main-block/main/shopping-cart";
 import TermsAndConditions from "./components/main-block/main/terms-&-conditions";
+import Pay from "./components/main-block/main/pay";
 
 const App = (props) => {
     return (
@@ -51,6 +52,46 @@ const App = (props) => {
                     </div>
                 )}
                 />
+                <Route exact path="/cart" render={props =>
+                    (
+                        <div className="wrapper">
+                            <header className="heading">
+                                <Header {...props}/>
+                            </header>
+                            <Grid container direction="row" className="main-container">
+                                <Grid container item sm={3}>
+                                    <AsideBlock {...props}/>
+                                </Grid>
+                                <Grid container item sm={9}>
+                                    <Grid container direction="column">
+                                        <ShoppingCart {...props} />
+                                        <Footer/>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </div>
+                    )
+                } />
+                <Route exact path="/payment" render={props =>
+                    (
+                        <div className="wrapper">
+                            <header className="heading">
+                                <Header {...props}/>
+                            </header>
+                            <Grid container direction="row" className="main-container">
+                                <Grid container item sm={3}>
+                                    <AsideBlock {...props}/>
+                                </Grid>
+                                <Grid container item sm={9}>
+                                    <Grid container direction="column">
+                                        <Pay {...props} />
+                                        <Footer/>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </div>
+                    )
+                } />
                 <Route exact path="/:id" render={props => {
                     const {id} = props.match.params;
                     return (
@@ -86,27 +127,6 @@ const App = (props) => {
                                 <Grid container item sm={9}>
                                     <Grid container direction="column">
                                         <Scene {...props} eventId={id}/>
-                                        <Footer/>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </div>
-                    );
-                }} />
-                <Route exact path="/:id/cart" render={props => {
-                    const { id } = props.match.params;
-                    return (
-                        <div className="wrapper">
-                            <header className="heading">
-                                <Header {...props}/>
-                            </header>
-                            <Grid container direction="row" className="main-container">
-                                <Grid container item sm={3}>
-                                    <AsideBlock {...props}/>
-                                </Grid>
-                                <Grid container item sm={9}>
-                                    <Grid container direction="column">
-                                        <ShoppingCart {...props} eventId={id}/>
                                         <Footer/>
                                     </Grid>
                                 </Grid>
