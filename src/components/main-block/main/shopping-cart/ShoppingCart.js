@@ -108,7 +108,31 @@ const ShoppingCart = (props) => {
                     <TicketsInCart lockedSeats={ticketsInCart} priceRanges={priceRanges.priceRanges}
                                    dispatch={dispatch}/>
                     <PricesSum pricesSum={pricesSum} ticketsCount={ticketsCount}/>
-                    <Button variant="contained" className="shopping-cart-btn col-md-4 col-12">PAY</Button>
+                    <Link to={"/payment"}>
+                        <Button variant="contained" className="shopping-cart-btn col-md-4 col-12" onClick={() => {
+                            let lockedSeats = [];
+                            let map = new Map();
+                            ticketsInCart.forEach(data => {
+                                let arr = data.split("-");
+                                if(map.get(arr[0]) === undefined){
+                                    let seats = [];
+                                    seats.push(arr[1]);
+                                    map.set(arr[0], seats);
+                                }else{
+                                    let tmp = map.get(arr[0]);
+                                    tmp.push(arr[1]);
+                                    map.set(arr[0], tmp);
+                                }
+                            });
+                            map.forEach((value, key) => {
+                                lockedSeats.push({
+                                    row: key.toString(),
+                                    seats: value
+                                });
+                            });
+                            localStorage.setItem("lockedSeats", JSON.stringify(lockedSeats));
+                        }}>PAY</Button>
+                    </Link>
                     <label form="agreement" className="label-for-checkbox pos-cart-agreement">
                         <input required type="checkbox" id="agreement" name="agreement" title="This is required"/>
                         <span className="checkmark"/>
