@@ -80,7 +80,7 @@ const ShoppingCart = (props) => {
 
     const goToPay = (event) => {
         event.preventDefault();
-        addLockedSeats(ticketsInCart);
+        addLockedSeats(ticketsInCart, ticketsCount, pricesSum, priceRanges);
         props.history.push("/payment");
     };
 
