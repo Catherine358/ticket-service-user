@@ -113,7 +113,7 @@ const ShoppingCart = (props) => {
                             <span className="checkmark"/>
                             <span className="red-text">*</span>
                             I have read the
-                            <Link to={"/terms"}>
+                            <Link to={"/terms"} target="_blank">
                                 <span className="yellow-text"> Terms and Conditions </span>
                             </Link>
                             and fully agree with them.
