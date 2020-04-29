@@ -1,3 +1,5 @@
+import { addLockedSeats } from "../utils/functions-for-shopping-cart";
+
 const updateTickets = (state, item, idx) => {
     const { ticketsInCart: { ticketsInCart } } = state;
     if(idx === -1) {
@@ -35,12 +37,22 @@ const updateCount = (state, count, idx) => {
 
 const ticketsInCart = (state, action) => {
     if(state === undefined){
-        return {
-            priceRanges: {},
-            ticketsInCart: [],
-            pricesSum: 0,
-            ticketsCount: 0,
-            error: ''
+        if(JSON.parse(localStorage.getItem("lockedSeats")) !== null){
+            return {
+                priceRanges: JSON.parse(localStorage.getItem("lockedSeats")).priceRanges,
+                ticketsInCart: JSON.parse(localStorage.getItem("lockedSeats")).ticketsInCart,
+                pricesSum:  JSON.parse(localStorage.getItem("lockedSeats")).pricesSum,
+                ticketsCount: JSON.parse(localStorage.getItem("lockedSeats")).ticketsCount,
+                error: ''
+            };
+        } else {
+            return {
+                priceRanges: {},
+                ticketsInCart: [],
+                pricesSum: 0,
+                ticketsCount: 0,
+                error: ''
+            };
         }
     }
     switch (action.type) {
@@ -77,6 +89,10 @@ const ticketsInCart = (state, action) => {
                 error: ''
             };
         case 'DELETE_TICKET_FROM_CART':
+            if(JSON.parse(localStorage.getItem("lockedSeats")) !== null){
+                addLockedSeats(updateTickets(state, action.payload, -1), state.ticketsInCart.ticketsCount,
+                    state.ticketsInCart.pricesSum, state.ticketsInCart.priceRanges);
+            }
             return {
                 priceRanges: state.ticketsInCart.priceRanges,
                 ticketsInCart: updateTickets(state, action.payload, 1),
@@ -93,6 +109,10 @@ const ticketsInCart = (state, action) => {
                 error: ''
             };
         case 'DECREASE_PRICE':
+            if(JSON.parse(localStorage.getItem("lockedSeats")) !== null){
+                addLockedSeats(state.ticketsInCart.ticketsInCart, state.ticketsInCart.ticketsCount,
+                    updatePricesSum(state, action.payload, -1), state.ticketsInCart.priceRanges);
+            }
             return {
                 priceRanges: state.ticketsInCart.priceRanges,
                 ticketsInCart: state.ticketsInCart.ticketsInCart,
@@ -109,11 +129,24 @@ const ticketsInCart = (state, action) => {
                 error: ''
             };
         case 'DECREASE_COUNT':
+            if(JSON.parse(localStorage.getItem("lockedSeats")) !== null){
+                addLockedSeats(state.ticketsInCart.ticketsInCart, updateCount(state, action.payload, -1),
+                    state.ticketsInCart.pricesSum, state.ticketsInCart.priceRanges);
+            }
             return {
                 priceRanges: state.ticketsInCart.priceRanges,
                 ticketsInCart: state.ticketsInCart.ticketsInCart,
                 pricesSum: state.ticketsInCart.pricesSum,
                 ticketsCount: updateCount(state, action.payload, -1),
+                error: ''
+            };
+        case 'CLEAR_CART':
+            localStorage.removeItem("lockedSeats");
+            return {
+                priceRanges: {},
+                ticketsInCart: [],
+                pricesSum: 0,
+                ticketsCount: 0,
                 error: ''
             };
         default:

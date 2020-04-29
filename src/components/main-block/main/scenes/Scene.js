@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import BigScene from "./BigScene";
 import {Link} from "react-router-dom";
 import { fetchSceneInfo, updateTickets, updatePriceSum, updateCount } from "../../../actions/actions";
+import { findPrice, addLockedSeats } from "../../../utils/functions-for-shopping-cart";
 
 const PriceRanges = ({priceRanges}) => {
     let priceRange;
@@ -23,15 +24,6 @@ const PriceRanges = ({priceRanges}) => {
     let priceCategories = [];
     priceCategories.push(priceRange);
     return priceCategories;
-};
-
-const findPrice = (row, priceRanges) => {
-    for(let i = 0; i < priceRanges.length; i++){
-        if(priceRanges[i].rows.includes(row.toString())){
-            return priceRanges[i].price;
-        }
-    }
-    return null;
 };
 
 const TicketsInCart = ({ ticketsInCart, priceRanges, dispatch }) => {
@@ -134,36 +126,13 @@ const Scene = (props) => {
                     </div>
                     <div className="col-12">
                         {ticketsInCart.length > 0 && <TicketsInCart ticketsInCart={ticketsInCart}
-                                                                    priceRanges={priceRanges.priceRanges}
+                                                                    priceRanges={priceRanges}
                         dispatch={dispatch}/>}
                     </div>
                     <PricesSum pricesSum={pricesSum} ticketsCount={ticketsCount}/>
                     <Link to={'/cart'}>
                         <Button variant="contained" className="cart-btn w-100 mt-2 pt-2" onClick={() => {
-                            let lockedSeats = [];
-                            let map = new Map();
-                            ticketsInCart.forEach(data => {
-                                let arr = data.split("-");
-                                if(map.get(arr[0]) === undefined){
-                                    let seats = [];
-                                    seats.push(arr[1]);
-                                    map.set(arr[0], seats);
-                                }else{
-                                    let tmp = map.get(arr[0]);
-                                    tmp.push(arr[1]);
-                                    map.set(arr[0], tmp);
-                                }
-                            });
-                            map.forEach((value, key) => {
-                                lockedSeats.push({
-                                    row: key.toString(),
-                                    seats: value
-                                });
-                            });
-                            localStorage.setItem("lockedSeats", JSON.stringify({
-                                lockedSeats: lockedSeats,
-                                ticketsInCart: ticketsInCart
-                            }));
+                            addLockedSeats(ticketsInCart, ticketsCount, pricesSum, priceRanges);
                         }}>TO THE CART</Button>
                     </Link>
                 </Grid>

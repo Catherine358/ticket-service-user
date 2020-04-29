@@ -1,23 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { withRouter } from "react-router";
 import './shoppingCart.less';
 import Button from "@material-ui/core/Button";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { bookTicket } from "../../../services";
 import { useDispatch, useSelector } from "react-redux";
-import { updateTickets, updatePriceSum, updateCount } from "../../../actions/actions";
+import { updateTickets, updatePriceSum, updateCount, clearCart } from "../../../actions/actions";
+import { addLockedSeats, findPrice } from "../../../utils/functions-for-shopping-cart";
 
-const findPrice = (row, priceRanges) => {
-    for(let i = 0; i < priceRanges.length; i++){
-        if(priceRanges[i].rows.includes(row.toString())){
-            return priceRanges[i].price;
-        }
-    }
-    return null;
-};
-
-const TicketsInCart = ({ lockedSeats, priceRanges, dispatch }) => {
-    let ticket = lockedSeats.map(data => {
+const TicketsInCart = ({ ticketsInCart, priceRanges, dispatch, ticketsCount, pricesSum }) => {
+    let ticket = ticketsInCart.map(data => {
         let arr = data.split("-");
         return (
             <div key={data} className="row justify-content-between seat-cart-row ml-0">
@@ -60,7 +52,6 @@ const ShoppingCart = (props) => {
     const month = new Date(parseInt(eventStart)).toLocaleString('default', {month: 'long'});
     const day = new Date(parseInt(eventStart)).getDate();
     const date = day + " " + month + " " + year;
-    const [section, setSection] = useState();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -89,27 +80,7 @@ const ShoppingCart = (props) => {
 
     const goToPay = (event) => {
         event.preventDefault();
-        let lockedSeats = [];
-        let map = new Map();
-        ticketsInCart.forEach(data => {
-            let arr = data.split("-");
-            if(map.get(arr[0]) === undefined){
-                let seats = [];
-                seats.push(arr[1]);
-                map.set(arr[0], seats);
-            }else{
-                let tmp = map.get(arr[0]);
-                tmp.push(arr[1]);
-                map.set(arr[0], tmp);
-            }
-        });
-        map.forEach((value, key) => {
-            lockedSeats.push({
-                row: key.toString(),
-                seats: value
-            });
-        });
-        localStorage.setItem("lockedSeats", JSON.stringify(lockedSeats));
+        addLockedSeats(ticketsInCart);
         props.history.push("/payment");
     };
 
@@ -132,8 +103,8 @@ const ShoppingCart = (props) => {
                         <span>Row</span>
                         <span>Place</span>
                     </div>
-                    <TicketsInCart lockedSeats={ticketsInCart} priceRanges={priceRanges.priceRanges}
-                                   dispatch={dispatch}/>
+                    <TicketsInCart ticketsInCart={ticketsInCart} priceRanges={priceRanges}
+                                   dispatch={dispatch} ticketsCount={ticketsCount} pricesSum={pricesSum}/>
                     <PricesSum pricesSum={pricesSum} ticketsCount={ticketsCount}/>
                     <form onSubmit={goToPay}>
                         <Button type="submit" variant="contained" className="shopping-cart-btn col-md-4 col-12">PAY</Button>
@@ -149,8 +120,7 @@ const ShoppingCart = (props) => {
                         </label>
                     </form>
                     <div className="clear-cart" onClick={() => {
-                        localStorage.removeItem("lockedSeats");
-                        setSection(0);
+                        dispatch(clearCart());
                     }}>Delete section</div>
                 </div>
             </div>

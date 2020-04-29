@@ -1,6 +1,7 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { updateTickets, updatePriceSum, updateCount } from "../../../actions/actions";
+import { findColorOrPrice } from "../../../utils/functions-for-shopping-cart";
 
 const Row = (index, row,  color, price, dispatch) => {
     let rows = [];
@@ -20,19 +21,6 @@ const Row = (index, row,  color, price, dispatch) => {
     }
     rows.push(<p key={row + "SmallScene"} className="hall-1-row">{seats}</p>);
     return rows;
-};
-
-const findColorOrPrice = (row, priceRanges, idx) => {
-    for(let i = 0; i < priceRanges.length; i++){
-        if(priceRanges[i].rows.includes(row.toString())){
-            if(idx > 0) {
-                return priceRanges[i].color;
-            }else{
-                return priceRanges[i].price;
-            }
-        }
-    }
-    return null;
 };
 
 const Scene = ({ priceRanges }, dispatch) => {

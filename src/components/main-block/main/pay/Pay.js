@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React  from "react";
 import ReactDOM from "react-dom";
-import Button from "@material-ui/core/Button";
 import "./pay.less"
-import { useSelector, connect } from "react-redux";
+import { connect } from "react-redux";
 import scriptLoader from 'react-async-script-loader';
 import Spinner from "../../../loader/Loader";
 import { loadPayPal } from "../../../actions/actions";
@@ -58,12 +57,6 @@ class PaySystem extends React.Component {
                         <span className="mr-4">{ticketsCount} tickets</span>
                         <span>&euro; {pricesSum}</span>
                     </p>
-                    {/*<form className="d-flex flex-wrap align-items-center">*/}
-                    {/*    <input type="checkbox" id="pp" name="pp" value="pp" className="mr-2"/>*/}
-                    {/*    <label htmlFor="pp"/>*/}
-                    {/*    <div className="element-wrapper w-100"/>*/}
-                    {/*    <Button variant="contained" className="pay-btn col-md-4 col-12">PAY</Button>*/}
-                    {/*</form>*/}
                     <PayPalButtons/>
                 </div>
             </div>}
@@ -72,7 +65,7 @@ class PaySystem extends React.Component {
     }
 }
 
-const mapStateToProps = ({ticketsInCart: { pricesSum, ticketsCount }, payPalSystem: { loading, paySuccess, payPalSystem }}) => {
+const mapStateToProps = ({ ticketsInCart: { pricesSum, ticketsCount }, payPalSystem: { loading, paySuccess, payPalSystem }}) => {
     return { pricesSum, ticketsCount, loading, paySuccess, payPalSystem };
 };
 

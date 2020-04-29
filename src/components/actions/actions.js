@@ -151,6 +151,12 @@ export const updateCount = (count, idx) => {
   }
 };
 
+export const clearCart = () => {
+    return {
+        type: 'CLEAR_CART'
+    };
+};
+
 export const loadPayPal = (act) => {
     if(act) {
         return {
