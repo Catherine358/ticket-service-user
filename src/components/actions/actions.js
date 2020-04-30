@@ -158,13 +158,20 @@ export const clearCart = () => {
 };
 
 export const loadPayPal = (act) => {
-    if(act) {
+    if(act === 'request') {
+        console.log('request');
         return {
             type: 'LOAD_PAYPAL_REQUEST'
         };
-    }else {
+    }else if(act === 'loaded') {
+        console.log('loaded');
         return {
             type: 'LOAD_PAYPAL_SUCCESS'
+        };
+    } else if(act === 'success'){
+        console.log('success');
+        return {
+            type: 'PAYING_PAYPAL_SUCCESS'
         };
     }
 };

@@ -19,6 +19,12 @@ const loadPayPal = (state, action) => {
                 paySuccess: false,
                 payPalSystem: true
             };
+        case 'PAYING_PAYPAL_SUCCESS':
+            return {
+                loading: false,
+                paySuccess: true,
+                payPalSystem: false
+            };
         default:
             return state.payPalSystem;
     }
