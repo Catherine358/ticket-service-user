@@ -1,0 +1,44 @@
+@dark-gray: #868685;
+@light-blue: #07ace8;
+@font-fut: FuturaFuturis, sans-serif;
+@font-futura-black: "FuturaFuturis bold", sans-serif;
+
+  .ticket {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    color: @dark-gray;
+
+    &-header {
+      display: flex;
+      width: 100%;
+
+      h1 {
+        margin-left: auto;
+        margin-right: auto;
+        border-bottom: 10px solid @dark-gray;
+        color: @dark-gray;
+      }
+    }
+
+    .border-ticket {
+      &-header {
+        margin-top: 15px;
+        font-family: @font-futura-black;
+        font-size: 22px;
+      }
+
+      .ticket-tickets {
+        font-family: @font-fut;
+      }
+
+      .light-blue {
+        color: @light-blue;
+      }
+
+      a {
+        font-family: @font-futura-black;
+        color: @dark-gray;
+      }
+    }
+  }
