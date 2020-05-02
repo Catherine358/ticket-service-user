@@ -8,6 +8,10 @@ import EventInfo from "./components/main-block/main/eventInfo";
 import Footer from "./components/main-block/footer";
 import { Switch, Route } from "react-router";
 import Scene from "./components/main-block/main/scenes";
+import ShoppingCart from "./components/main-block/main/shopping-cart";
+import TermsAndConditions from "./components/main-block/main/terms-&-conditions";
+import PaySystem from "./components/main-block/main/pay/Pay";
+import Ticket from "./components/main-block/main/ticket";
 
 const App = (props) => {
     return (
@@ -15,35 +19,114 @@ const App = (props) => {
                 <Route exact path="/" render={props => (
                     <div className="wrapper">
                         <header className="heading">
-                            <Header/>
+                            <Header {...props}/>
                         </header>
                         <Grid container direction="row" className="main-container">
                             <Grid container item sm={3}>
-                                <AsideBlock/>
+                                <AsideBlock {...props}/>
                             </Grid>
                             <Grid container item sm={9}>
                                 <Grid container direction="column">
-                                    <Events/>
+                                    <Events {...props}/>
                                     <Footer/>
                                 </Grid>
                             </Grid>
                         </Grid>
                     </div>
                 )}/>
+                <Route exact path="/terms" render={props => (
+                    <div className="wrapper">
+                        <header className="heading">
+                            <Header {...props}/>
+                        </header>
+                        <Grid container direction="row" className="main-container">
+                            <Grid container item sm={3}>
+                                <AsideBlock {...props}/>
+                            </Grid>
+                            <Grid container item sm={9}>
+                                <Grid container direction="column">
+                                    <TermsAndConditions {...props}/>
+                                    <Footer/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </div>
+                )}
+                />
+                <Route exact path="/cart" render={props =>
+                    (
+                        <div className="wrapper">
+                            <header className="heading">
+                                <Header {...props}/>
+                            </header>
+                            <Grid container direction="row" className="main-container">
+                                <Grid container item sm={3}>
+                                    <AsideBlock {...props}/>
+                                </Grid>
+                                <Grid container item sm={9}>
+                                    <Grid container direction="column">
+                                        <ShoppingCart {...props} />
+                                        <Footer/>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </div>
+                    )
+                } />
+                <Route exact path="/payment" render={props =>
+                    (
+                        <div className="wrapper">
+                            <header className="heading">
+                                <Header {...props}/>
+                            </header>
+                            <Grid container direction="row" className="main-container">
+                                <Grid container item sm={3}>
+                                    <AsideBlock {...props}/>
+                                </Grid>
+                                <Grid container item sm={9}>
+                                    <Grid container direction="column">
+                                        <PaySystem {...props} />
+                                        <Footer/>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </div>
+                    )
+                } />
+                <Route exact path="/ticket" render={props =>
+                    (
+                        <div className="wrapper">
+                            <header className="heading">
+                                <Header {...props}/>
+                            </header>
+                            <Grid container direction="row" className="main-container">
+                                <Grid container item sm={3}>
+                                    <AsideBlock {...props}/>
+                                </Grid>
+                                <Grid container item sm={9}>
+                                    <Grid container direction="column">
+                                        <Ticket {...props} />
+                                        <Footer/>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </div>
+                    )
+                } />
                 <Route exact path="/:id" render={props => {
                     const {id} = props.match.params;
                     return (
                         <div className="wrapper">
                             <header className="heading">
-                                <Header/>
+                                <Header {...props}/>
                             </header>
                             <Grid container direction="row" className="main-container">
                                 <Grid container item sm={3}>
-                                    <AsideBlock/>
+                                    <AsideBlock {...props}/>
                                 </Grid>
                                 <Grid container item sm={9}>
                                     <Grid container direction="column">
-                                        <EventInfo eventId={id}/>
+                                        <EventInfo {...props} eventId={id}/>
                                         <Footer/>
                                     </Grid>
                                 </Grid>
@@ -56,22 +139,21 @@ const App = (props) => {
                     return (
                         <div className="wrapper">
                             <header className="heading">
-                                <Header/>
+                                <Header {...props}/>
                             </header>
                             <Grid container direction="row" className="main-container">
                                 <Grid container item sm={3}>
-                                    <AsideBlock/>
+                                    <AsideBlock {...props}/>
                                 </Grid>
                                 <Grid container item sm={9}>
                                     <Grid container direction="column">
-                                        <Scene eventId={id}/>
+                                        <Scene {...props} eventId={id}/>
                                         <Footer/>
                                     </Grid>
                                 </Grid>
                             </Grid>
                         </div>
                     );
-
                 }} />
             </Switch>
     );

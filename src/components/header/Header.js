@@ -9,6 +9,7 @@ import icon_ok from "../../img/icons/icon-classmates.png";
 import icon_rss from "../../img/icons/icon-rss.png";
 import Grid from '@material-ui/core/Grid';
 import Menu from "./menu";
+import {Link} from "react-router-dom";
 
 const Header = (props) => {
     const [menu, setMenu] = useState(false);
@@ -22,7 +23,9 @@ const Header = (props) => {
     return (
         <Grid className="header-layout" container direction="row" justify="space-around" alignItems="flex-start">
             <Grid container item  sm={4} className="logo">
-                <img src={logo} alt="logo" className="logo-img"/>
+                <Link to={"/"}>
+                    <img src={logo} alt="logo" className="logo-img"/>
+                </Link>
             </Grid>
             <Grid  container item sm={4} className="info-header">
                 <Grid container direction="column" className="middle-sec-header">
