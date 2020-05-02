@@ -8,6 +8,7 @@ import icon_tw from "../../../img/icons/white/icon-twitter.png";
 import icon_inst from "../../../img/icons/white/icon-inst.png";
 import icon_ok from "../../../img/icons/white/icon-classmates.png";
 import icon_rss from "../../../img/icons/white/icon-rss.png";
+import {Link} from "react-router-dom";
 
 const Menu = (props) => {
     const { setMenu } = props;
@@ -45,9 +46,13 @@ const Menu = (props) => {
                 <Grid container direction="column">
                     <ul className="menu-list">
                         <li><span>LOGIN/OUT</span></li>
-                        <li><span>EVENTS</span></li>
+                        <Link to={"/"}>
+                            <li><span>EVENTS</span></li>
+                        </Link>
                         <li><span>SHOPPING CART</span></li>
-                        <li><span>HALLS SCHEME</span></li>
+                        <Link to={"/halls-schemes"}>
+                            <li><span>HALLS SCHEME</span></li>
+                        </Link>
                         <li><span>ABOUT US</span></li>
                     </ul>
                 </Grid>

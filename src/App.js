@@ -12,6 +12,7 @@ import ShoppingCart from "./components/main-block/main/shopping-cart";
 import TermsAndConditions from "./components/main-block/main/terms-&-conditions";
 import PaySystem from "./components/main-block/main/pay/Pay";
 import Ticket from "./components/main-block/main/ticket";
+import HallScheme from "./components/main-block/main/hall-scheme";
 
 const App = (props) => {
     return (
@@ -106,6 +107,26 @@ const App = (props) => {
                                 <Grid container item sm={9}>
                                     <Grid container direction="column">
                                         <Ticket {...props} />
+                                        <Footer/>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </div>
+                    )
+                } />
+                <Route exact path="/halls-schemes" render={props =>
+                    (
+                        <div className="wrapper">
+                            <header className="heading">
+                                <Header {...props}/>
+                            </header>
+                            <Grid container direction="row" className="main-container">
+                                <Grid container item sm={3}>
+                                    <AsideBlock {...props}/>
+                                </Grid>
+                                <Grid container item sm={9}>
+                                    <Grid container direction="column">
+                                        <HallScheme {...props} />
                                         <Footer/>
                                     </Grid>
                                 </Grid>
