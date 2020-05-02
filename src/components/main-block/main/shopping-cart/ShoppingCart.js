@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateTickets, updatePriceSum, updateCount, clearCart } from "../../../actions/actions";
 import { addLockedSeats, findPrice } from "../../../utils/functions-for-shopping-cart";
 
-const TicketsInCart = ({ ticketsInCart, priceRanges, dispatch, ticketsCount, pricesSum }) => {
+const TicketsInCart = ({ ticketsInCart, priceRanges, dispatch }) => {
     let ticket = ticketsInCart.map(data => {
         let arr = data.split("-");
         return (
@@ -104,7 +104,7 @@ const ShoppingCart = (props) => {
                         <span>Place</span>
                     </div>
                     <TicketsInCart ticketsInCart={ticketsInCart} priceRanges={priceRanges}
-                                   dispatch={dispatch} ticketsCount={ticketsCount} pricesSum={pricesSum}/>
+                                   dispatch={dispatch}/>
                     <PricesSum pricesSum={pricesSum} ticketsCount={ticketsCount}/>
                     <form onSubmit={goToPay}>
                         <Button type="submit" variant="contained" className="shopping-cart-btn col-md-4 col-12">PAY</Button>
