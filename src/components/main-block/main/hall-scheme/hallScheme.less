@@ -1,0 +1,54 @@
+@dark-gray: #868685;
+@light-gray: #f3f4f4;
+@font-futura-black: "FuturaFuturis bold", sans-serif;
+
+.hall-scheme {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  font-family: @font-futura-black;
+  color: @dark-gray;
+
+  &-header {
+    display: flex;
+    margin-bottom: 20px;
+    width: 100%;
+
+    h1 {
+      margin-left: auto;
+      margin-right: auto;
+      border-bottom: 10px solid @dark-gray;
+      color: @dark-gray;
+    }
+  }
+
+  .prev-btn,
+  .next-btn {
+    font-size: 72px;
+    font-weight: 700;
+    border: none;
+    background-color: transparent;
+    color: @dark-gray;
+
+    &[disabled]:hover {
+      cursor: auto;
+      color: @dark-gray;
+    }
+
+    &:focus,
+    &:hover,
+    &:active {
+      outline: none;
+      color: darkgray;
+    }
+  }
+
+  .next-btn {
+    transform: rotate(180deg);
+  }
+
+  .scheme {
+    display: inline-block;
+  }
+
+}
