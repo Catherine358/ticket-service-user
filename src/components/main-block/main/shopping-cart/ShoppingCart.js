@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { bookTicket } from "../../../services";
 import { useDispatch, useSelector } from "react-redux";
-import { updateTickets, updatePriceSum, updateCount, clearCart } from "../../../actions/actions";
+import { updateTickets, clearCart } from "../../../actions/actions";
 import { addLockedSeats, findPrice } from "../../../utils/functions-for-shopping-cart";
 
 const TicketsInCart = ({ ticketsInCart, priceRanges, dispatch }) => {
@@ -16,10 +16,8 @@ const TicketsInCart = ({ ticketsInCart, priceRanges, dispatch }) => {
                 <span className="seat-cart-font">{arr[0]}</span>
                 <span className="seat-cart-font">{arr[1]}</span>
                 <span className="seat-cart-cross" onClick={() => {
-                    dispatch(updateTickets(data, -1));
                     let price = findPrice(arr[0], priceRanges);
-                    dispatch(updatePriceSum(price, -1));
-                    dispatch(updateCount(1, -1));
+                    dispatch(updateTickets(data, price, 1, -1));
                 }}>&times;</span>
             </div>
         )
@@ -80,7 +78,7 @@ const ShoppingCart = (props) => {
 
     const goToPay = (event) => {
         event.preventDefault();
-        addLockedSeats(ticketsInCart, ticketsCount, pricesSum, priceRanges);
+        addLockedSeats({ ticketsInCart, ticketsCount, pricesSum }, priceRanges);
         props.history.push("/payment");
     };
 
