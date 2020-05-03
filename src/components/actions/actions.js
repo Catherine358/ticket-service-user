@@ -1,4 +1,5 @@
 import { requestEvents, ticketsInformation, sceneInformation } from "../services";
+import {DateUtils} from "react-day-picker";
 
 const eventsLoaded = (events) => {
     return {
@@ -94,6 +95,13 @@ const fetchSceneInfo = (dispatch, eventId) => {
     sceneInformation(eventId)
         .then(data => dispatch(sceneInfoLoaded(data)))
         .catch(error => dispatch(sceneInfoError(error)));
+};
+
+export const setRange = (range) => {
+    return {
+        type: 'SET_DATE_RANGE',
+        payload: range
+    };
 };
 
 export const rangeEventsSort = (range) => {
