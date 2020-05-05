@@ -82,4 +82,27 @@ const bookTicket = (eventId, lockedSeats) => {
     return response;
 };
 
-export { requestEvents, ticketsInformation, sceneInformation, bookTicket };
+const userRegistration = (user) => {
+    console.log("server ", user);
+    const response = fetch(`${BASE_URL}user`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user)
+    })
+        .then(response => {
+            console.log(response);
+            if(response.status !== 200){
+                if(response.status === 400) {
+                    throw new Error(`Input validation error, received ${response.status}`);
+                } else {
+                    throw new Error(`Could not fetch data`);
+                }
+            }
+            return response.json();
+        });
+    return response;
+};
+
+export { requestEvents, ticketsInformation, sceneInformation, bookTicket, userRegistration };
