@@ -61,7 +61,13 @@ const Menu = (props) => {
                                 }}>HALLS SCHEME</span>
                             </Link>
                             </li>
-                        <li><span>ABOUT US</span></li>
+                        <li>
+                            <Link to={"/about"}>
+                                <span onClick={() => {
+                                    setMenu(false);
+                                }}>ABOUT US</span>
+                            </Link>
+                        </li>
                     </ul>
                 </Grid>
             </Grid>
