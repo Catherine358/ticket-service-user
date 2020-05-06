@@ -45,7 +45,13 @@ const Menu = (props) => {
             <Grid container item sm={3}>
                 <Grid container direction="column">
                     <ul className="menu-list">
-                        <li><span>LOGIN/OUT</span></li>
+                        <li>
+                            <Link to={"/login"}>
+                                <span onClick={() => {
+                                    setMenu(false);
+                                }}>LOGIN/OUT</span>
+                            </Link>
+                            </li>
                         <li>
                             <Link to={"/"}>
                                 <span onClick={() => {
