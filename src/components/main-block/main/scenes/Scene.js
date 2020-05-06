@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import { useDispatch, useSelector } from "react-redux";
 import BigScene from "./BigScene";
 import {Link} from "react-router-dom";
-import { fetchSceneInfo, updateTickets, updatePriceSum, updateCount } from "../../../actions/actions";
+import { fetchSceneInfo, updateTickets } from "../../../actions/actions";
 import { findPrice, addLockedSeats } from "../../../utils/functions-for-shopping-cart";
 
 const PriceRanges = ({priceRanges}) => {
@@ -34,10 +34,8 @@ const TicketsInCart = ({ ticketsInCart, priceRanges, dispatch }) => {
             <span className="seat-cart-font">{arr[0]}</span>
             <span className="seat-cart-font">{arr[1]}</span>
             <span className="seat-cart-cross" onClick={() => {
-                dispatch(updateTickets(data, -1));
                 let price = findPrice(arr[0], priceRanges);
-                dispatch(updatePriceSum(price, -1));
-                dispatch(updateCount(1, -1));
+                dispatch(updateTickets(data, price, 1, -1));
             }}>&times;</span>
         </div>
       )

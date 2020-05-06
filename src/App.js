@@ -15,6 +15,7 @@ import Ticket from "./components/main-block/main/ticket";
 import Registration from "./components/main-block/main/registration";
 import Login from "./components/main-block/main/login";
 import AboutUs from "./components/main-block/main/about";
+import HallScheme from "./components/main-block/main/hall-scheme";
 
 const App = (props) => {
     return (
@@ -169,6 +170,26 @@ const App = (props) => {
                                 <Grid container item sm={9}>
                                     <Grid container direction="column">
                                         <AboutUs {...props} />
+                                        <Footer/>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </div>
+                    )
+                } />
+                <Route exact path="/halls-schemes" render={props =>
+                    (
+                        <div className="wrapper">
+                            <header className="heading">
+                                <Header {...props}/>
+                            </header>
+                            <Grid container direction="row" className="main-container">
+                                <Grid container item sm={3}>
+                                    <AsideBlock {...props}/>
+                                </Grid>
+                                <Grid container item sm={9}>
+                                    <Grid container direction="column">
+                                        <HallScheme {...props} />
                                         <Footer/>
                                     </Grid>
                                 </Grid>

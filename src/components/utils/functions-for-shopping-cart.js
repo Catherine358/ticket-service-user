@@ -1,4 +1,5 @@
-const addLockedSeats = (ticketsInCart, ticketsCount, pricesSum, priceRanges) => {
+const addLockedSeats = (newTickets, priceRanges) => {
+    const { ticketsInCart, pricesSum, ticketsCount } = newTickets;
     let lockedSeats = [];
     let map = new Map();
     ticketsInCart.forEach(data => {
