@@ -48,20 +48,40 @@
         flex-direction: column;
         width: 200px;
 
-        input {
-          margin-top: 10px;
-          border: none;
-          border-bottom: 1px solid @dark-gray;
-          background-color: transparent;
+        label {
+          position: relative;
 
-          &:focus,
-          &:hover,
-          &:active {
-            outline: none;
+          input {
+            margin-top: 10px;
+            border: none;
+            border-bottom: 1px solid @dark-gray;
+            width: 100%;
+            background-color: transparent;
+
+            &:focus,
+            &:hover,
+            &:active {
+              outline: none;
+            }
+
+            &:focus {
+              border-bottom-width: 2px;
+            }
           }
 
-          &:focus {
-            border-bottom-width: 2px;
+          .btn-reset {
+            border: none;
+            position: absolute;
+            right: 0;
+            top: 10px;
+            color: #868685;
+            background-color: transparent;
+
+            &:focus,
+            &:hover,
+            &:active {
+              outline: none;
+            }
           }
         }
         .forgot {

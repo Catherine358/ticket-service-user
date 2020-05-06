@@ -28,9 +28,18 @@ const handleChange = (event, setEmail) => {
     setEmail(event.target.value);
 };
 
+const resetEmail = (setEmail) => {
+    setEmail('');
+};
+
+const resetPassword = (setPassword) => {
+    setPassword('');
+};
+
 const Login = (props) => {
     const [message, setMessage] = useState('');
     const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     return (
         <div className="login">
@@ -42,9 +51,15 @@ const Login = (props) => {
                     <div className="already-user">
                         <h2>I am already a customer</h2>
                         <form onSubmit={(event) => login(event, setMessage)}>
-                            <input type="email" id="login" name="login" placeholder="Email"
+                            <label>
+                                <input type="email" id="login" name="login" placeholder="Email"
                                    onChange={(event) => handleChange(event, setEmail)}/>
-                            <input type="password" id="password" name="password" placeholder="Password"/>
+                                <button type="reset" className="btn-reset" onClick={() => resetEmail(setEmail)}>&times;</button>
+                            </label>
+                            <label>
+                                <input type="password" id="password" name="password" placeholder="Password"/>
+                                <button type="reset" className="btn-reset" onClick={() => resetPassword(setPassword)}>&times;</button>
+                            </label>
                             <span className="forgot" onClick={() => passwordRecovery(email, setMessage)}>Forgotten password?</span>
                             <Button type="submit" variant="contained" className="login-btn">Login</Button>
                         </form>
