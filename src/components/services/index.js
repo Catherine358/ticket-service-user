@@ -1,3 +1,3 @@
-import { requestEvents, ticketsInformation, sceneInformation, bookTicket, userRegistration } from "./Server";
+import { requestEvents, ticketsInformation, sceneInformation, bookTicket, userRegistration, handleSubmitLogin, recoverPassword } from "./Server";
 
-export { requestEvents, ticketsInformation, sceneInformation, bookTicket, userRegistration };
+export { requestEvents, ticketsInformation, sceneInformation, bookTicket, userRegistration, handleSubmitLogin, recoverPassword };

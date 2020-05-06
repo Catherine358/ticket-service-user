@@ -104,4 +104,52 @@ const userRegistration = (user) => {
     return response;
 };
 
-export { requestEvents, ticketsInformation, sceneInformation, bookTicket, userRegistration };
+const handleSubmitLogin = (email, password) => {
+    const response = fetch(`${BASE_URL}login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify( { email, password })
+    })
+        .then(response => {
+            if(response.status !== 200) {
+                if (response.status === 400) {
+                    throw new Error(`Input validation error, received ${response.status}, please check the
+                        following fields: email. Email is required and its length should be between 3 and 100 characters.`);
+                } else if (response.status === 404) {
+                    throw new Error(`User with email ${email} does not exist, received ${response.status}`);
+                } else {
+                    throw new Error(`Could not fetch ${BASE_URL}, received ${response.status}`);
+                }
+            }
+            return response.json();
+        });
+    return response;
+};
+
+const recoverPassword = (email) => {
+    const response = fetch(`${BASE_URL}user/password`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify( { email }),
+        withCredentials: true})
+        .then(response => {
+            if(response.status !== 200) {
+                if (response.status === 400) {
+                    throw new Error(`Input validation error, received ${response.status}, please check the
+                        following fields: email. Email is required and its length should be between 3 and 100 characters.`);
+                } else if (response.status === 404) {
+                    throw new Error(`User with email ${email} does not exist, received ${response.status}`);
+                } else {
+                    throw new Error(`Could not fetch ${BASE_URL}, received ${response.status}`);
+                }
+            }
+            return `Success, please check your email, received ${response.status}`;
+        });
+    return response;
+};
+
+export { requestEvents, ticketsInformation, sceneInformation, bookTicket, userRegistration, handleSubmitLogin, recoverPassword };
