@@ -14,6 +14,7 @@ import PaySystem from "./components/main-block/main/pay/Pay";
 import Ticket from "./components/main-block/main/ticket";
 import Registration from "./components/main-block/main/registration";
 import Login from "./components/main-block/main/login";
+import AboutUs from "./components/main-block/main/about";
 
 const App = (props) => {
     return (
@@ -148,6 +149,26 @@ const App = (props) => {
                                 <Grid container item sm={9}>
                                     <Grid container direction="column">
                                         <Registration {...props} />
+                                        <Footer/>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </div>
+                    )
+                } />
+                <Route exact path="/about" render={props =>
+                    (
+                        <div className="wrapper">
+                            <header className="heading">
+                                <Header {...props}/>
+                            </header>
+                            <Grid container direction="row" className="main-container">
+                                <Grid container item sm={3}>
+                                    <AsideBlock {...props}/>
+                                </Grid>
+                                <Grid container item sm={9}>
+                                    <Grid container direction="column">
+                                        <AboutUs {...props} />
                                         <Footer/>
                                     </Grid>
                                 </Grid>
