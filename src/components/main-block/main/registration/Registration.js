@@ -73,28 +73,26 @@ const Registration = (props) => {
                     <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password*" required/>
                     <input type="tel" id="tel" name="tel" placeholder="Phone number*" required/>
                     <input type="tel" id="adTel" placeholder="Additional phone number"/>
-                    {/*<div className="agreements">*/}
-                        <label form="agreement_first" className="label-for-checkbox pos-agreement">
-                            <input required type="checkbox" id="agreement_first" name="agreement_first" title="This is required" />
-                            <span className="checkmark"/>
-                            <span className="red-text">*</span>
-                            I have read the notice on
-                            <Link to={"/terms"} target="_blank">
-                                <span className="yellow-text"> data protection </span>
-                            </Link>
-                            and the content of the
-                            <Link to={"/terms"} target="_blank">
-                                <span className="yellow-text"> Standard Terms of Business </span>
-                            </Link>
-                            and agree to the storage of my personal data.
-                        </label>
-                        <label form="agreement_second" className="label-for-checkbox pos-agreement">
-                            <input required type="checkbox" id="agreement_second" name="agreement_second" title="This is required" />
-                            <span className="checkmark"/>
-                            <span className="red-text">*</span>
-                            I agree to get notifications on my Email and phone.
-                        </label>
-                    {/*</div>*/}
+                    <label form="agreement_first" className="label-for-checkbox pos-agreement">
+                        <input required type="checkbox" id="agreement_first" name="agreement_first" title="This is required" />
+                        <span className="checkmark"/>
+                        <span className="red-text">*</span>
+                        I have read the notice on
+                        <Link to={"/terms"} target="_blank">
+                            <span className="yellow-text"> data protection </span>
+                        </Link>
+                        and the content of the
+                        <Link to={"/terms"} target="_blank">
+                            <span className="yellow-text"> Standard Terms of Business </span>
+                        </Link>
+                        and agree to the storage of my personal data.
+                    </label>
+                    <label form="agreement_second" className="label-for-checkbox pos-agreement">
+                        <input required type="checkbox" id="agreement_second" name="agreement_second" title="This is required" />
+                        <span className="checkmark"/>
+                        <span className="red-text">*</span>
+                        I agree to get notifications on my Email and phone.
+                    </label>
                 </div>
                 <div />
                 <Button type="submit" variant="contained" className="registration-btn col-md-4 col-12">Register</Button>
