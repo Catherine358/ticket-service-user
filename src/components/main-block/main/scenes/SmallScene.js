@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import { updateTickets, updatePriceSum, updateCount } from "../../../actions/actions";
+import { updateTickets } from "../../../actions/actions";
 import { findColorOrPrice } from "../../../utils/functions-for-shopping-cart";
 
 const Row = (index, row,  color, price, dispatch) => {
@@ -13,9 +13,7 @@ const Row = (index, row,  color, price, dispatch) => {
                          id={`${row}-${j + 1 <= side ? j + 1 : index - j}${j + 1 <= side ? "L" : "R"}`}
                          style={{backgroundColor: `${color === null ? "" : color}`}}
         onClick={() => {
-            dispatch(updateTickets(`${row}-${j + 1 <= side ? j + 1 : index - j}${j + 1 <= side ? "L" : "R"}`, 1));
-            dispatch(updatePriceSum(price, 1));
-            dispatch(updateCount(1, 1));
+            dispatch(updateTickets(`${row}-${j + 1 <= side ? j + 1 : index - j}${j + 1 <= side ? "L" : "R"}`, price, 1, 1));
         }}>
                     {j + 1 <= side ? j + 1 : index - j}</span>);
     }

@@ -1,4 +1,5 @@
 import { requestEvents, ticketsInformation, sceneInformation } from "../services";
+import {DateUtils} from "react-day-picker";
 
 const eventsLoaded = (events) => {
     return {
@@ -96,6 +97,13 @@ const fetchSceneInfo = (dispatch, eventId) => {
         .catch(error => dispatch(sceneInfoError(error)));
 };
 
+export const setRange = (range) => {
+    return {
+        type: 'SET_DATE_RANGE',
+        payload: range
+    };
+};
+
 export const rangeEventsSort = (range) => {
     return {
         type: 'RANGE_EVENTS_SORT',
@@ -109,46 +117,22 @@ export const clearRangeEventsSort = () => {
     };
 };
 
-export const updateTickets = (item, idx) => {
+export const updateTickets = (item, price, count, idx) => {
     if(idx > 0) {
         return {
             type: 'ADD_TICKET_TO_CART',
-            payload: item
+            payload: {
+                item, price, count
+            }
         };
     }else{
         return {
             type: 'DELETE_TICKET_FROM_CART',
-            payload: item
+            payload: {
+                item, price, count
+            }
         };
     }
-};
-
-export const updatePriceSum = (price, idx) => {
-    if(idx > 0) {
-        return {
-            type: 'INCREASE_PRICE',
-            payload: price
-        };
-    }else{
-        return {
-          type: 'DECREASE_PRICE',
-          payload: price
-        };
-    }
-};
-
-export const updateCount = (count, idx) => {
-  if(idx > 0) {
-      return {
-          type: 'INCREASE_COUNT',
-          payload: count
-      };
-  }  else {
-      return {
-          type: 'DECREASE_COUNT',
-          payload: count
-      };
-  }
 };
 
 export const clearCart = () => {

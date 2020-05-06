@@ -1,39 +1,36 @@
 import { addLockedSeats } from "../utils/functions-for-shopping-cart";
 
-const updateTickets = (state, item, idx) => {
-    const { ticketsInCart: { ticketsInCart } } = state;
-    if(idx === -1) {
-        return [
-            ...ticketsInCart,
-            item
-        ];
-    }else{
-        let index = ticketsInCart.findIndex(itm => itm === item);
-        return [
-            ...ticketsInCart.slice(0, index),
-            ...ticketsInCart.slice(index + 1)
-        ];
+const updateTickets = (state, item, idx, price, count) => {
+    const { ticketsInCart: { ticketsInCart, pricesSum, ticketsCount } } = state;
+    if(ticketsInCart.indexOf(item) >= 0 && idx === -1){
+        return {
+            ticketsInCart: ticketsInCart,
+            pricesSum: pricesSum,
+            ticketsCount: ticketsCount
+        };
+    }else {
+        if (idx === -1) {
+            return {
+                ticketsInCart: [
+                    ...ticketsInCart,
+                    item
+                ],
+                pricesSum: pricesSum + price,
+                ticketsCount: ticketsCount + count
+            };
+        } else {
+            let index = ticketsInCart.findIndex(itm => itm === item);
+            return {
+                ticketsInCart: [
+                    ...ticketsInCart.slice(0, index),
+                    ...ticketsInCart.slice(index + 1)
+                ],
+                pricesSum: pricesSum - price,
+                ticketsCount: ticketsCount - count
+            };
+        }
     }
 };
-
-const updatePricesSum = (state, price, idx) => {
-    const { ticketsInCart: { pricesSum } } = state;
-    if(idx === -1){
-        return pricesSum - price;
-    }else{
-        return pricesSum + price;
-    }
-};
-
-const updateCount = (state, count, idx) => {
-    const { ticketsInCart: { ticketsCount } } = state;
-    if(idx === -1){
-        return ticketsCount - count;
-    }else{
-        return ticketsCount + count;
-    }
-};
-
 
 const ticketsInCart = (state, action) => {
     if(state === undefined){
@@ -81,63 +78,24 @@ const ticketsInCart = (state, action) => {
                 error: action.payload
             };
         case 'ADD_TICKET_TO_CART':
+            const newTickets = updateTickets(state, action.payload.item, -1, action.payload.price, action.payload.count);
             return {
                 priceRanges: state.ticketsInCart.priceRanges,
-                ticketsInCart: updateTickets(state, action.payload, -1),
-                pricesSum: state.ticketsInCart.pricesSum,
-                ticketsCount: state.ticketsInCart.ticketsCount,
+                ticketsInCart: newTickets.ticketsInCart,
+                pricesSum: newTickets.pricesSum,
+                ticketsCount: newTickets.ticketsCount,
                 error: ''
             };
         case 'DELETE_TICKET_FROM_CART':
+            const newTickets2 = updateTickets(state, action.payload.item, 1, action.payload.price, action.payload.count);
             if(JSON.parse(localStorage.getItem("lockedSeats")) !== null){
-                addLockedSeats(updateTickets(state, action.payload, -1), state.ticketsInCart.ticketsCount,
-                    state.ticketsInCart.pricesSum, state.ticketsInCart.priceRanges);
+                addLockedSeats(newTickets2, state.ticketsInCart.priceRanges);
             }
             return {
                 priceRanges: state.ticketsInCart.priceRanges,
-                ticketsInCart: updateTickets(state, action.payload, 1),
-                pricesSum: state.ticketsInCart.pricesSum,
-                ticketsCount: state.ticketsInCart.ticketsCount,
-                error: ''
-            };
-        case 'INCREASE_PRICE':
-            return {
-                priceRanges: state.ticketsInCart.priceRanges,
-                ticketsInCart: state.ticketsInCart.ticketsInCart,
-                pricesSum: updatePricesSum(state, action.payload, 1),
-                ticketsCount: state.ticketsInCart.ticketsCount,
-                error: ''
-            };
-        case 'DECREASE_PRICE':
-            if(JSON.parse(localStorage.getItem("lockedSeats")) !== null){
-                addLockedSeats(state.ticketsInCart.ticketsInCart, state.ticketsInCart.ticketsCount,
-                    updatePricesSum(state, action.payload, -1), state.ticketsInCart.priceRanges);
-            }
-            return {
-                priceRanges: state.ticketsInCart.priceRanges,
-                ticketsInCart: state.ticketsInCart.ticketsInCart,
-                pricesSum: updatePricesSum(state, action.payload, -1),
-                ticketsCount: state.ticketsInCart.ticketsCount,
-                error: ''
-            };
-        case 'INCREASE_COUNT':
-            return {
-                priceRanges: state.ticketsInCart.priceRanges,
-                ticketsInCart: state.ticketsInCart.ticketsInCart,
-                pricesSum: state.ticketsInCart.pricesSum,
-                ticketsCount: updateCount(state, action.payload, 1),
-                error: ''
-            };
-        case 'DECREASE_COUNT':
-            if(JSON.parse(localStorage.getItem("lockedSeats")) !== null){
-                addLockedSeats(state.ticketsInCart.ticketsInCart, updateCount(state, action.payload, -1),
-                    state.ticketsInCart.pricesSum, state.ticketsInCart.priceRanges);
-            }
-            return {
-                priceRanges: state.ticketsInCart.priceRanges,
-                ticketsInCart: state.ticketsInCart.ticketsInCart,
-                pricesSum: state.ticketsInCart.pricesSum,
-                ticketsCount: updateCount(state, action.payload, -1),
+                ticketsInCart: newTickets2.ticketsInCart,
+                pricesSum: newTickets2.pricesSum,
+                ticketsCount: newTickets2.ticketsCount,
                 error: ''
             };
         case 'CLEAR_CART':

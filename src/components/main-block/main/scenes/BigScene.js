@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import { updateTickets, updatePriceSum, updateCount } from "../../../actions/actions";
+import { updateTickets } from "../../../actions/actions";
 import { findColorOrPrice } from "../../../utils/functions-for-shopping-cart";
 
 const RowLeft = (index, row, color, price, dispatch) => {
@@ -10,9 +10,7 @@ const RowLeft = (index, row, color, price, dispatch) => {
         seats.push(<span className="hall-2-place" key={`${row}-${i + 1}L`}
                          id={`${row}-${i + 1}L`}
                          onClick={() => {
-                             dispatch(updateTickets(`${row}-${i + 1}L`, 1));
-                             dispatch(updatePriceSum(price, 1));
-                             dispatch(updateCount(1, 1));
+                             dispatch(updateTickets(`${row}-${i + 1}L`, price, 1, 1));
                          }}
                          style={{backgroundColor: `${color === null ? "" : color}`}}>
                 {i + 1}</span>)
@@ -28,9 +26,7 @@ const RowRight = (index, row, color, price, dispatch) => {
         seats.push(<span className="hall-2-place" key={`${row}-${i}R`}
                          id={`${row}-${i}R`}
                          onClick={() => {
-                             dispatch(updateTickets(`${row}-${i}R`, 1));
-                             dispatch(updatePriceSum(price, 1));
-                             dispatch(updateCount(1, 1));
+                             dispatch(updateTickets(`${row}-${i}R`, price, 1, 1));
                          }}
                          style={{backgroundColor: `${color === null ? "" : color}`}}>
                 {i}</span>)
@@ -47,9 +43,8 @@ const RowCenter = (index, row, startIndex, color, price, dispatch) => {
         seats.push(<span className="hall-2-place" key={`${row}-${i <= side ? i : (index + (startIndex) * 2) - i - 1}${i <= side ? "L" : "R"}`}
                          id={`${row}-${i <= side ? i : (index + (startIndex) * 2) - i - 1}${i <= side ? "L" : "R"}`}
                          onClick={() => {
-                             dispatch(updateTickets(`${row}-${i <= side ? i : (index + (startIndex) * 2) - i - 1}${i <= side ? "L" : "R"}`, 1));
-                             dispatch(updatePriceSum(price, 1));
-                             dispatch(updateCount(1, 1));
+                             dispatch(updateTickets(`${row}-${i <= side ? i : (index + (startIndex) * 2) - i - 1}${i <= side ? "L" : "R"}`,
+                                 price, 1, 1));
                          }}
                          style={{backgroundColor: `${color === null ? "" : color}`}}>
                 {i <= side ? i : (index + (startIndex) * 2) - i - 1}</span>)

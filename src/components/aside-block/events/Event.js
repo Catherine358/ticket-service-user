@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { fetchTickets } from "../../actions/actions";
+import {Link} from "react-router-dom";
 
 const Event = ({event}) => {
     const ticketsRemained = useSelector(state => state.ticketsInfo.ticketsInfo.restTick);
@@ -26,10 +27,13 @@ const Event = ({event}) => {
     let preview = event.images[event.images.length - 1];
     return (
         <aside key={event.eventId}>
-            <div className="event"
-                 style={{backgroundImage: `url(${preview})`, backgroundSize: "210px", backgroundPosition: "top"}}>
-                <p className="event-name">{event.eventName}</p>
-            </div>
+            <Link to={`/${event.eventId}`}>
+                <div className="event" onClick={() => {
+                    localStorage.setItem("myEvent", JSON.stringify(event));
+                }} style={{backgroundImage: `url(${preview})`, backgroundSize: "210px", backgroundPosition: "top"}}>
+                    <p className="event-name">{event.eventName}</p>
+                </div>
+            </Link>
             <Grid container direction="row" justify="space-between" className="event-date">
                 <p>{date}</p>
                 <p>{time}</p>

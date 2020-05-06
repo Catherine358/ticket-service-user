@@ -1,22 +1,20 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect } from "react";
 import Grid from '@material-ui/core/Grid';
 import EventsAside from "./events";
 import DayPicker, { DateUtils } from "react-day-picker";
 import './day-picker.less';
 import { rangeEventsSort } from "../actions/actions";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import { setRange } from "../actions/actions";
 
-const handleDayClick = (day, range, setRange) => {
+const handleDayClick = (day, range, dispatch) => {
     const res = DateUtils.addDayToRange(day, range);
-    setRange(res);
+    dispatch(setRange(res));
 };
 
 const AsideBlock = (props) => {
     const WEEKDAYS_SHORT = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-    const [range, setRange] = useState({
-        from: undefined,
-        to: undefined
-    });
+    const range = useSelector(state => state.dateRange);
     const modifiers = { start: range.from, end: range.to };
     const dispatch = useDispatch();
     useEffect(() => {
@@ -31,7 +29,7 @@ const AsideBlock = (props) => {
             <DayPicker className="Selectable" weekdaysShort={WEEKDAYS_SHORT} selectedDays={[range.from, range]}
                        modifiers={modifiers}
                        onDayClick={(day) => {
-                           handleDayClick(day, range, setRange);
+                           handleDayClick(day, range, dispatch);
             }}/>
             <div className="title">Upcoming events</div>
             <EventsAside/>
