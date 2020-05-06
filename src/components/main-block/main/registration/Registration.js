@@ -68,9 +68,9 @@ const Registration = (props) => {
                     <input type="text" id="country" placeholder="Country"/>
                 </div>
                 <div className="contact">
-                    <input type="email" id="email" name="email" placeholder="Email" required/>
-                    <input type="password" id="password" name="password" placeholder="Password" required/>
-                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required/>
+                    <input type="email" id="email" name="email" placeholder="Email*" required/>
+                    <input type="password" id="password" name="password" placeholder="Password*" required/>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password*" required/>
                     <input type="tel" id="tel" name="tel" placeholder="Phone number*" required/>
                     <input type="tel" id="adTel" placeholder="Additional phone number"/>
                     {/*<div className="agreements">*/}
