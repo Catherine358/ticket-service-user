@@ -100,7 +100,6 @@ const userRegistration = (user) => {
                     throw new Error(`Could not fetch data`);
                 }
             }
-            return response.json();
         });
     return response;
 };
