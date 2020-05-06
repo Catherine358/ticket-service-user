@@ -24,15 +24,19 @@ const AsideBlock = (props) => {
     }, [dispatch, range]);
 
     return (
-        <Grid container direction="column" justify="flex-start" className="aside-container">
-            <div className="title">Calendar</div>
+        <Grid container className="aside-container">
+            <div className="title">
+                <p>Calendar</p>
             <DayPicker className="Selectable" weekdaysShort={WEEKDAYS_SHORT} selectedDays={[range.from, range]}
                        modifiers={modifiers}
                        onDayClick={(day) => {
                            handleDayClick(day, range, dispatch);
             }}/>
-            <div className="title">Upcoming events</div>
+            </div>
+            <div className="title">
+                <p>Upcoming events</p>
             <EventsAside/>
+            </div>
         </Grid>
     );
 };

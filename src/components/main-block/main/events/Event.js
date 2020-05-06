@@ -18,11 +18,10 @@ const Event = ({ arr, indexForPagination }) => {
                 <Link to={`/${data.eventId}`}>
                     <article key={data.eventId} className="event" onClick={() => {
                         localStorage.setItem("myEvent", JSON.stringify(data));
-                    }}>
+                    }} style={{backgroundImage: `url(${data.images[0]})`}}>
                         <div className="date">{date}</div>
                         <h1>{data.artist}</h1>
                         <h2>{data.eventName}</h2>
-                        <img src={data.images[0]} alt="poster"/>
                     </article>
                 </Link>
             );

@@ -26,10 +26,10 @@ const App = (props) => {
                             <Header {...props}/>
                         </header>
                         <Grid container direction="row" className="main-container">
-                            <Grid container item sm={3}>
+                            <Grid container item md={3}>
                                 <AsideBlock {...props}/>
                             </Grid>
-                            <Grid container item sm={9}>
+                            <Grid container item md={9}>
                                 <Grid container direction="column">
                                     <Events {...props}/>
                                     <Footer/>

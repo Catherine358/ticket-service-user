@@ -12,17 +12,20 @@
   .header {
     display: flex;
     width: 100%;
+
     h1 {
       margin-left: auto;
       margin-right: auto;
       border-bottom: 10px solid @dark-gray;
       color: @dark-gray;
     }
+
     select {
       border: none;
       background-color: transparent;
       font-family: @font-dnipro;
     }
+
     select:active,
     select:focus {
       outline: none;
@@ -30,22 +33,23 @@
   }
 
   .list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    display: grid;
+    grid-gap: 25px;
+    grid-template-columns: 1fr;
     width: 100%;
+
+    a {
+      width: fit-content;
+    }
   }
 
   .event {
     position: relative;
-    margin-left: 0;
-    margin-right: 20px;
-    margin-bottom: 30px;
     min-width: 320px;
-    max-width: 400px;
-    width: 40%;
     height: 200px;
+    margin: 0 auto;
     overflow: hidden;
+
     .date {
       position: absolute;
       top: 5px;
@@ -54,6 +58,7 @@
       text-align: right;
       color: @base-color
     }
+
     h1 {
       position: absolute;
       bottom: 25px;
@@ -63,6 +68,7 @@
       color: @yellow;
       font-size: 30px;
     }
+
     h2 {
       position: absolute;
       bottom: 5px;
@@ -76,6 +82,7 @@
   .btn-page {
     &-container {
       margin-bottom: 15px;
+      grid-column-end: 2;
     }
 
     &-prev,
@@ -92,4 +99,23 @@
     }
   }
 
+}
+
+@media screen and (min-width: 321px) {
+  .eventsList .list a {
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 666px){
+  .eventsList .list {
+    grid-template-columns: 1fr 1fr;
+
+    .btn-page {
+      &-container {
+        grid-column-start: 1;
+        grid-column-end: 3;
+      }
+    }
+  }
 }
