@@ -16,7 +16,7 @@ const Event = ({ arr, indexForPagination }) => {
             const date = day + " " + month;
             myEvents.push(
                 <Link to={`/${data.eventId}`}>
-                    <article className="event" onClick={() => {
+                    <article key={data.eventId} className="event" onClick={() => {
                         localStorage.setItem("myEvent", JSON.stringify(data));
                     }}>
                         <div className="date">{date}</div>

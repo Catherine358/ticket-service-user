@@ -1,0 +1,118 @@
+@base-color: #ffffff;
+@dark-gray: #868685;
+@yellow: #ffc800;
+@light-gray: #f3f4f4;
+@font-futura-black: "FuturaFuturis bold", sans-serif;
+@font-dnipro: "DINPro reg", sans-serif;
+@font-dnipro-light: DINPro-Light, sans-serif;
+
+
+.registration {
+  font-family: @font-futura-black;
+  width: 100%;
+
+  .header {
+    display: flex;
+    width: 100%;
+
+    h1 {
+      margin-left: auto;
+      margin-right: auto;
+      border-bottom: 10px solid @dark-gray;
+      color: @dark-gray;
+    }
+  }
+
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    margin: 20px;
+
+    select,
+    input {
+      width: 100%;
+      height: 30px;
+      border: none;
+      border-bottom: 1px solid @dark-gray;
+      background-color: transparent;
+      color: @dark-gray;
+
+      &:focus,
+      &:hover,
+      &:active {
+        outline: none;
+      }
+
+      &:focus {
+        border-bottom-width: 2px;
+      }
+    }
+
+    .label-for-checkbox:first-of-type {
+      margin-top: 5%;
+    }
+    input[type=checkbox] {
+      box-sizing: border-box;
+      padding: 0;
+    }
+    .pos-agreement {
+      position: relative;
+      padding-left: 20px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    .label-for-checkbox {
+      font-family: @font-dnipro-light;
+      font-size: 12px;
+      line-height: 15px;
+      input {
+        opacity: 0;
+        cursor: pointer;
+        height: 1px;
+        width: 1px;
+      }
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        background-color: @light-gray;
+        border: 1px solid @dark-gray;
+      }
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+      input:checked ~ .checkmark:after {
+        position: relative;
+        display: block;
+        left: 2px;
+        top: -4px;
+        width: 10px;
+        height: 15px;
+        border: solid @dark-gray;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+    }
+    .yellow-text {
+      color: @yellow;
+      cursor: pointer;
+    }
+
+    .registration-btn {
+      font-family: @font-futura-black;
+      margin-left: auto;
+      color: white;
+      background-color: @dark-gray;
+    }
+  }
+}

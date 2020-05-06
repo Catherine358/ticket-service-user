@@ -1,0 +1,122 @@
+@base-color: #ffffff;
+@dark-gray: #868685;
+@yellow: #ffc800;
+@light-gray: #f3f4f4;
+@font-futura-black: "FuturaFuturis bold", sans-serif;
+@font-dnipro: "DINPro reg", sans-serif;
+@font-dnipro-light: DINPro-Light, sans-serif;
+
+.login {
+  font-family: @font-futura-black;
+  width: 100%;
+
+  .header {
+    display: flex;
+    width: 100%;
+
+    h1 {
+      margin-left: auto;
+      margin-right: auto;
+      border-bottom: 10px solid @dark-gray;
+      color: @dark-gray;
+    }
+  }
+
+  p,
+  input {
+    color: @dark-gray;
+  }
+
+  .login-forms {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    margin-top: 20px;
+
+    h2 {
+      color: @dark-gray;
+      font-size: 1.5rem;
+    }
+
+    .already-user {
+      display: flex;
+      flex-direction: column;
+      margin-right: 10px;
+      margin-left: 10px;
+      form {
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+
+        label {
+          position: relative;
+
+          input {
+            margin-top: 10px;
+            border: none;
+            border-bottom: 1px solid @dark-gray;
+            width: 100%;
+            background-color: transparent;
+
+            &:focus,
+            &:hover,
+            &:active {
+              outline: none;
+            }
+
+            &:focus {
+              border-bottom-width: 2px;
+            }
+          }
+
+          .btn-reset {
+            border: none;
+            position: absolute;
+            right: 0;
+            top: 10px;
+            color: #868685;
+            background-color: transparent;
+
+            &:focus,
+            &:hover,
+            &:active {
+              outline: none;
+            }
+          }
+        }
+        .forgot {
+          margin-top: 10px;
+          font-weight: normal;
+          font-size: 12px;
+          color: @yellow;
+          cursor: pointer;
+        }
+
+        .login-btn {
+          font-family: @font-futura-black;
+          color: white;
+          background-color: @dark-gray;
+        }
+      }
+    }
+    .new-user {
+      margin-right: 10px;
+      margin-left: 10px;
+
+      .registration-btn {
+        width: 100%;
+        font-family: @font-futura-black;
+        color: white;
+        background-color: @dark-gray;
+      }
+    }
+  }
+}
+
+@media screen and(max-width: 800px) {
+  .login {
+    .login-forms {
+      grid-template-columns: 1fr;
+    }
+  }
+}

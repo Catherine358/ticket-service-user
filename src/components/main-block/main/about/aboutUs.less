@@ -1,0 +1,40 @@
+@dark-gray: #868685;
+@light-gray: #f3f4f4;
+@font-futura-black: "FuturaFuturis bold", sans-serif;
+
+.about {
+  font-family: @font-futura-black;
+  width: 100%;
+
+  .header{
+    display: flex;
+    width: 100%;
+
+    h1 {
+      margin-left: auto;
+      margin-right: auto;
+      border-bottom: 10px solid @dark-gray;
+      color: @dark-gray;
+    }
+  }
+
+  .cover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+    width: 805px;
+    height: 332px;
+    max-width: 60vw;
+    background-image: url("../../../../img/cover.jpg");
+    background-size: initial;
+    color: @light-gray;
+  }
+
+  &-title {
+    padding: 20px;
+    font-family: @font-futura-black;
+    font-size: 30px;
+    border: 5px solid @light-gray;
+  }
+}

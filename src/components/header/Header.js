@@ -30,7 +30,9 @@ const Header = (props) => {
             <Grid  container item sm={4} className="info-header">
                 <Grid container direction="column" className="middle-sec-header">
                     <p>Berlin City Hall | Events & Tickets</p>
-                    <span>LOGIN</span>
+                    <Link to={'/login'}>
+                        <span>LOGIN</span>
+                    </Link>
                 </Grid>
             </Grid>
             <Grid container item sm={4} className="menu">
