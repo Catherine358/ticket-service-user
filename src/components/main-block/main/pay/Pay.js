@@ -7,6 +7,7 @@ import Spinner from "../../../loader/Loader";
 import { loadPayPal } from "../../../actions/actions";
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
+import ErrorIndicator from "../../../error-indicator";
 
 const CLIENT_ID = 'AYcAK925I-41dyDTXQ5ClviRB4gln7gPFzi1h26Tso9-4zm97cLpBh_Rq_MjjH0MfcB-tpntW5Fl08SS';
 let PayPalButtons = null;
@@ -51,6 +52,10 @@ class PaySystem extends React.Component {
                 console.log('details', details);
                 console.log('data', data);
                 this.props.loadPayPal('success');
+            })
+            .catch(error => {
+                console.log(error);
+                this.props.loadPayPal('failure');
             });
     };
 
@@ -62,13 +67,14 @@ class PaySystem extends React.Component {
         const year = eventStart.getFullYear();
         const date = day + " " + month + " " + year;
 
-        const { pricesSum, ticketsCount, loading, paySuccess, payPalSystem } = this.props;
+        const { pricesSum, ticketsCount, loading, paySuccess, payPalSystem, error } = this.props;
 
         return (
          <div className="pay">
             <div className="pay-header">
                 <h1>PAYING</h1>
             </div>
+             {error && <ErrorIndicator error={error}/>}
              {paySuccess && <div className="reserved-text row justify-content-start mt-5 mx-0">
                 <div className="col-12 w-100 text-center text-md-left">
                     The tickets shown here have now been reserved for you for 10 minutes.
@@ -102,8 +108,8 @@ class PaySystem extends React.Component {
     }
 }
 
-const mapStateToProps = ({ ticketsInCart: { pricesSum, ticketsCount }, payPalSystem: { loading, paySuccess, payPalSystem }}) => {
-    return { pricesSum, ticketsCount, loading, paySuccess, payPalSystem };
+const mapStateToProps = ({ ticketsInCart: { pricesSum, ticketsCount }, payPalSystem: { loading, paySuccess, payPalSystem, error }}) => {
+    return { pricesSum, ticketsCount, loading, paySuccess, payPalSystem, error };
 };
 
  const mapDispatchToProps = (dispatch) => {

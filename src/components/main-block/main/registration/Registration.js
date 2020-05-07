@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import './registration.less'
 import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { userRegistration } from "../../../services";
 import { withRouter } from "react-router";
+import ErrorIndicator from "../../../error-indicator";
 
-const sendForm = (event, props) => {
+const sendForm = (event, props, setError) => {
     event.preventDefault();
     let gender = event.target.salut.value;
     switch(gender){
@@ -41,17 +42,22 @@ const sendForm = (event, props) => {
                 props.history.push("/");
 
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                console.log(error);
+                setError(error.message);
+            });
     }
 };
 
 const Registration = (props) => {
+    const [error, setError] = useState('');
+
     return (
         <div className="registration">
             <div className="header">
                 <h1>Registration</h1>
             </div>
-            <form onSubmit={(event) => sendForm(event, props)}>
+            {error ? <ErrorIndicator error={error}/> : <form onSubmit={(event) => sendForm(event, props, setError)}>
                 <div className="salutation">
                     <select id="salut" required name="salut">
                         <option value="mr">Mr.</option>
@@ -96,7 +102,7 @@ const Registration = (props) => {
                 </div>
                 <div />
                 <Button type="submit" variant="contained" className="registration-btn col-md-4 col-12">Register</Button>
-            </form>
+            </form>}
         </div>
     );
 };

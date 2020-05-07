@@ -9,6 +9,7 @@ import Spinner from "../../loader/Loader";
 const EventsAside = (props) => {
     const [events, setEvents] = useState([]);
     const [arr, setArr] = useState([]);
+    const [error, setError] = useState('');
     let index = 0;
 
     useEffect(() => {
@@ -21,7 +22,10 @@ const EventsAside = (props) => {
                     }
                     setEvents(tmp);
                 })
-                .catch(error => console.log(error));
+                .catch(error => {
+                    console.log(error);
+                    setError(error.message);
+                });
         }
         fetchEvents();
     }, []);
@@ -39,7 +43,6 @@ const EventsAside = (props) => {
         return () => clearInterval(interval);
     }, [events, index]);
 
-    //let arr = events.slice(0, 3);
     let newEvent = [];
     arr.forEach(data => {
          newEvent.push(<Event key={data.eventId} event={data}/>)
@@ -47,7 +50,7 @@ const EventsAside = (props) => {
 
     return (
         <Grid container direction="column">
-            {newEvent.length === 0 ? <Spinner/> : newEvent}
+            {error ? <ErrorIndicator error={error}/> : newEvent.length === 0 ? <Spinner/> : newEvent}
         </Grid>
     );
 };
