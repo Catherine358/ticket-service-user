@@ -8,7 +8,7 @@ import img from "../../../../img/TicketDesign.jpg";
 
 
 const MyDocument = (props) => {
-    const { myEvent, pricesSum, ticketsInCart, priceRanges } = props;
+    const { myEvent, ticketsInCart, priceRanges } = props;
     const day = new Date(myEvent.eventStart).getDate();
     const month = new Date(myEvent.eventStart).toLocaleString('default', {month: 'long'});
     let hours = new Date(myEvent.eventStart).getHours();

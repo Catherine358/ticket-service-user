@@ -3,7 +3,8 @@ const loadPayPal = (state, action) => {
         return {
             loading: true,
             paySuccess: false,
-            payPalSystem: false
+            payPalSystem: false,
+            error: ''
         }
     }
     switch (action.type) {
@@ -11,19 +12,29 @@ const loadPayPal = (state, action) => {
             return {
                 loading: true,
                 paySuccess: false,
-                payPalSystem: false
+                payPalSystem: false,
+                error: ''
             };
         case 'LOAD_PAYPAL_SUCCESS':
             return {
                 loading: false,
                 paySuccess: false,
-                payPalSystem: true
+                payPalSystem: true,
+                error: ''
             };
         case 'PAYING_PAYPAL_SUCCESS':
             return {
                 loading: false,
                 paySuccess: true,
-                payPalSystem: false
+                payPalSystem: false,
+                error: ''
+            };
+        case 'PAYING_PAYPAL_FAILURE':
+            return {
+                loading: false,
+                paySuccess: false,
+                payPalSystem: false,
+                error: 'Something went wrong, please, try again later.'
             };
         default:
             return state.payPalSystem;

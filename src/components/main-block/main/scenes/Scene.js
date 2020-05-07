@@ -8,6 +8,7 @@ import BigScene from "./BigScene";
 import {Link} from "react-router-dom";
 import { fetchSceneInfo, updateTickets } from "../../../actions/actions";
 import { findPrice, addLockedSeats } from "../../../utils/functions-for-shopping-cart";
+import ErrorIndicator from "../../../error-indicator";
 
 const PriceRanges = ({priceRanges}) => {
     let priceRange;
@@ -65,12 +66,24 @@ const Scene = (props) => {
     const ticketsInCart = useSelector(state => state.ticketsInCart.ticketsInCart);
     const pricesSum = useSelector(state => state.ticketsInCart.pricesSum);
     const ticketsCount = useSelector(state => state.ticketsInCart.ticketsCount);
+    const error = useSelector(state => state.ticketsInCart.error);
     const sceneType = myEvent.hall === 0 ? "big" : "small";
     const dispatch = useDispatch();
 
     useEffect(() => {
        fetchSceneInfo(dispatch, myEvent.eventId);
     }, [dispatch, myEvent.eventId]);
+
+    if(error) {
+        return (
+            <div className="scene">
+                <div className="scene-header">
+                    <h1>Tickets</h1>
+                </div>
+                <ErrorIndicator error={error}/>
+            </div>
+        );
+    }
 
     return (
         <div className="scene">

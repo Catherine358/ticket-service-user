@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchTickets } from "../../../actions/actions";
 import { Link } from "react-router-dom";
 import './eventInfo.less';
+import ErrorIndicator from "../../../error-indicator";
 
 const EventInfo = (props) => {
     const myEvent = JSON.parse(localStorage.getItem("myEvent"));
@@ -23,6 +24,7 @@ const EventInfo = (props) => {
     const time = hour + ":" + minute;
 
     const ticketInfo = useSelector(state => state.ticketsInfo.ticketsInfo);
+    const error = useSelector(state => state.ticketsInfo.error);
     const dispatch = useDispatch();
     useEffect(() => {
         fetchTickets(dispatch, myEvent.eventId)
@@ -42,11 +44,11 @@ const EventInfo = (props) => {
             <div className="info">
                 <h1>{myEvent.artist}</h1>
                 <div className="description">{myEvent.description}</div>
-                <div className="dateAndTickets">
+                {error ? <ErrorIndicator error={error}/> : <div className="dateAndTickets">
                     <span>Date: <span className="yellow">{date}</span> <span>{time}</span></span>
                     <span>Tickets available - <span className="yellow">{ticketInfo.restTick}</span></span>
                     <span>Price range: <span className="yellow">{ticketInfo.maxPrice} - {ticketInfo.minPrice}</span></span>
-                </div>
+                </div>}
                 <Link to={`/${myEvent.eventId}/scene`}>
                     <span className="yellow">BUY TICKETS</span>
                 </Link>

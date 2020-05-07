@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import { fetchEvents, clearRangeEventsSort } from "../../../actions/actions";
 import { useSelector, useDispatch } from "react-redux";
 import Spinner from "../../../loader/Loader";
+import ErrorIndicator from "../../../error-indicator";
 
 const updatePage = (indexForPagination, quantity) => {
     return indexForPagination + 4 * quantity;
@@ -16,6 +17,7 @@ const Events = (props) => {
     const eventsSorted = useSelector(state => state.sortedEvents.eventsFiltered);
     const message = useSelector(state => state.sortedEvents.message);
     const [indexForPagination, setIndex] = useState(0);
+    const error = useSelector(state => state.eventsList.error);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -31,6 +33,7 @@ const Events = (props) => {
                     <option>Stand Up</option>
                 </select>
             </div>
+            {error ? <ErrorIndicator error={error}/> :
             <div className="list">
                 {message ? <p>{message}</p> :
                     (events.length > 0 || eventsSorted.length > 0 ?
@@ -53,7 +56,7 @@ const Events = (props) => {
                             RESET</Button>}
                     </Grid>
                 </Grid>
-            </div>
+            </div> }
         </div>
     )
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import { withRouter } from "react-router";
 import './shoppingCart.less';
 import Button from "@material-ui/core/Button";
@@ -7,6 +7,7 @@ import { bookTicket } from "../../../services";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTickets, clearCart } from "../../../actions/actions";
 import { addLockedSeats, findPrice } from "../../../utils/functions-for-shopping-cart";
+import ErrorIndicator from "../../../error-indicator";
 
 const TicketsInCart = ({ ticketsInCart, priceRanges, dispatch }) => {
     let ticket = ticketsInCart.map(data => {
@@ -52,14 +53,30 @@ const ShoppingCart = (props) => {
     const date = day + " " + month + " " + year;
     const dispatch = useDispatch();
 
+    const [error, setError] = useState('');
+
     useEffect(() => {
         async function bookSeats(eventId, lockedSeats) {
             await bookTicket(eventId, lockedSeats)
                 .then(data => console.log(data))
-                .catch(error => console.log(error));
+                .catch(error => {
+                    console.log(error);
+                    setError(error.message);
+                });
         }
         bookSeats(myEvent.eventId, lockedSeats);
     }, [myEvent.eventId, lockedSeats]);
+
+    if(error){
+        return (
+        <div className="shopping-cart">
+            <div className="shopping-cart-header">
+                <h1>Shopping cart</h1>
+            </div>
+            <ErrorIndicator error={error}/>
+        </div>
+        );
+    }
 
     if(ticketsCount === 0){
         return (

@@ -157,6 +157,10 @@ export const loadPayPal = (act) => {
         return {
             type: 'PAYING_PAYPAL_SUCCESS'
         };
+    }else if(act === 'failure'){
+        return {
+            type: 'PAYING_PAYPAL_FAILURE'
+        };
     }
 };
 
