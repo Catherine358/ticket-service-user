@@ -18,7 +18,7 @@ const Menu = (props) => {
             <Grid container item sm={3} className="menu-burger-logo">
                 <img src={logo} alt="logo" className="menu-burger-logo-img"/>
             </Grid>
-            <Grid container item sm={5}>
+            <Grid container item sm={5} className="menu-burger-info">
                 <Grid container direction="column">
                     <p className="menu-burger-name">Berlin City Hall | Events & Tickets</p>
                     <Grid container item justify="flex-start" className="menu-burger-icons">
@@ -42,7 +42,7 @@ const Menu = (props) => {
                     </span>
                 </Grid>
             </Grid>
-            <Grid container item sm={3}>
+            <Grid container item sm={3} xs={9}>
                 <Grid container direction="column">
                     <ul className="menu-list">
                         <li>
@@ -59,7 +59,13 @@ const Menu = (props) => {
                                 }}>EVENTS</span>
                             </Link>
                             </li>
-                        <li><span>SHOPPING CART</span></li>
+                        <li>
+                            <Link to={"/cart"}>
+                                <span onClick={() => {
+                                    setMenu(false);
+                                }}>SHOPPING CART</span>
+                            </Link>
+                        </li>
                         <li>
                             <Link to={"/halls-schemes"}>
                                 <span onClick={() => {
@@ -77,7 +83,7 @@ const Menu = (props) => {
                     </ul>
                 </Grid>
             </Grid>
-            <Grid container item sm={1}>
+            <Grid container item sm={1} xs={3}>
                     <span className="cross" onClick={() => {
                         setMenu(false);
                     }}>&times;</span>

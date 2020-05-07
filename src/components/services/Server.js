@@ -77,7 +77,6 @@ const bookTicket = (eventId, lockedSeats) => {
             if(response.status !== 200){
                 throw new Error(`Could not fetch data`);
             }
-            return response.json();
         });
     return response;
 };

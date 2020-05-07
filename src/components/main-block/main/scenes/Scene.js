@@ -91,10 +91,10 @@ const Scene = (props) => {
                 <h1>Tickets</h1>
             </div>
             <Grid container direction="row" className="scene-main-section">
-                <div className="scene-main-section-header">
+                <div className="scene-main-section-header w-100">
                     <p>{myEvent.artist} | {myEvent.eventName} | {date}</p>
                 </div>
-                <Grid container item sm={9}>
+                <Grid container item md={9}>
                     <Grid container direction="row" justify="center">
                         <p className="buhne">BÜHNE</p>
                         <div className="w-100"/>
@@ -124,7 +124,7 @@ const Scene = (props) => {
                         </div>
                     </Grid>
                 </Grid>
-                <Grid container item sm={3} className="w-100 cart-container">
+                <Grid container item md={3} className="w-100 cart-container">
                     <div className="ml-2 mb-4 scene-main-section-prices w-100">
                         <div>Price range:</div>
                         <PriceRanges priceRanges={priceRanges.priceRanges}/>
@@ -143,7 +143,7 @@ const Scene = (props) => {
                     <PricesSum pricesSum={pricesSum} ticketsCount={ticketsCount}/>
                     <Link to={'/cart'}>
                         <Button variant="contained" className="cart-btn w-100 mt-2 pt-2" onClick={() => {
-                            addLockedSeats(ticketsInCart, ticketsCount, pricesSum, priceRanges);
+                            addLockedSeats({ ticketsInCart, ticketsCount, pricesSum }, priceRanges);
                         }}>TO THE CART</Button>
                     </Link>
                 </Grid>
