@@ -74,6 +74,8 @@ const Scene = (props) => {
        fetchSceneInfo(dispatch, myEvent.eventId);
     }, [dispatch, myEvent.eventId]);
 
+
+
     if(error) {
         return (
             <div className="scene">

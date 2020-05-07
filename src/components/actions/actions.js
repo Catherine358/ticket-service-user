@@ -1,5 +1,6 @@
 import { requestEvents, ticketsInformation, sceneInformation } from "../services";
-import {DateUtils} from "react-day-picker";
+
+// Loading events
 
 const eventsLoaded = (events) => {
     return {
@@ -21,6 +22,25 @@ const eventsError = (error) => {
     };
 };
 
+const fetchEvents = (dispatch) => {
+    dispatch(eventsReqeusted());
+    requestEvents()
+        .then(data => {
+            console.log(data);
+            let arr = [];
+            for(let i = 0; i < data.length; i++){
+                arr.push(data[i]);
+            }
+            dispatch(eventsLoaded(arr));
+        })
+        .catch(error => {
+            console.log(error);
+            dispatch(eventsError(error.message));
+        })
+};
+
+// Loading remained tickets
+
 const ticketsLoaded = (tickets) => {
     return {
         type: 'FETCH_TICKETS_SUCCESS',
@@ -40,6 +60,20 @@ const ticketsError = (error) => {
         payload: error
     };
 };
+
+const fetchTickets = (dispatch, eventId) => {
+    dispatch(ticketsRequested());
+    ticketsInformation(eventId)
+        .then(data => {
+            dispatch(ticketsLoaded(data));
+        })
+        .catch(error => {
+            console.log(error);
+            dispatch(ticketsError(error.message));
+        })
+};
+
+// Loading price ranges
 
 const sceneInfoLoaded = (tickets) => {
     return {
@@ -61,41 +95,14 @@ const sceneInfoError = (error) => {
     };
 };
 
-const fetchEvents = (dispatch) => {
-    dispatch(eventsReqeusted());
-    requestEvents()
-        .then(data => {
-            console.log(data);
-            let arr = [];
-            for(let i = 0; i < data.length; i++){
-                arr.push(data[i]);
-            }
-            dispatch(eventsLoaded(arr));
-        })
-        .catch(error => {
-            console.log(error);
-            dispatch(eventsError(error.message));
-        })
-};
-
-const fetchTickets = (dispatch, eventId) => {
-    dispatch(ticketsRequested());
-    ticketsInformation(eventId)
-        .then(data => {
-            dispatch(ticketsLoaded(data));
-        })
-        .catch(error => {
-            console.log(error);
-            dispatch(ticketsError(error.message));
-        })
-};
-
 const fetchSceneInfo = (dispatch, eventId) => {
     dispatch(sceneInfoRequested());
     sceneInformation(eventId)
         .then(data => dispatch(sceneInfoLoaded(data)))
         .catch(error => dispatch(sceneInfoError(error)));
 };
+
+// For sorting by date picker
 
 export const setRange = (range) => {
     return {
@@ -116,6 +123,8 @@ export const clearRangeEventsSort = () => {
         type: 'CLEAR_RANGE_EVENTS_SORT'
     };
 };
+
+// Work with shopping cart
 
 export const updateTickets = (item, price, count, idx) => {
     if(idx > 0) {
@@ -140,6 +149,8 @@ export const clearCart = () => {
         type: 'CLEAR_CART'
     };
 };
+
+// Work with Pay Pal
 
 export const loadPayPal = (act) => {
     if(act === 'request') {
