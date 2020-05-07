@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import { withRouter } from "react-router";
 import './shoppingCart.less';
 import Button from "@material-ui/core/Button";
@@ -7,6 +7,8 @@ import { bookTicket } from "../../../services";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTickets, clearCart } from "../../../actions/actions";
 import { addLockedSeats, findPrice } from "../../../utils/functions-for-shopping-cart";
+import Spinner from "../../../loader/Loader";
+import ErrorIndicator from "../../../error-indicator";
 
 const TicketsInCart = ({ ticketsInCart, priceRanges, dispatch }) => {
     let ticket = ticketsInCart.map(data => {
@@ -52,14 +54,29 @@ const ShoppingCart = (props) => {
     const date = day + " " + month + " " + year;
     const dispatch = useDispatch();
 
+    const [error, setError] = useState('');
+
     useEffect(() => {
         async function bookSeats(eventId, lockedSeats) {
             await bookTicket(eventId, lockedSeats)
-                .then(data => console.log(data))
-                .catch(error => console.log(error));
+                .catch(error => {
+                    console.log(error);
+                    setError(error.message);
+                });
         }
         bookSeats(myEvent.eventId, lockedSeats);
     }, [myEvent.eventId, lockedSeats]);
+
+    if(error){
+        return (
+            <div className="shopping-cart">
+                <div className="shopping-cart-header">
+                    <h1>Shopping cart</h1>
+                </div>
+                <ErrorIndicator error={error}/>
+            </div>
+        );
+    }
 
     if(ticketsCount === 0){
         return (
@@ -87,12 +104,13 @@ const ShoppingCart = (props) => {
             <div className="shopping-cart-header">
                 <h1>Shopping cart</h1>
             </div>
+            {!lockedSeats ? <Spinner/> : <>
             <div className="reserved-text row justify-content-start mt-5 mx-0">
                 <div className="col-12 w-100 text-center text-md-left">
                     The tickets shown here have now been reserved for you for 10 minutes.
                 </div>
             </div>
-            <div className="row w-100 border-cart p-2 m-0 mr-2">
+            <div className="row w-100 border-cart m-0 mr-2">
                 <div>
                     <p className="border-cart-header ml-md-3 mx-0 mt-0 text-md-left text-center">
                         {myEvent.artist} | {myEvent.eventName} | {date}
@@ -104,24 +122,26 @@ const ShoppingCart = (props) => {
                     <TicketsInCart ticketsInCart={ticketsInCart} priceRanges={priceRanges}
                                    dispatch={dispatch}/>
                     <PricesSum pricesSum={pricesSum} ticketsCount={ticketsCount}/>
-                    <form onSubmit={goToPay}>
-                        <Button type="submit" variant="contained" className="shopping-cart-btn col-md-4 col-12">PAY</Button>
-                        <label form="agreement" className="label-for-checkbox pos-cart-agreement">
-                            <input required type="checkbox" id="agreement" name="agreement" title="This is required" />
-                            <span className="checkmark"/>
-                            <span className="red-text">*</span>
-                            I have read the
-                            <Link to={"/terms"} target="_blank">
-                                <span className="yellow-text"> Terms and Conditions </span>
-                            </Link>
-                            and fully agree with them.
-                        </label>
-                    </form>
+
                     <div className="clear-cart" onClick={() => {
                         dispatch(clearCart());
                     }}>Delete section</div>
                 </div>
+                <form onSubmit={goToPay}>
+                    <Button type="submit" variant="contained" className="shopping-cart-btn col-md-4 col-12">PAY</Button>
+                    <label form="agreement" className="label-for-checkbox pos-cart-agreement">
+                        <input required type="checkbox" id="agreement" name="agreement" title="This is required" />
+                        <span className="checkmark"/>
+                        <span className="red-text">*</span>
+                        I have read the
+                        <Link to={"/terms"} target="_blank">
+                            <span className="yellow-text"> Terms and Conditions </span>
+                        </Link>
+                        and fully agree with them.
+                    </label>
+                </form>
             </div>
+                </>}
         </div>
     );
 };
