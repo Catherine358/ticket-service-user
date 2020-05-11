@@ -136,31 +136,18 @@ const fetchSceneInfo = (dispatch, eventId) => {
 
 // Booking tickets
 
-const ticketsBooked = () => {
+export const ticketsBooked = () => {
     return {
         type: 'BOOK_TICKETS_SUCCESS',
         payload: true
     };
 };
 
-const ticketsBookRequested = () => {
-    return {
-        type: 'BOOK_TICKETS_REQUEST'
-    };
-};
-
-const ticketsBookError = (error) => {
+export const ticketsBookError = (error) => {
     return {
         type: 'BOOK_TICKETS_FAILURE',
         payload: error
     };
-};
-
-const fetchBookTickets = (dispatch, eventId, lockedSeats) => {
-    dispatch(ticketsBookRequested());
-    bookTicket(eventId, lockedSeats)
-        .then(data => dispatch(ticketsBooked()))
-        .catch(error => dispatch(ticketsBookError(error)));
 };
 
 
@@ -241,6 +228,5 @@ export {
     fetchEvents,
     fetchTickets,
     fetchSceneInfo,
-    fetchBookTickets,
     fetchTicketsForAsideBlock
 };

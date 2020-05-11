@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import './scene.less';
 import SmallScene from "./SmallScene";
 import Button from "@material-ui/core/Button";
@@ -6,9 +6,15 @@ import Grid from "@material-ui/core/Grid";
 import { useDispatch, useSelector } from "react-redux";
 import BigScene from "./BigScene";
 import { withRouter } from "react-router";
-import {fetchBookTickets, fetchSceneInfo, updateTickets} from "../../../actions/actions";
+import {
+    fetchSceneInfo,
+    ticketsBooked,
+    ticketsBookError,
+    updateTickets
+} from "../../../actions/actions";
 import { findPrice, addLockedSeats } from "../../../utils/functions-for-shopping-cart";
 import ErrorIndicator from "../../../error-indicator";
+import {bookTicket} from "../../../services";
 
 const PriceRanges = ({priceRanges}) => {
     let priceRange;
@@ -55,11 +61,17 @@ const PricesSum = ({pricesSum, ticketsCount}) => {
     );
 };
 
-const toCart = ({ history }, dispatch, eventId, lockedSeats, bookTicketsSuccess) => {
-    fetchBookTickets(dispatch, eventId, lockedSeats);
-    if(bookTicketsSuccess) {
-        history.push("/cart");
-    }
+const toCart = ({ history }, dispatch, eventId, lockedSeats, setError) => {
+    bookTicket(eventId, lockedSeats)
+        .then(data => {
+            dispatch(ticketsBooked());
+            history.push("/cart");
+        })
+        .catch(error => {
+            dispatch(ticketsBookError(error));
+            setError(error.message);
+        })
+
 };
 
 const Scene = (props) => {
@@ -74,8 +86,7 @@ const Scene = (props) => {
     const pricesSum = useSelector(state => state.ticketsInCart.pricesSum);
     const ticketsCount = useSelector(state => state.ticketsInCart.ticketsCount);
     const error = useSelector(state => state.ticketsInCart.error);
-    const errorBookTickets = useSelector(state => state.bookTickets.error);
-    const bookTicketsSuccess = useSelector(state => state.bookTickets.bookSuccess);
+    const [errorBookTickets, setError] = useState('');
     const sceneType = myEvent.hall === 0 ? "big" : "small";
     const dispatch = useDispatch();
 
@@ -152,7 +163,7 @@ const Scene = (props) => {
                     <PricesSum pricesSum={pricesSum} ticketsCount={ticketsCount}/>
                     <Button variant="contained" className="cart-btn w-100 mt-2 pt-2" onClick={() => {
                         const lockedSeats = addLockedSeats({ ticketsInCart, ticketsCount, pricesSum }, priceRanges);
-                        toCart(props, dispatch, myEvent.eventId, lockedSeats.lockedSeats, bookTicketsSuccess);
+                        toCart(props, dispatch, myEvent.eventId, lockedSeats.lockedSeats, setError);
                     }}>TO THE CART</Button>
                 </Grid>
             </Grid>

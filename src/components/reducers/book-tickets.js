@@ -5,13 +5,7 @@ const bookTickets = (state, action) => {
             error: ''
         }
     }
-    console.log(action.type)
     switch (action.type) {
-        case 'BOOK_TICKETS_REQUEST':
-            return {
-                bookSuccess: false,
-                error: ''
-            };
         case 'BOOK_TICKETS_FAILURE':
             return {
                 bookSuccess: false,
