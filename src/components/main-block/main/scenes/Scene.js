@@ -5,8 +5,8 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { useDispatch, useSelector } from "react-redux";
 import BigScene from "./BigScene";
-import {Link} from "react-router-dom";
-import { fetchSceneInfo, updateTickets } from "../../../actions/actions";
+import { withRouter } from "react-router";
+import {fetchBookTickets, fetchSceneInfo, updateTickets} from "../../../actions/actions";
 import { findPrice, addLockedSeats } from "../../../utils/functions-for-shopping-cart";
 import ErrorIndicator from "../../../error-indicator";
 
@@ -55,6 +55,13 @@ const PricesSum = ({pricesSum, ticketsCount}) => {
     );
 };
 
+const toCart = ({ history }, dispatch, eventId, lockedSeats, bookTicketsSuccess) => {
+    fetchBookTickets(dispatch, eventId, lockedSeats);
+    if(bookTicketsSuccess) {
+        history.push("/cart");
+    }
+};
+
 const Scene = (props) => {
     const myEvent = JSON.parse(localStorage.getItem("myEvent"));
     const eventStart = myEvent.eventStart;
@@ -67,6 +74,8 @@ const Scene = (props) => {
     const pricesSum = useSelector(state => state.ticketsInCart.pricesSum);
     const ticketsCount = useSelector(state => state.ticketsInCart.ticketsCount);
     const error = useSelector(state => state.ticketsInCart.error);
+    const errorBookTickets = useSelector(state => state.bookTickets.error);
+    const bookTicketsSuccess = useSelector(state => state.bookTickets.bookSuccess);
     const sceneType = myEvent.hall === 0 ? "big" : "small";
     const dispatch = useDispatch();
 
@@ -74,15 +83,13 @@ const Scene = (props) => {
        fetchSceneInfo(dispatch, myEvent.eventId);
     }, [dispatch, myEvent.eventId]);
 
-
-
-    if(error) {
+    if(error || errorBookTickets) {
         return (
             <div className="scene">
                 <div className="scene-header">
                     <h1>Tickets</h1>
                 </div>
-                <ErrorIndicator error={error}/>
+                <ErrorIndicator error={error ? error : errorBookTickets}/>
             </div>
         );
     }
@@ -143,15 +150,14 @@ const Scene = (props) => {
                         dispatch={dispatch}/>}
                     </div>
                     <PricesSum pricesSum={pricesSum} ticketsCount={ticketsCount}/>
-                    <Link to={'/cart'}>
-                        <Button variant="contained" className="cart-btn w-100 mt-2 pt-2" onClick={() => {
-                            addLockedSeats({ ticketsInCart, ticketsCount, pricesSum }, priceRanges);
-                        }}>TO THE CART</Button>
-                    </Link>
+                    <Button variant="contained" className="cart-btn w-100 mt-2 pt-2" onClick={() => {
+                        const lockedSeats = addLockedSeats({ ticketsInCart, ticketsCount, pricesSum }, priceRanges);
+                        toCart(props, dispatch, myEvent.eventId, lockedSeats.lockedSeats, bookTicketsSuccess);
+                    }}>TO THE CART</Button>
                 </Grid>
             </Grid>
         </div>
     );
 };
 
-export default Scene;
+export default withRouter(Scene);

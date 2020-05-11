@@ -1,4 +1,4 @@
-import { requestEvents, ticketsInformation, sceneInformation } from "../services";
+import {requestEvents, ticketsInformation, sceneInformation, bookTicket} from "../services";
 
 // Loading events
 
@@ -73,6 +73,38 @@ const fetchTickets = (dispatch, eventId) => {
         })
 };
 
+const ticketsLoadedAside = (tickets) => {
+    return {
+        type: 'FETCH_TICKETS_ASIDE_SUCCESS',
+        payload: tickets
+    };
+};
+
+const ticketsRequestedAside = () => {
+    return {
+        type: 'FETCH_TICKETS_ASIDE_REQUEST'
+    };
+};
+
+const ticketsErrorAside = (error) => {
+    return {
+        type: 'FETCH_TICKETS_ASIDE_FAILURE',
+        payload: error
+    };
+};
+
+const fetchTicketsForAsideBlock = (dispatch, eventId) => {
+    dispatch(ticketsRequestedAside());
+    ticketsInformation(eventId)
+        .then(data => {
+            dispatch(ticketsLoadedAside(data));
+        })
+        .catch(error => {
+            console.log(error);
+            dispatch(ticketsErrorAside(error.message));
+        })
+};
+
 // Loading price ranges
 
 const sceneInfoLoaded = (tickets) => {
@@ -101,6 +133,36 @@ const fetchSceneInfo = (dispatch, eventId) => {
         .then(data => dispatch(sceneInfoLoaded(data)))
         .catch(error => dispatch(sceneInfoError(error)));
 };
+
+// Booking tickets
+
+const ticketsBooked = () => {
+    return {
+        type: 'BOOK_TICKETS_SUCCESS',
+        payload: true
+    };
+};
+
+const ticketsBookRequested = () => {
+    return {
+        type: 'BOOK_TICKETS_REQUEST'
+    };
+};
+
+const ticketsBookError = (error) => {
+    return {
+        type: 'BOOK_TICKETS_FAILURE',
+        payload: error
+    };
+};
+
+const fetchBookTickets = (dispatch, eventId, lockedSeats) => {
+    dispatch(ticketsBookRequested());
+    bookTicket(eventId, lockedSeats)
+        .then(data => dispatch(ticketsBooked()))
+        .catch(error => dispatch(ticketsBookError(error)));
+};
+
 
 // For sorting by date picker
 
@@ -178,5 +240,7 @@ export const loadPayPal = (act) => {
 export {
     fetchEvents,
     fetchTickets,
-    fetchSceneInfo
+    fetchSceneInfo,
+    fetchBookTickets,
+    fetchTicketsForAsideBlock
 };

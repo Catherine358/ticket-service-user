@@ -20,13 +20,15 @@ const addLockedSeats = (newTickets, priceRanges) => {
             seats: value
         });
     });
-    localStorage.setItem("lockedSeats", JSON.stringify({
+    const lockedSeatsObj = {
         lockedSeats: lockedSeats,
         ticketsInCart: ticketsInCart,
         ticketsCount: ticketsCount,
         pricesSum: pricesSum,
         priceRanges: priceRanges
-    }));
+    };
+    localStorage.setItem("lockedSeats", JSON.stringify(lockedSeatsObj));
+    return lockedSeatsObj;
 };
 
 const findPrice = (row, priceRanges) => {

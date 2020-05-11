@@ -54,29 +54,29 @@ const ShoppingCart = (props) => {
     const date = day + " " + month + " " + year;
     const dispatch = useDispatch();
 
-    const [error, setError] = useState('');
+   // const [error, setError] = useState('');
 
-    useEffect(() => {
-        async function bookSeats(eventId, lockedSeats) {
-            await bookTicket(eventId, lockedSeats)
-                .catch(error => {
-                    console.log(error);
-                    setError(error.message);
-                });
-        }
-        bookSeats(myEvent.eventId, lockedSeats);
-    }, [myEvent.eventId, lockedSeats]);
+    // useEffect(() => {
+    //     async function bookSeats(eventId, lockedSeats) {
+    //         await bookTicket(eventId, lockedSeats)
+    //             .catch(error => {
+    //                 console.log(error);
+    //                 setError(error.message);
+    //             });
+    //     }
+    //     bookSeats(myEvent.eventId, lockedSeats);
+    // }, [myEvent.eventId, lockedSeats]);
 
-    if(error){
-        return (
-            <div className="shopping-cart">
-                <div className="shopping-cart-header">
-                    <h1>Shopping cart</h1>
-                </div>
-                <ErrorIndicator error={error}/>
-            </div>
-        );
-    }
+    // if(error){
+    //     return (
+    //         <div className="shopping-cart">
+    //             <div className="shopping-cart-header">
+    //                 <h1>Shopping cart</h1>
+    //             </div>
+    //             <ErrorIndicator error={error}/>
+    //         </div>
+    //     );
+    // }
 
     if(ticketsCount === 0){
         return (

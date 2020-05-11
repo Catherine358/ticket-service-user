@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Grid from "@material-ui/core/Grid";
-import { fetchTickets } from "../../actions/actions";
+import { fetchTicketsForAsideBlock } from "../../actions/actions";
 import {Link} from "react-router-dom";
 
 const Event = ({event}) => {
-    const ticketsRemained = useSelector(state => state.ticketsInfo.ticketsInfo.restTick);
+    const ticketsRemained = useSelector(state => state.ticketsInfoForAsideBlock.ticketsInfo.restTick);
     const dispatch = useDispatch();
     useEffect(() => {
-        fetchTickets(dispatch, event.eventId);
+        fetchTicketsForAsideBlock(dispatch, event.eventId);
         }, [dispatch, event.eventId]);
 
     let res = event.eventStart;
