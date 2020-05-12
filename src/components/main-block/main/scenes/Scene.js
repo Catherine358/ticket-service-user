@@ -123,8 +123,8 @@ const Scene = (props) => {
                             {sceneType === "big" && <span className="mid-title-hall-2">Mittelparkett</span>}
                             <span className="notausgang">Notausgang</span>
                         </div>
-                        {sceneType === "small" ? <SmallScene priceRanges={priceRanges} dispatch={dispatch}/>
-                        : <BigScene priceRanges={priceRanges} dispatch={dispatch}/>}
+                        {sceneType === "small" ? <SmallScene priceRanges={priceRanges} dispatch={dispatch} ticketsInCart={ticketsInCart}/>
+                        : <BigScene priceRanges={priceRanges} dispatch={dispatch} ticketsInCart={ticketsInCart}/>}
                         {sceneType === "small" ? <p className="hall-1-title mt-5">KLEINER SAAL</p>
                             : <p className="hall-1-title mt-5">GROSSER SAAL</p>}
                         <div className="d-flex justify-content-between row title-hall-row w-100">

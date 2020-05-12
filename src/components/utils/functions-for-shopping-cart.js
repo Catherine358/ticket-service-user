@@ -53,8 +53,21 @@ const findColorOrPrice = (row, priceRanges, idx) => {
     return null;
 };
 
+
+const ifPlaceIsLocked = (lockedSeats, seat, row) => {
+    for(let i = 0; i < lockedSeats.length; i++){
+        if(lockedSeats[i].row === row.toString()){
+            if(lockedSeats[i].seats.includes(seat)){
+                return true;
+            }
+        }
+    }
+    return false;
+};
+
 export {
     addLockedSeats,
     findPrice,
-    findColorOrPrice
+    findColorOrPrice,
+    ifPlaceIsLocked
 };
