@@ -1,14 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { withRouter } from "react-router";
 import './shoppingCart.less';
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import { bookTicket } from "../../../services";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTickets, clearCart } from "../../../actions/actions";
 import { addLockedSeats, findPrice } from "../../../utils/functions-for-shopping-cart";
 import Spinner from "../../../loader/Loader";
-import ErrorIndicator from "../../../error-indicator";
 
 const TicketsInCart = ({ ticketsInCart, priceRanges, dispatch }) => {
     let ticket = ticketsInCart.map(data => {

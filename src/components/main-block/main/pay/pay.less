@@ -8,11 +8,14 @@
 .pay {
   display: flex;
   flex-wrap: wrap;
+  flex: 1 0 auto;
   margin-bottom: 20px;
   color: @dark-gray;
+
   &-header {
     display: flex;
     width: 100%;
+
     h1 {
       margin-left: auto;
       margin-right: auto;
@@ -27,13 +30,16 @@
     font-size: 15px;
     color: @pink;
   }
+
   .border-pay {
     border: 1px solid @dark-gray;
+
     &-header {
       margin-top: 15px;
       font-family: @font-futura-black;
       font-size: 22px;
     }
+
     .pay-tickets {
       font-family: @font-fut;
     }
@@ -48,6 +54,7 @@
       background-position: center;
       background-color: @dark-gray;
     }
+
     .pay-btn {
       text-align: center;
       padding: 4px 0;
@@ -60,10 +67,12 @@
   }
 
   .border-pay-success {
+
     p {
       font-family: @font-fut;
       font-size: 40px;
     }
+
     .get-ticket-btn {
       text-align: center;
       padding: 4px;

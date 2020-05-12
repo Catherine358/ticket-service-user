@@ -1,13 +1,14 @@
 import moment from "moment";
 
 const sortRangeEvents = (state, range) => {
+    console.log(range)
     const {eventsList: {events}} = state;
     let to = moment(range.to).format( "YYYY MM DD");
     let from = moment(range.from).format( "YYYY MM DD");
     let arr = [];
     for (let i = 0; i < events.length; i++) {
         let eventStart = moment(events[i].eventStart).format( "YYYY MM DD");
-        if (eventStart === from || (eventStart >= from && eventStart <= to)) {
+        if ((eventStart >= from && eventStart <= to) || (eventStart >= from && to === undefined) || eventStart === from) {
             arr.push(events[i]);
         }
     }

@@ -62,15 +62,19 @@ const PricesSum = ({pricesSum, ticketsCount}) => {
 };
 
 const toCart = ({ history }, dispatch, eventId, lockedSeats, setError) => {
-    bookTicket(eventId, lockedSeats)
-        .then(data => {
-            dispatch(ticketsBooked());
-            history.push("/cart");
-        })
-        .catch(error => {
-            dispatch(ticketsBookError(error));
-            setError(error.message);
-        })
+    if(localStorage.getItem("token") === null){
+        setError("Sorry, you cannot book tickets if you are not logged in");
+    }else {
+        bookTicket(eventId, lockedSeats)
+            .then(data => {
+                dispatch(ticketsBooked());
+                history.push("/cart");
+            })
+            .catch(error => {
+                dispatch(ticketsBookError(error));
+                setError(error.message);
+            });
+    }
 
 };
 
