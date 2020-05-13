@@ -16,8 +16,8 @@ const HallScheme = (props) => {
                     setIndex(0);
                 }} disabled={indexImg === 0}>&#10094;</button>
                 <div className="scheme">
-                    {indexImg === 0 ? <img src={scheme1} alt="scheme"/>
-                    : <img src={scheme2} alt="scheme"/>}
+                    {indexImg === 0 ? <img className="scheme-img" src={scheme1} alt="scheme"/>
+                    : <img className="scheme-img" src={scheme2} alt="scheme"/>}
                 </div>
                 <button className="next-btn" onClick={() => {
                     setIndex(1);

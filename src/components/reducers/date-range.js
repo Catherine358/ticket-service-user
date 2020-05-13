@@ -1,5 +1,4 @@
 const setDateRange = (state, action) => {
-    console.log(action.payload)
     if(state === undefined){
         return {
             from: undefined,

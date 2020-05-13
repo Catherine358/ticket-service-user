@@ -1,7 +1,6 @@
 import moment from "moment";
 
 const sortRangeEvents = (state, range) => {
-    console.log(range)
     const {eventsList: {events}} = state;
     let to = moment(range.to).format( "YYYY MM DD");
     let from = moment(range.from).format( "YYYY MM DD");

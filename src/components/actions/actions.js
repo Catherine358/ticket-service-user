@@ -1,4 +1,4 @@
-import {requestEvents, ticketsInformation, sceneInformation, bookTicket} from "../services";
+import { requestEvents, ticketsInformation, sceneInformation } from "../services";
 
 // Loading events
 

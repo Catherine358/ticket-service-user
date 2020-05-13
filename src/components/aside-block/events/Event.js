@@ -9,7 +9,7 @@ const Event = ({event}) => {
     const dispatch = useDispatch();
     useEffect(() => {
         fetchTicketsForAsideBlock(dispatch, event.eventId);
-        }, [dispatch]);
+        }, [dispatch, event.eventId]);
 
     let res = event.eventStart;
     let date2 = new Date(parseInt(res)).toLocaleString('default', {month: 'long'});

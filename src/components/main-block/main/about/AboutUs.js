@@ -3,7 +3,7 @@ import './aboutUs.less';
 
 const AboutUs = (props) => {
     return (
-        <div className="about row justify-content-center w-100">
+        <div className="about justify-content-center w-100">
             <div className="header">
                 <h1>About us</h1>
             </div>
