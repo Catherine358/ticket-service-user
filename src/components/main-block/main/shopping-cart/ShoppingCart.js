@@ -69,6 +69,7 @@ const ShoppingCart = (props) => {
 
     const goToPay = (event) => {
         event.preventDefault();
+        console.log("SDFGHNM<")
         addLockedSeats({ ticketsInCart, ticketsCount, pricesSum }, priceRanges);
         props.history.push("/ticket-service-user/payment");
     };

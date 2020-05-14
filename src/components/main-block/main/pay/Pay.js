@@ -73,7 +73,7 @@ class PaySystem extends React.Component {
                 <h1>PAYING</h1>
             </div>
              {error && <ErrorIndicator error={error}/>}
-             {paySuccess && <div className="reserved-text row justify-content-start mt-5 mx-0">
+             {payPalSystem && <div className="reserved-text row justify-content-start mt-5 mx-0">
                 <div className="col-12 w-100 text-center text-md-left">
                     The tickets shown here have now been reserved for you for 10 minutes.
                 </div>
