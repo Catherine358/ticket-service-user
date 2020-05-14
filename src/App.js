@@ -20,7 +20,7 @@ import HallScheme from "./components/main-block/main/hall-scheme";
 const App = (props) => {
     return (
             <Switch>
-                <Route exact path="/" render={props => (
+                <Route exact path="/ticket-service-user" render={props => (
                     <div className="wrapper">
                         <header className="heading">
                             <Header {...props}/>
@@ -38,7 +38,7 @@ const App = (props) => {
                         </Grid>
                     </div>
                 )}/>
-                <Route exact path="/terms" render={props => (
+                <Route exact path="/ticket-service-user/terms" render={props => (
                     <div className="wrapper">
                         <header className="heading">
                             <Header {...props}/>
@@ -57,7 +57,7 @@ const App = (props) => {
                     </div>
                 )}
                 />
-                <Route exact path="/cart" render={props =>
+                <Route exact path="/ticket-service-user/cart" render={props =>
                     (
                         <div className="wrapper">
                             <header className="heading">
@@ -77,7 +77,7 @@ const App = (props) => {
                         </div>
                     )
                 } />
-                <Route exact path="/payment" render={props =>
+                <Route exact path="/ticket-service-user/payment" render={props =>
                     (
                         <div className="wrapper">
                             <header className="heading">
@@ -97,7 +97,7 @@ const App = (props) => {
                         </div>
                     )
                 } />
-                <Route exact path="/ticket" render={props =>
+                <Route exact path="/ticket-service-user/ticket" render={props =>
                     (
                         <div className="wrapper">
                             <header className="heading">
@@ -117,7 +117,7 @@ const App = (props) => {
                         </div>
                     )
                 } />
-                <Route exact path="/login" render={props =>
+                <Route exact path="/ticket-service-user/login" render={props =>
                     (
                         <div className="wrapper">
                             <header className="heading">
@@ -137,7 +137,7 @@ const App = (props) => {
                         </div>
                     )
                 } />
-                <Route exact path="/registration" render={props =>
+                <Route exact path="/ticket-service-user/registration" render={props =>
                     (
                         <div className="wrapper">
                             <header className="heading">
@@ -157,7 +157,7 @@ const App = (props) => {
                         </div>
                     )
                 } />
-                <Route exact path="/about" render={props =>
+                <Route exact path="/ticket-service-user/about" render={props =>
                     (
                         <div className="wrapper">
                             <header className="heading">
@@ -177,7 +177,7 @@ const App = (props) => {
                         </div>
                     )
                 } />
-                <Route exact path="/halls-schemes" render={props =>
+                <Route exact path="/ticket-service-user/halls-schemes" render={props =>
                     (
                         <div className="wrapper">
                             <header className="heading">
@@ -197,7 +197,7 @@ const App = (props) => {
                         </div>
                     )
                 } />
-                <Route exact path="/:id" render={props => {
+                <Route exact path="/ticket-service-user/:id" render={props => {
                     const {id} = props.match.params;
                     return (
                         <div className="wrapper">
@@ -218,7 +218,7 @@ const App = (props) => {
                         </div>
                     );
                 }}/>
-                <Route exact path="/:id/scene" render={props => {
+                <Route exact path="/ticket-service-user/:id/scene" render={props => {
                     const { id } = props.match.params;
                     return (
                         <div className="wrapper">

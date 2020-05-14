@@ -80,7 +80,7 @@ const Ticket = (props) => {
                     <p className="light-blue">
                         Congratulations! You've successfuly payed. Your PDF ticket have been sent to your email. We wish you a pleasant time.
                     </p>
-                    <Link to="/">
+                    <Link to="/ticket-service-user">
                         <span className="d-block">Return to the main page</span>
                     </Link>
                     <PDFDownloadLink document={<MyDocument myEvent={myEvent} pricesSum={pricesSum} ticketsInCart={ticketsInCart}

@@ -4,7 +4,7 @@ import "./pay.less"
 import { connect } from "react-redux";
 import scriptLoader from 'react-async-script-loader';
 import Spinner from "../../../loader/Loader";
-import { loadPayPal } from "../../../actions/actions";
+import { loadPayPal } from "../../../../actions/actions";
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
 import ErrorIndicator from "../../../error-indicator";
@@ -49,8 +49,6 @@ class PaySystem extends React.Component {
     onApprove = (data, action) => {
         action.order.capture()
             .then(details => {
-                console.log('details', details);
-                console.log('data', data);
                 this.props.loadPayPal('success');
             })
             .catch(error => {
@@ -99,7 +97,7 @@ class PaySystem extends React.Component {
              {paySuccess && <div className="row w-100 border-pay-success m-0 p-2 flex-wrap justify-content-center">
                  <p>PROCEED PAYING SUCCESS</p>
                  <div className="w-100" />
-                 <Link to={"/ticket"}>
+                 <Link to={"/ticket-service-user/ticket"}>
                     <Button variant="contained" className="get-ticket-btn">Get ticket</Button>
                  </Link>
              </div>}

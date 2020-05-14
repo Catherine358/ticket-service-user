@@ -84,7 +84,7 @@ const Login = (props) => {
                     </div>
                     <div className="new-user">
                         <h2>New customer</h2>
-                        <Link to={"/registration"}>
+                        <Link to={"/ticket-service-user/registration"}>
                             <Button variant="contained" className="registration-btn">Register</Button>
                         </Link>
                     </div>

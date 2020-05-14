@@ -23,14 +23,14 @@ const Header = (props) => {
     return (
         <Grid className="header-layout" container direction="row" justify="space-around" alignItems="flex-start">
             <Grid container item  sm={4} className="logo">
-                <Link to={"/"}>
+                <Link to={"/ticket-service-user"}>
                     <img src={logo} alt="logo" className="logo-img"/>
                 </Link>
             </Grid>
             <Grid  container item sm={4} className="info-header">
                 <Grid container direction="column" className="middle-sec-header">
                     <p>Berlin City Hall | Events & Tickets</p>
-                    <Link to={'/login'}>
+                    <Link to={'/ticket-service-user/login'}>
                         <span>LOGIN</span>
                     </Link>
                 </Grid>

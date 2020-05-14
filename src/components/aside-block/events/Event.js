@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Grid from "@material-ui/core/Grid";
-import { fetchTicketsForAsideBlock } from "../../actions/actions";
+import { fetchTicketsForAsideBlock } from "../../../actions/actions";
 import {Link} from "react-router-dom";
 
 const Event = ({event}) => {
@@ -27,11 +27,11 @@ const Event = ({event}) => {
     let preview = event.images[event.images.length - 1];
     return (
         <aside key={event.eventId}>
-            <Link to={`/${event.eventId}`}>
+            <Link to={`/ticket-service-user/${event.eventId}`}>
                 <div className="event" onClick={() => {
                     localStorage.setItem("myEvent", JSON.stringify(event));
                 }} style={{backgroundImage: `url(${preview})`, backgroundSize: "210px", backgroundPosition: "top"}}>
-                    <div style={{width: "0", height: "60px", display: "inline-block"}}></div>
+                    <div style={{width: "0", height: "60px", display: "inline-block"}}/>
                     <p className="event-name">{event.eventName}</p>
                 </div>
             </Link>

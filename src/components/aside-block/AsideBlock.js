@@ -3,9 +3,9 @@ import Grid from '@material-ui/core/Grid';
 import EventsAside from "./events";
 import DayPicker, { DateUtils } from "react-day-picker";
 import './day-picker.less';
-import { rangeEventsSort } from "../actions/actions";
+import { rangeEventsSort } from "../../actions/actions";
 import {useDispatch, useSelector} from "react-redux";
-import { setRange } from "../actions/actions";
+import { setRange } from "../../actions/actions";
 
 const handleDayClick = (day, range, dispatch) => {
     const res = DateUtils.addDayToRange(day, range);

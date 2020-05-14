@@ -4,7 +4,7 @@ import './shoppingCart.less';
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateTickets, clearCart } from "../../../actions/actions";
+import { updateTickets, clearCart } from "../../../../actions/actions";
 import { addLockedSeats, findPrice } from "../../../utils/functions-for-shopping-cart";
 import Spinner from "../../../loader/Loader";
 
@@ -52,30 +52,6 @@ const ShoppingCart = (props) => {
     const date = day + " " + month + " " + year;
     const dispatch = useDispatch();
 
-   // const [error, setError] = useState('');
-
-    // useEffect(() => {
-    //     async function bookSeats(eventId, lockedSeats) {
-    //         await bookTicket(eventId, lockedSeats)
-    //             .catch(error => {
-    //                 console.log(error);
-    //                 setError(error.message);
-    //             });
-    //     }
-    //     bookSeats(myEvent.eventId, lockedSeats);
-    // }, [myEvent.eventId, lockedSeats]);
-
-    // if(error){
-    //     return (
-    //         <div className="shopping-cart">
-    //             <div className="shopping-cart-header">
-    //                 <h1>Shopping cart</h1>
-    //             </div>
-    //             <ErrorIndicator error={error}/>
-    //         </div>
-    //     );
-    // }
-
     if(ticketsCount === 0){
         return (
             <div className="shopping-cart">
@@ -94,7 +70,7 @@ const ShoppingCart = (props) => {
     const goToPay = (event) => {
         event.preventDefault();
         addLockedSeats({ ticketsInCart, ticketsCount, pricesSum }, priceRanges);
-        props.history.push("/payment");
+        props.history.push("/ticket-service-user/payment");
     };
 
     return (
@@ -132,7 +108,7 @@ const ShoppingCart = (props) => {
                         <span className="checkmark"/>
                         <span className="red-text">*</span>
                         I have read the
-                        <Link to={"/terms"} target="_blank">
+                        <Link to={"/ticket-service-user/terms"} target="_blank">
                             <span className="yellow-text"> Terms and Conditions </span>
                         </Link>
                         and fully agree with them.

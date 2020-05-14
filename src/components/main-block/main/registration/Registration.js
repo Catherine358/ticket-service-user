@@ -38,8 +38,7 @@ const sendForm = (event, props, setError) => {
         };
         userRegistration(user)
             .then(response => {
-                console.log(response);
-                props.history.push("/");
+                props.history.push("/ticket-service-user");
 
             })
             .catch(error => {
@@ -84,11 +83,11 @@ const Registration = (props) => {
                         <span className="checkmark"/>
                         <span className="red-text">*</span>
                         I have read the notice on
-                        <Link to={"/terms"} target="_blank">
+                        <Link to={"/ticket-service-user/terms"} target="_blank">
                             <span className="yellow-text"> data protection </span>
                         </Link>
                         and the content of the
-                        <Link to={"/terms"} target="_blank">
+                        <Link to={"/ticket-service-user/terms"} target="_blank">
                             <span className="yellow-text"> Standard Terms of Business </span>
                         </Link>
                         and agree to the storage of my personal data.

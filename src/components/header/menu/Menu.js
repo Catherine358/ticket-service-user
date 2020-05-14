@@ -46,35 +46,35 @@ const Menu = (props) => {
                 <Grid container direction="column">
                     <ul className="menu-list">
                         <li>
-                            <Link to={"/login"}>
+                            <Link to={"/ticket-service-user/login"}>
                                 <span onClick={() => {
                                     setMenu(false);
                                 }}>LOGIN/OUT</span>
                             </Link>
                             </li>
                         <li>
-                            <Link to={"/"}>
+                            <Link to={"/ticket-service-user"}>
                                 <span onClick={() => {
                                     setMenu(false);
                                 }}>EVENTS</span>
                             </Link>
                             </li>
                         <li>
-                            <Link to={"/cart"}>
+                            <Link to={"/ticket-service-user/cart"}>
                                 <span onClick={() => {
                                     setMenu(false);
                                 }}>SHOPPING CART</span>
                             </Link>
                         </li>
                         <li>
-                            <Link to={"/halls-schemes"}>
+                            <Link to={"/ticket-service-user/halls-schemes"}>
                                 <span onClick={() => {
                                     setMenu(false);
                                 }}>HALLS SCHEME</span>
                             </Link>
                             </li>
                         <li>
-                            <Link to={"/about"}>
+                            <Link to={"/ticket-service-user/about"}>
                                 <span onClick={() => {
                                     setMenu(false);
                                 }}>ABOUT US</span>

@@ -3,7 +3,7 @@ import './events.less';
 import Event from "./Event";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import { fetchEvents, clearRangeEventsSort } from "../../../actions/actions";
+import { fetchEvents, clearRangeEventsSort } from "../../../../actions/actions";
 import { useSelector, useDispatch } from "react-redux";
 import Spinner from "../../../loader/Loader";
 import ErrorIndicator from "../../../error-indicator";

@@ -15,7 +15,7 @@ const Event = ({ arr, indexForPagination }) => {
             const day = res.getDate();
             const date = day + " " + month;
             myEvents.push(
-                <Link to={`/${data.eventId}`}>
+                <Link to={`/ticket-service-user/${data.eventId}`}>
                     <article key={data.eventId} className="event" onClick={() => {
                         localStorage.setItem("myEvent", JSON.stringify(data));
                     }} style={{backgroundImage: `url(${data.images[0]})`}}>

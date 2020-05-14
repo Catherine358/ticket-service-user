@@ -11,7 +11,7 @@ import {
     ticketsBooked,
     ticketsBookError,
     updateTickets
-} from "../../../actions/actions";
+} from "../../../../actions/actions";
 import { findPrice, addLockedSeats } from "../../../utils/functions-for-shopping-cart";
 import ErrorIndicator from "../../../error-indicator";
 import {bookTicket} from "../../../services";
@@ -68,7 +68,7 @@ const toCart = ({ history }, dispatch, eventId, lockedSeats, setError) => {
         bookTicket(eventId, lockedSeats)
             .then(data => {
                 dispatch(ticketsBooked());
-                history.push("/cart");
+                history.push("/ticket-service-user/cart");
             })
             .catch(error => {
                 dispatch(ticketsBookError(error));

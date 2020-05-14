@@ -1,4 +1,4 @@
-import { requestEvents, ticketsInformation, sceneInformation } from "../services";
+import { requestEvents, ticketsInformation, sceneInformation } from "../components/services";
 
 // Loading events
 

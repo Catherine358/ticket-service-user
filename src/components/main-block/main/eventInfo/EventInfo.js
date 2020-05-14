@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTickets } from "../../../actions/actions";
+import { fetchTickets } from "../../../../actions/actions";
 import { Link } from "react-router-dom";
 import './eventInfo.less';
 import ErrorIndicator from "../../../error-indicator";
@@ -49,7 +49,7 @@ const EventInfo = (props) => {
                     <span>Tickets available - <span className="yellow">{ticketInfo.restTick}</span></span>
                     <span>Price range: <span className="yellow">{ticketInfo.maxPrice} - {ticketInfo.minPrice}</span></span>
                 </div>}
-                <Link to={`/${myEvent.eventId}/scene`}>
+                <Link to={`/ticket-service-user/${myEvent.eventId}/scene`}>
                     <span className="yellow">BUY TICKETS</span>
                 </Link>
             </div>
