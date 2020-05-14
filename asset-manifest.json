@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/ticket-service-user/static/css/main.5af12519.chunk.css",
-    "main.js": "/ticket-service-user/static/js/main.253a991a.chunk.js",
-    "main.js.map": "/ticket-service-user/static/js/main.253a991a.chunk.js.map",
+    "main.js": "/ticket-service-user/static/js/main.52ab2779.chunk.js",
+    "main.js.map": "/ticket-service-user/static/js/main.52ab2779.chunk.js.map",
     "runtime-main.js": "/ticket-service-user/static/js/runtime-main.7b0666fe.js",
     "runtime-main.js.map": "/ticket-service-user/static/js/runtime-main.7b0666fe.js.map",
     "static/css/2.69121389.chunk.css": "/ticket-service-user/static/css/2.69121389.chunk.css",
     "static/js/2.4acd52b9.chunk.js": "/ticket-service-user/static/js/2.4acd52b9.chunk.js",
     "static/js/2.4acd52b9.chunk.js.map": "/ticket-service-user/static/js/2.4acd52b9.chunk.js.map",
     "index.html": "/ticket-service-user/index.html",
-    "precache-manifest.812b111deb7bf042c5791ac8156f94e2.js": "/ticket-service-user/precache-manifest.812b111deb7bf042c5791ac8156f94e2.js",
+    "precache-manifest.9d952c2c9ee4a0a144c727882032f16b.js": "/ticket-service-user/precache-manifest.9d952c2c9ee4a0a144c727882032f16b.js",
     "service-worker.js": "/ticket-service-user/service-worker.js",
     "static/css/2.69121389.chunk.css.map": "/ticket-service-user/static/css/2.69121389.chunk.css.map",
     "static/css/main.5af12519.chunk.css.map": "/ticket-service-user/static/css/main.5af12519.chunk.css.map",
@@ -30,6 +30,6 @@
     "static/css/2.69121389.chunk.css",
     "static/js/2.4acd52b9.chunk.js",
     "static/css/main.5af12519.chunk.css",
-    "static/js/main.253a991a.chunk.js"
+    "static/js/main.52ab2779.chunk.js"
   ]
 }
