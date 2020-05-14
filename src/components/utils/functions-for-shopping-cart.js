@@ -20,13 +20,15 @@ const addLockedSeats = (newTickets, priceRanges) => {
             seats: value
         });
     });
-    localStorage.setItem("lockedSeats", JSON.stringify({
+    const lockedSeatsObj = {
         lockedSeats: lockedSeats,
         ticketsInCart: ticketsInCart,
         ticketsCount: ticketsCount,
         pricesSum: pricesSum,
         priceRanges: priceRanges
-    }));
+    };
+    localStorage.setItem("lockedSeats", JSON.stringify(lockedSeatsObj));
+    return lockedSeatsObj;
 };
 
 const findPrice = (row, priceRanges) => {
@@ -51,8 +53,21 @@ const findColorOrPrice = (row, priceRanges, idx) => {
     return null;
 };
 
+
+const ifPlaceIsLocked = (lockedSeats, seat, row) => {
+    for(let i = 0; i < lockedSeats.length; i++){
+        if(lockedSeats[i].row === row.toString()){
+            if(lockedSeats[i].seats.includes(seat)){
+                return true;
+            }
+        }
+    }
+    return false;
+};
+
 export {
     addLockedSeats,
     findPrice,
-    findColorOrPrice
+    findColorOrPrice,
+    ifPlaceIsLocked
 };

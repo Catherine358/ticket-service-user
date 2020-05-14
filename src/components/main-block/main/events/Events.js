@@ -34,11 +34,12 @@ const Events = (props) => {
                 </select>
             </div>
             {error ? <ErrorIndicator error={error}/> :
+                message ? <p>{message}</p> :
+                        (events.length > 0 || eventsSorted.length > 0 ?
             <div className="list">
-                {message ? <p>{message}</p> :
-                    (events.length > 0 || eventsSorted.length > 0 ?
+
                         <Event arr={eventsSorted.length > 0 && !message ? eventsSorted: events} indexForPagination={indexForPagination}/>
-                        : <Spinner/>)}
+
                 <Grid container direction="row" className="btn-page-container w-100">
                     <Grid container item justify="center">
                         {(!message && eventsSorted.length === 0) &&
@@ -56,7 +57,7 @@ const Events = (props) => {
                             RESET</Button>}
                     </Grid>
                 </Grid>
-            </div> }
+            </div> : <Spinner/>)}
         </div>
     )
 };

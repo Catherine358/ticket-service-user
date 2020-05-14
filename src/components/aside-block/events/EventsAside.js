@@ -39,7 +39,7 @@ const EventsAside = (props) => {
                 index = 0;
                 setArr(events.slice(index, index + 3));
             }
-        }, 3000);
+        }, 6000);
         return () => clearInterval(interval);
     }, [events, index]);
 

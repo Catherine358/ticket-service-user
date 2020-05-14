@@ -73,6 +73,38 @@ const fetchTickets = (dispatch, eventId) => {
         })
 };
 
+const ticketsLoadedAside = (tickets) => {
+    return {
+        type: 'FETCH_TICKETS_ASIDE_SUCCESS',
+        payload: tickets
+    };
+};
+
+const ticketsRequestedAside = () => {
+    return {
+        type: 'FETCH_TICKETS_ASIDE_REQUEST'
+    };
+};
+
+const ticketsErrorAside = (error) => {
+    return {
+        type: 'FETCH_TICKETS_ASIDE_FAILURE',
+        payload: error
+    };
+};
+
+const fetchTicketsForAsideBlock = (dispatch, eventId) => {
+    dispatch(ticketsRequestedAside());
+    ticketsInformation(eventId)
+        .then(data => {
+            dispatch(ticketsLoadedAside(data));
+        })
+        .catch(error => {
+            console.log(error);
+            dispatch(ticketsErrorAside(error.message));
+        })
+};
+
 // Loading price ranges
 
 const sceneInfoLoaded = (tickets) => {
@@ -101,6 +133,23 @@ const fetchSceneInfo = (dispatch, eventId) => {
         .then(data => dispatch(sceneInfoLoaded(data)))
         .catch(error => dispatch(sceneInfoError(error)));
 };
+
+// Booking tickets
+
+export const ticketsBooked = () => {
+    return {
+        type: 'BOOK_TICKETS_SUCCESS',
+        payload: true
+    };
+};
+
+export const ticketsBookError = (error) => {
+    return {
+        type: 'BOOK_TICKETS_FAILURE',
+        payload: error
+    };
+};
+
 
 // For sorting by date picker
 
@@ -178,5 +227,6 @@ export const loadPayPal = (act) => {
 export {
     fetchEvents,
     fetchTickets,
-    fetchSceneInfo
+    fetchSceneInfo,
+    fetchTicketsForAsideBlock
 };

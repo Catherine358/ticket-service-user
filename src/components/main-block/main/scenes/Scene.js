@@ -1,14 +1,20 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import './scene.less';
 import SmallScene from "./SmallScene";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { useDispatch, useSelector } from "react-redux";
 import BigScene from "./BigScene";
-import {Link} from "react-router-dom";
-import { fetchSceneInfo, updateTickets } from "../../../actions/actions";
+import { withRouter } from "react-router";
+import {
+    fetchSceneInfo,
+    ticketsBooked,
+    ticketsBookError,
+    updateTickets
+} from "../../../actions/actions";
 import { findPrice, addLockedSeats } from "../../../utils/functions-for-shopping-cart";
 import ErrorIndicator from "../../../error-indicator";
+import {bookTicket} from "../../../services";
 
 const PriceRanges = ({priceRanges}) => {
     let priceRange;
@@ -55,6 +61,23 @@ const PricesSum = ({pricesSum, ticketsCount}) => {
     );
 };
 
+const toCart = ({ history }, dispatch, eventId, lockedSeats, setError) => {
+    if(localStorage.getItem("token") === null){
+        setError("Sorry, you cannot book tickets if you are not logged in");
+    }else {
+        bookTicket(eventId, lockedSeats)
+            .then(data => {
+                dispatch(ticketsBooked());
+                history.push("/cart");
+            })
+            .catch(error => {
+                dispatch(ticketsBookError(error));
+                setError(error.message);
+            });
+    }
+
+};
+
 const Scene = (props) => {
     const myEvent = JSON.parse(localStorage.getItem("myEvent"));
     const eventStart = myEvent.eventStart;
@@ -67,6 +90,7 @@ const Scene = (props) => {
     const pricesSum = useSelector(state => state.ticketsInCart.pricesSum);
     const ticketsCount = useSelector(state => state.ticketsInCart.ticketsCount);
     const error = useSelector(state => state.ticketsInCart.error);
+    const [errorBookTickets, setError] = useState('');
     const sceneType = myEvent.hall === 0 ? "big" : "small";
     const dispatch = useDispatch();
 
@@ -74,15 +98,13 @@ const Scene = (props) => {
        fetchSceneInfo(dispatch, myEvent.eventId);
     }, [dispatch, myEvent.eventId]);
 
-
-
-    if(error) {
+    if(error || errorBookTickets) {
         return (
             <div className="scene">
                 <div className="scene-header">
                     <h1>Tickets</h1>
                 </div>
-                <ErrorIndicator error={error}/>
+                <ErrorIndicator error={error ? error : errorBookTickets}/>
             </div>
         );
     }
@@ -105,8 +127,8 @@ const Scene = (props) => {
                             {sceneType === "big" && <span className="mid-title-hall-2">Mittelparkett</span>}
                             <span className="notausgang">Notausgang</span>
                         </div>
-                        {sceneType === "small" ? <SmallScene priceRanges={priceRanges} dispatch={dispatch}/>
-                        : <BigScene priceRanges={priceRanges} dispatch={dispatch}/>}
+                        {sceneType === "small" ? <SmallScene priceRanges={priceRanges} dispatch={dispatch} ticketsInCart={ticketsInCart}/>
+                        : <BigScene priceRanges={priceRanges} dispatch={dispatch} ticketsInCart={ticketsInCart}/>}
                         {sceneType === "small" ? <p className="hall-1-title mt-5">KLEINER SAAL</p>
                             : <p className="hall-1-title mt-5">GROSSER SAAL</p>}
                         <div className="d-flex justify-content-between row title-hall-row w-100">
@@ -143,15 +165,14 @@ const Scene = (props) => {
                         dispatch={dispatch}/>}
                     </div>
                     <PricesSum pricesSum={pricesSum} ticketsCount={ticketsCount}/>
-                    <Link to={'/cart'}>
-                        <Button variant="contained" className="cart-btn w-100 mt-2 pt-2" onClick={() => {
-                            addLockedSeats({ ticketsInCart, ticketsCount, pricesSum }, priceRanges);
-                        }}>TO THE CART</Button>
-                    </Link>
+                    <Button variant="contained" className="cart-btn w-100 mt-2 pt-2" onClick={() => {
+                        const lockedSeats = addLockedSeats({ ticketsInCart, ticketsCount, pricesSum }, priceRanges);
+                        toCart(props, dispatch, myEvent.eventId, lockedSeats.lockedSeats, setError);
+                    }}>TO THE CART</Button>
                 </Grid>
             </Grid>
         </div>
     );
 };
 
-export default Scene;
+export default withRouter(Scene);

@@ -81,7 +81,7 @@ class PaySystem extends React.Component {
                 </div>
             </div>}
              {loading && <Spinner/>}
-             {paySuccess && <div className="row w-100 border-pay p-2 m-0 mr-2">
+             {payPalSystem && <div className="row w-100 border-pay p-2 m-0 mr-2">
                 <div>
                     <p className="border-pay-header ml-md-3 mx-0 mt-0 text-md-left text-center">
                         {myEvent.artist} | {myEvent.eventName} | {date}
@@ -96,7 +96,7 @@ class PaySystem extends React.Component {
                      />
                 </div>
             </div>}
-             {payPalSystem && <div className="row w-100 border-pay-success m-0 p-2 flex-wrap justify-content-center">
+             {paySuccess && <div className="row w-100 border-pay-success m-0 p-2 flex-wrap justify-content-center">
                  <p>PROCEED PAYING SUCCESS</p>
                  <div className="w-100" />
                  <Link to={"/ticket"}>

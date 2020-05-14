@@ -7,7 +7,7 @@ const sortRangeEvents = (state, range) => {
     let arr = [];
     for (let i = 0; i < events.length; i++) {
         let eventStart = moment(events[i].eventStart).format( "YYYY MM DD");
-        if (eventStart === from || (eventStart >= from && eventStart <= to)) {
+        if ((eventStart >= from && eventStart <= to) || (eventStart >= from && to === undefined) || eventStart === from) {
             arr.push(events[i]);
         }
     }
