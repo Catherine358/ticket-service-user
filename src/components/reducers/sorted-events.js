@@ -2,7 +2,7 @@ import moment from "moment";
 
 const sortRangeEvents = (state, range) => {
     const {eventsList: {events}} = state;
-    let to = moment(range.to).format( "YYYY MM DD");
+    let to = range.to === undefined ? undefined : moment(range.to).format( "YYYY MM DD");
     let from = moment(range.from).format( "YYYY MM DD");
     let arr = [];
     for (let i = 0; i < events.length; i++) {
@@ -15,6 +15,25 @@ const sortRangeEvents = (state, range) => {
         return arr;
     }else{
         return "There are no events planned in this range of time."
+    }
+};
+
+const sortTypeEvents = (state, value) => {
+    const {eventsList: {events}} = state;
+    let arr = [];
+    if(value === "0" || value === "1") {
+        for (let i = 0; i < events.length; i++) {
+            if (parseInt(value) === events[i].eventType) {
+                arr.push(events[i]);
+            }
+        }
+    }else{
+        return [];
+    }
+    if(arr.length > 0) {
+        return arr;
+    }else{
+        return "There are no events of such type."
     }
 };
 
@@ -35,6 +54,18 @@ const sortEvents = (state, action) => {
             }else{
                 return {
                     eventsFiltered: sortRangeEvents(state, action.payload),
+                    message: ''
+                };
+            }
+        case 'TYPE_EVENTS_SORT':
+            if(typeof sortTypeEvents(state, action.payload) === "string") {
+                return {
+                    eventsFiltered: [],
+                    message: sortTypeEvents(state, action.payload)
+                };
+            }else {
+                return {
+                    eventsFiltered: sortTypeEvents(state, action.payload),
                     message: ''
                 };
             }

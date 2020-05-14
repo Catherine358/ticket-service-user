@@ -1,4 +1,4 @@
-import { requestEvents, ticketsInformation, sceneInformation } from "../components/services";
+import { requestEvents, ticketsInformation, sceneInformation } from "../services";
 
 // Loading events
 
@@ -26,7 +26,6 @@ const fetchEvents = (dispatch) => {
     dispatch(eventsReqeusted());
     requestEvents()
         .then(data => {
-            console.log(data);
             let arr = [];
             for(let i = 0; i < data.length; i++){
                 arr.push(data[i]);
@@ -170,6 +169,15 @@ export const rangeEventsSort = (range) => {
 export const clearRangeEventsSort = () => {
     return {
         type: 'CLEAR_RANGE_EVENTS_SORT'
+    };
+};
+
+// For sorting by date picker
+
+export const sortEventsType = (value) => {
+    return {
+        type: 'TYPE_EVENTS_SORT',
+        payload: value
     };
 };
 

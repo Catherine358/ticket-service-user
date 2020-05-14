@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Grid from "@material-ui/core/Grid";
-import { fetchTicketsForAsideBlock } from "../../../actions/actions";
+import { fetchTicketsForAsideBlock } from "../../actions/actions";
 import {Link} from "react-router-dom";
 
 const Event = ({event}) => {

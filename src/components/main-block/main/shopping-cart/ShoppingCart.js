@@ -4,7 +4,7 @@ import './shoppingCart.less';
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateTickets, clearCart } from "../../../../actions/actions";
+import { updateTickets, clearCart } from "../../../actions/actions";
 import { addLockedSeats, findPrice } from "../../../utils/functions-for-shopping-cart";
 import Spinner from "../../../loader/Loader";
 
@@ -52,7 +52,7 @@ const ShoppingCart = (props) => {
     const date = day + " " + month + " " + year;
     const dispatch = useDispatch();
 
-    if(ticketsCount === 0){
+    if(ticketsCount === 0 || !lockedSeats){
         return (
             <div className="shopping-cart">
                 <div className="shopping-cart-header">
@@ -78,7 +78,6 @@ const ShoppingCart = (props) => {
             <div className="shopping-cart-header">
                 <h1>Shopping cart</h1>
             </div>
-            {!lockedSeats ? <Spinner/> : <>
             <div className="reserved-text row justify-content-start mt-5 mx-0">
                 <div className="col-12 w-100 text-center text-md-left">
                     The tickets shown here have now been reserved for you for 10 minutes.
@@ -115,7 +114,6 @@ const ShoppingCart = (props) => {
                     </label>
                 </form>
             </div>
-                </>}
         </div>
     );
 };

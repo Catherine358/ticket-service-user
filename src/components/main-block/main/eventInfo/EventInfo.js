@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTickets } from "../../../../actions/actions";
+import { fetchTickets } from "../../../actions/actions";
 import { Link } from "react-router-dom";
 import './eventInfo.less';
 import ErrorIndicator from "../../../error-indicator";

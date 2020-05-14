@@ -9,7 +9,7 @@
 .shopping-cart {
   display: flex;
   flex-wrap: wrap;
-  flex: 1 0 auto;
+  align-content: flex-start;
   margin-bottom: 20px;
   color: @dark-gray;
   font-family: @font-futura-black;
@@ -18,6 +18,7 @@
     display: flex;
     margin-bottom: 20px;
     width: 100%;
+    max-height: 4em;
 
     h1 {
       margin-left: auto;
@@ -35,6 +36,9 @@
   }
 
   .border-cart {
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
     position: relative;
     padding: 0.5rem;
     border: 1px solid @dark-gray;
@@ -78,8 +82,6 @@
 
   .pos-cart-agreement {
     position: relative;
-    //right: 15px;
-    //bottom: 10px;
     padding-left: 20px;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -151,5 +153,11 @@
 @media screen and (max-width: 1000px){
   .shopping-cart .border-cart {
     padding-top: 2rem;
+  }
+}
+
+@media screen and (min-width: 600px){
+  .shopping-cart {
+    min-height: 674px;
   }
 }

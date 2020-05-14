@@ -11,7 +11,7 @@ import {
     ticketsBooked,
     ticketsBookError,
     updateTickets
-} from "../../../../actions/actions";
+} from "../../../actions/actions";
 import { findPrice, addLockedSeats } from "../../../utils/functions-for-shopping-cart";
 import ErrorIndicator from "../../../error-indicator";
 import {bookTicket} from "../../../services";
@@ -62,9 +62,6 @@ const PricesSum = ({pricesSum, ticketsCount}) => {
 };
 
 const toCart = ({ history }, dispatch, eventId, lockedSeats, setError) => {
-    if(localStorage.getItem("token") === null){
-        setError("Sorry, you cannot book tickets if you are not logged in");
-    }else {
         bookTicket(eventId, lockedSeats)
             .then(data => {
                 dispatch(ticketsBooked());
@@ -74,7 +71,6 @@ const toCart = ({ history }, dispatch, eventId, lockedSeats, setError) => {
                 dispatch(ticketsBookError(error));
                 setError(error.message);
             });
-    }
 
 };
 
@@ -166,8 +162,12 @@ const Scene = (props) => {
                     </div>
                     <PricesSum pricesSum={pricesSum} ticketsCount={ticketsCount}/>
                     <Button variant="contained" className="cart-btn w-100 mt-2 pt-2" onClick={() => {
-                        const lockedSeats = addLockedSeats({ ticketsInCart, ticketsCount, pricesSum }, priceRanges);
-                        toCart(props, dispatch, myEvent.eventId, lockedSeats.lockedSeats, setError);
+                        if(localStorage.getItem("token") === null){
+                            setError("Sorry, you cannot book tickets if you are not logged in");
+                        }else {
+                            const lockedSeats = addLockedSeats({ticketsInCart, ticketsCount, pricesSum}, priceRanges);
+                            toCart(props, dispatch, myEvent.eventId, lockedSeats.lockedSeats, setError);
+                        }
                     }}>TO THE CART</Button>
                 </Grid>
             </Grid>

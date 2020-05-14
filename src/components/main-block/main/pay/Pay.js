@@ -4,7 +4,7 @@ import "./pay.less"
 import { connect } from "react-redux";
 import scriptLoader from 'react-async-script-loader';
 import Spinner from "../../../loader/Loader";
-import { loadPayPal } from "../../../../actions/actions";
+import { loadPayPal } from "../../../actions/actions";
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
 import ErrorIndicator from "../../../error-indicator";

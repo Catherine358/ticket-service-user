@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import { updateTickets } from "../../../../actions/actions";
+import { updateTickets } from "../../../actions/actions";
 import {findColorOrPrice, ifPlaceIsLocked} from "../../../utils/functions-for-shopping-cart";
 
 const RowLeft = (index, row, color, price, dispatch, lockedSeats, ticketsInCart) => {
