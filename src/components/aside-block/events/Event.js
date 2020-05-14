@@ -31,6 +31,7 @@ const Event = ({event}) => {
                 <div className="event" onClick={() => {
                     localStorage.setItem("myEvent", JSON.stringify(event));
                 }} style={{backgroundImage: `url(${preview})`, backgroundSize: "210px", backgroundPosition: "top"}}>
+                    <div style={{width: "0", height: "60px", display: "inline-block"}}></div>
                     <p className="event-name">{event.eventName}</p>
                 </div>
             </Link>
