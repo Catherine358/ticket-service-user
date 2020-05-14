@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/ticket-service-user/static/css/main.5af12519.chunk.css",
+    "main.js": "/ticket-service-user/static/js/main.253a991a.chunk.js",
+    "main.js.map": "/ticket-service-user/static/js/main.253a991a.chunk.js.map",
+    "runtime-main.js": "/ticket-service-user/static/js/runtime-main.7b0666fe.js",
+    "runtime-main.js.map": "/ticket-service-user/static/js/runtime-main.7b0666fe.js.map",
+    "static/css/2.69121389.chunk.css": "/ticket-service-user/static/css/2.69121389.chunk.css",
+    "static/js/2.4acd52b9.chunk.js": "/ticket-service-user/static/js/2.4acd52b9.chunk.js",
+    "static/js/2.4acd52b9.chunk.js.map": "/ticket-service-user/static/js/2.4acd52b9.chunk.js.map",
+    "index.html": "/ticket-service-user/index.html",
+    "precache-manifest.812b111deb7bf042c5791ac8156f94e2.js": "/ticket-service-user/precache-manifest.812b111deb7bf042c5791ac8156f94e2.js",
+    "service-worker.js": "/ticket-service-user/service-worker.js",
+    "static/css/2.69121389.chunk.css.map": "/ticket-service-user/static/css/2.69121389.chunk.css.map",
+    "static/css/main.5af12519.chunk.css.map": "/ticket-service-user/static/css/main.5af12519.chunk.css.map",
+    "static/js/2.4acd52b9.chunk.js.LICENSE.txt": "/ticket-service-user/static/js/2.4acd52b9.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/ticket-service-user/static/media/FUTURAFUTURIS.ef2b9b2c.OTF",
+    "static/media/TicketDesign.jpg": "/ticket-service-user/static/media/TicketDesign.4cf3749e.jpg",
+    "static/media/big_hall.png": "/ticket-service-user/static/media/big_hall.867bd061.png",
+    "static/media/cover.jpg": "/ticket-service-user/static/media/cover.803be05e.jpg",
+    "static/media/icon-rss.png": "/ticket-service-user/static/media/icon-rss.45b81036.png",
+    "static/media/icon-utube.png": "/ticket-service-user/static/media/icon-utube.b9c84379.png",
+    "static/media/logo_col.svg": "/ticket-service-user/static/media/logo_col.4fa451cb.svg",
+    "static/media/logo_white.svg": "/ticket-service-user/static/media/logo_white.647c99c9.svg",
+    "static/media/App.css": "/ticket-service-user/static/media/rhwk_decorGrey.8ed2b7ed.png",
+    "static/media/small_hall.png": "/ticket-service-user/static/media/small_hall.0181df38.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7b0666fe.js",
+    "static/css/2.69121389.chunk.css",
+    "static/js/2.4acd52b9.chunk.js",
+    "static/css/main.5af12519.chunk.css",
+    "static/js/main.253a991a.chunk.js"
+  ]
+}
