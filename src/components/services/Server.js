@@ -80,6 +80,26 @@ const bookTicket = (eventId, lockedSeats) => {
     return response;
 };
 
+const buyTicket = (eventId, lockedSeats) => {
+    const response = fetch(`${BASE_URL}user/to_sell`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+                eventId: eventId,
+                lockedSeats: lockedSeats
+            }
+        )
+    })
+        .then(response => {
+            if(response.status !== 200){
+                throw new Error(`Could not fetch data`);
+            }
+        });
+    return response;
+};
+
 const userRegistration = (user) => {
     console.log("server ", user);
     const response = fetch(`${BASE_URL}user`,{
@@ -150,4 +170,4 @@ const recoverPassword = (email) => {
     return response;
 };
 
-export { requestEvents, ticketsInformation, sceneInformation, bookTicket, userRegistration, handleSubmitLogin, recoverPassword };
+export { requestEvents, ticketsInformation, sceneInformation, bookTicket, userRegistration, handleSubmitLogin, recoverPassword, buyTicket };

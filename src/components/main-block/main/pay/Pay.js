@@ -8,6 +8,7 @@ import { loadPayPal } from "../../../actions/actions";
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
 import ErrorIndicator from "../../../error-indicator";
+import { buyTicket } from "../../../services/Server";
 
 const CLIENT_ID = 'AYcAK925I-41dyDTXQ5ClviRB4gln7gPFzi1h26Tso9-4zm97cLpBh_Rq_MjjH0MfcB-tpntW5Fl08SS';
 let PayPalButtons = null;
@@ -49,7 +50,14 @@ class PaySystem extends React.Component {
     onApprove = (data, action) => {
         action.order.capture()
             .then(details => {
-                this.props.loadPayPal('success');
+                const eventId = JSON.parse(localStorage.getItem("myEvent")).eventId;
+                const lockedSeats = JSON.parse(localStorage.getItem("lockedSeats")).lockedSeats;
+                buyTicket(eventId, lockedSeats)
+                    .then(response => this.props.loadPayPal('success'))
+                    .catch(error => {
+                        console.log(error);
+                        this.props.loadPayPal('failure');
+                    })
             })
             .catch(error => {
                 console.log(error);
